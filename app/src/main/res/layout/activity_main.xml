@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+    <ImageView
+        android:id="@+id/image_fri_4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:src="@drawable/fri_egg_4_pixel"
+        android:padding="100dp"/>
+    <ImageView
+        android:id="@+id/image_fri_3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:src="@drawable/fri_egg_3_pixel"
+        android:padding="100dp"/>
+    <ImageView
+        android:id="@+id/image_fri_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:src="@drawable/fri_egg_2_pixel"
+        android:padding="100dp"/>
+    <ImageView
+        android:id="@+id/image_fri_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:src="@drawable/fri_egg_1_pixel"
+        android:padding="100dp"/>
+</FrameLayout>

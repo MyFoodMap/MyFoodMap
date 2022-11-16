@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".NaverMapActivity"
+    tools:viewBindingIgnore="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/et_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="원하시는 주소를 입력하세요"
+            android:textColorHint="@color/black"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dp"
+            android:backgroundTint="#6739B8"
+            android:textColor="#fff"
+            android:id="@+id/btn_xy"
+            android:text="입력"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_yx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="x,y = "
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"/>
+    <com.naver.maps.map.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
