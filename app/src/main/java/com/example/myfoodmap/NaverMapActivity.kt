@@ -101,12 +101,13 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 response: Response<NaverResponse>
             ) {
                 Log.d("결과", "성공 : ${response.body()}")
+                // api검색으로 response한 body를 사용하는 부분,
                 response.body()?.let {
-                    val y = it.addresses[0].y
-                    val x = it.addresses[0].x
-
+                    val y = it.addresses[0].y // 경도
+                    val x = it.addresses[0].x // 위도
+                    val roadAddress = it.addresses[0].roadAddress // 도로명 주소
                     tv_yx.text="x,y : $x, $y"
-
+                    tv_roadAddress.text="roadAddress : $roadAddress"
                     val cameraUpdate = CameraUpdate.scrollTo(LatLng(y.toDouble(), x.toDouble())) // 위도 경도 y x 주의
                         .animate(CameraAnimation.Fly)
                     naverMap.moveCamera(cameraUpdate)

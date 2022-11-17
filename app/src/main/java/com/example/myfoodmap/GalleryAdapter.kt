@@ -1,9 +1,7 @@
 package com.example.myfoodmap
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +21,7 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     // 화면 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater=LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.item_layout, parent, false)
+        val view: View = inflater.inflate(R.layout.item_gallery_layout, parent, false)
         return ViewHolder(view)
     }
     // 데이터 설정
@@ -31,7 +29,6 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         Glide.with(context)
             .load(imageList[position]) // 이미지 위치
             .into(holder.galleryView) // 보여줄 위치
-        Log.i(TAG, "onBindViewHolder: $position")
     }
     // 아이템 개수
     override fun getItemCount(): Int {

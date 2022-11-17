@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ReadingActivity"
+    tools:context=".StorePictureActivity"
     tools:ignore="ExtraText"
     android:orientation="vertical">
     <LinearLayout
@@ -17,11 +17,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btn_picture_upload"
-                android:layout_width="100dp"
+                android:id="@+id/picture_single_upload"
+                android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
-                android:text="사진 등록"/>
+                android:text="단일 사진 등록"/>
             <ImageView
                 android:id="@+id/picture_1"
                 android:layout_width="160dp"
@@ -33,8 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="70dp"
             android:layout_marginLeft="30dp">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/picture_multi_upload"
+                android:text="다중 사진 등록"/>
             <ImageView
                 android:id="@+id/picture_2"
                 android:layout_width="120dp"
