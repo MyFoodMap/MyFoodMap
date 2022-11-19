@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="800dp"
+    android:background="@color/white"
+    tools:context=".AppMainActivity">
+    <ImageView
+        android:id="@+id/search_button"
+        android:layout_width="45dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="673dp"
+        android:background="@mipmap/search_button" />
+    <ImageView
+        android:id="@+id/profile_button"
+        android:layout_width="54dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="156dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="673dp"
+        android:background="@mipmap/profile_button" />
+    <ImageView
+        android:id="@+id/plus_button"
+        android:layout_width="53dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="278dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="673dp"
+        android:background="@mipmap/plus_button"
+        />
+
+</FrameLayout>

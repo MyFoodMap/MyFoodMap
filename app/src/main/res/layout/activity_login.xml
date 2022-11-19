@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="800dp"
+    android:background="@color/white"
+    tools:context=".LoginActivity">
+
+<!--    <com.naver.maps.map.MapView-->
+<!--        android:id="@+id/login_Map"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        />-->
+    <!-- 배경 하얀색으로 되어있음 수정해야함 -->
+    <!-- 레이아웃 문제로 Top-200상태 -->
+    <ImageView
+        android:id="@+id/login_SignIn_Button"
+        android:layout_width="161dp"
+        android:layout_height="76dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="460dp"
+        android:background="@mipmap/sign_in_button"
+        />
+    <ImageView
+        android:id="@+id/login_SignUp_Button"
+        android:layout_width="162dp"
+        android:layout_height="76dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="460dp"
+        android:background="@mipmap/sign_up_button"
+        />
+</FrameLayout>
