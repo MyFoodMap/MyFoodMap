@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MultiActivity"
+    tools:context=".GalleryActivity"
     android:orientation="vertical">
     <Button
         android:layout_width="wrap_content"
@@ -12,11 +12,10 @@
         android:layout_gravity="center"
         android:text="사진첩 열기"
         android:textSize="20sp"
-        android:id="@+id/galleryBtn"/>
+        android:id="@+id/btnGallery"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="wrap_content"
+        android:id="@+id/recyclerViewGallery"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="horizontal"/>
 </LinearLayout>

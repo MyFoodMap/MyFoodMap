@@ -7,31 +7,31 @@
     tools:context=".MainActivity"
     android:background="@color/white">
     <ImageView
-        android:id="@+id/image_fri_4"
+        android:id="@+id/mainactivity_loading_4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
-        android:src="@drawable/fri_egg_4_pixel"
+        android:src="@drawable/mainactivity_loading_4_pixel"
         android:padding="100dp"/>
     <ImageView
-        android:id="@+id/image_fri_3"
+        android:id="@+id/mainactivity_loading_3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
-        android:src="@drawable/fri_egg_3_pixel"
+        android:src="@drawable/mainactivity_loading_3_pixel"
         android:padding="100dp"/>
     <ImageView
-        android:id="@+id/image_fri_2"
+        android:id="@+id/mainactivity_loading_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
-        android:src="@drawable/fri_egg_2_pixel"
+        android:src="@drawable/mainactivity_loading_2_pixel"
         android:padding="100dp"/>
     <ImageView
-        android:id="@+id/image_fri_1"
+        android:id="@+id/mainactivity_loading_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
-        android:src="@drawable/fri_egg_1_pixel"
+        android:src="@drawable/mainactivity_loading_1_pixel"
         android:padding="100dp"/>
 </FrameLayout>

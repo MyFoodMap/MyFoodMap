@@ -18,7 +18,14 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".ReadingActivity"
+            android:name=".KeywordSearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".StorePictureActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -32,14 +39,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MultiActivity"
+            android:name=".GalleryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".FunctionActivity"
+            android:name=".ChooseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -58,6 +65,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="eee6pqxi1g" />
