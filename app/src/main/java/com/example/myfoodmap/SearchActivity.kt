@@ -10,7 +10,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        search_PlacePicture2.setOnClickListener() {
+        search_PlacePicture.setOnClickListener() {
             val intent= Intent(this,CafeteriaActivity::class.java)
             startActivity(intent)
         }

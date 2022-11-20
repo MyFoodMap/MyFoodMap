@@ -23,5 +23,14 @@ class ProfileActivity : AppCompatActivity() {
             profile_SelectPeed.visibility=View.INVISIBLE
             profile_SelectBookmark.visibility=View.VISIBLE
         }
+
+        profile_PeedPin_Button.setOnClickListener() {
+            profile_PeedPin_Button.visibility= View.INVISIBLE
+            profile_PeedPinSelected_Button.visibility= View.VISIBLE
+        }
+        profile_PeedPinSelected_Button.setOnClickListener() {
+            profile_PeedPin_Button.visibility= View.VISIBLE
+            profile_PeedPinSelected_Button.visibility= View.INVISIBLE
+        }
     }
 }

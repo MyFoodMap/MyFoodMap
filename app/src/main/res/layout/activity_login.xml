@@ -14,24 +14,25 @@
         />
     <!-- 배경 하얀색으로 되어있음 수정해야함 -->
     <!-- 레이아웃 문제로 Top-200상태 -->
-    <ImageView
-        android:id="@+id/login_SignIn_Button"
-        android:layout_width="161dp"
-        android:layout_height="76dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="660dp"
-        android:src="@mipmap/sign_in_button"
-        />
-    <ImageView
-        android:id="@+id/login_SignUp_Button"
-        android:layout_width="162dp"
-        android:layout_height="76dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="176dp"
-        android:layout_marginTop="660dp"
-        android:src="@mipmap/sign_up_button"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="60dp" >
+        <ImageView
+            android:id="@+id/login_SignIn_Button"
+            android:layout_width="161dp"
+            android:layout_height="76dp"
+            android:src="@mipmap/sign_in_button"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/login_SignUp_Button"
+            android:layout_width="162dp"
+            android:layout_height="76dp"
+            android:src="@mipmap/sign_up_button"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 </FrameLayout>
