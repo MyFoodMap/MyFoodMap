@@ -23,5 +23,9 @@ class ChooseActivity : AppCompatActivity() {
             val intent= Intent(this,KeywordSearchActivity::class.java)
             startActivity(intent)
         }
+
+        choose_SingUpButton.setOnClickListener {
+            startActivity(Intent(this,SingUpActivity::class.java))
+        }
     }
 }
