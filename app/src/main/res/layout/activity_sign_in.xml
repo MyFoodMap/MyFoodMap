@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
-    android:layout_height="800dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".SignInActivity">
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="326dp"
-        android:background="@mipmap/input_id_pwd"
+        android:src="@mipmap/input_id_pwd"
         />
     <ImageView
         android:id="@+id/signIn_Logo"
@@ -24,7 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="200dp"
-        android:background="#D8D8D8"
+        android:src="#D8D8D8"
         />
     <EditText
         android:id="@+id/signIn_IdEditText"
@@ -60,6 +60,6 @@
         android:layout_marginLeft="35dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="440dp"
-        android:background="@mipmap/login_in_button" />
+        android:src="@mipmap/login_in_button" />
 
 </FrameLayout>
