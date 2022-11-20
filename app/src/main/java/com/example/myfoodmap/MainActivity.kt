@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             mainactivity_loading_3.visibility= View.INVISIBLE
         }
         mainactivity_loading_4.setOnClickListener() {
-            val intent= Intent(this,ChooseActivity::class.java)
+            val intent= Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }
     }

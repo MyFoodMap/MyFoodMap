@@ -1,73 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="360dp"
+    android:layout_height="800dp"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/login_Id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="248dp"
-        android:ems="10"
-        android:hint="아이디"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/login_Password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/login_Id"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/login_Id"
-        app:layout_constraintTop_toBottomOf="@+id/login_Id"
-        android:autofillHints="" />
-
-
-    <Button
-        android:id="@+id/login_LoginButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_Password" />
-
-    <Button
-        android:id="@+id/Login_GotoRegisteActivityButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_LoginButton" />
-
-    <Button
-        android:id="@+id/login_ResetPasswordButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="203dp"
-        android:text="비밀번호 재설정"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_GotoRegisteActivityButton"
-        app:layout_constraintVertical_bias="0.0" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <com.naver.maps.map.MapView-->
+<!--        android:id="@+id/login_Map"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        />-->
+    <!-- 배경 하얀색으로 되어있음 수정해야함 -->
+    <!-- 레이아웃 문제로 Top-200상태 -->
+    <ImageView
+        android:id="@+id/login_SignIn_Button"
+        android:layout_width="161dp"
+        android:layout_height="76dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="460dp"
+        android:background="@mipmap/sign_in_button"
+        />
+    <ImageView
+        android:id="@+id/login_SignUp_Button"
+        android:layout_width="162dp"
+        android:layout_height="76dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="460dp"
+        android:background="@mipmap/sign_up_button"
+        />
+</FrameLayout>

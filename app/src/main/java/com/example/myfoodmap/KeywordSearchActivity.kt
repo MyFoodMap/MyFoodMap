@@ -3,10 +3,10 @@ package com.example.myfoodmap
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myfoodmap.databinding.ActivityKeywordSearchBinding
 import kotlinx.android.synthetic.main.activity_keyword_search.*
-import kotlinx.android.synthetic.main.activity_naver_map.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,8 +24,7 @@ class KeywordSearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityKeywordSearchBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         binding.btnSearch.setOnClickListener() {
             var etTextKeyword=keyword.text.toString()
@@ -56,11 +55,9 @@ class KeywordSearchActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
-
                     }
                 }
             }
-
             override fun onFailure(call: Call<KakaoData>, t: Throwable) {
                 // 통신 실패
                 Log.w("MainActivity", "통신 실패: ${t.message}")
