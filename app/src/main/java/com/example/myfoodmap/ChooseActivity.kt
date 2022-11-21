@@ -24,8 +24,5 @@ class ChooseActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        choose_SingUpButton.setOnClickListener {
-            startActivity(Intent(this,SingUpActivity::class.java))
-        }
     }
 }

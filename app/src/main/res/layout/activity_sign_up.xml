@@ -6,6 +6,7 @@
     android:layout_height="800dp"
     android:background="@color/white"
     tools:context=".SignUpActivity">
+
     <ImageView
         android:id="@+id/signUp_logo"
         android:layout_width="321dp"
@@ -74,17 +75,18 @@
         android:layout_marginTop="709dp"
         android:background="@mipmap/login_in_button"
         />
+
     <EditText
         android:id="@+id/signUp_SignUpId_EditText"
         android:layout_width="225dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="268dp"
-        android:textColor="@color/black"
         android:inputType="textEmailAddress"
-        />
+        android:textColor="@color/black" />
+
     <EditText
         android:id="@+id/signUp_Password_EditText"
         android:layout_width="300dp"
@@ -172,15 +174,14 @@
     <Button
         android:id="@+id/signUp_Man_Button"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="647dp"
-        android:text="남"
-        android:textColor="@color/black"
         android:background="#D8D8D8"
-        />
+        android:text="남"
+        android:textColor="@color/black" />
     <Button
         android:id="@+id/signUp_Woman_Button"
         android:layout_width="150dp"
@@ -193,4 +194,5 @@
         android:textColor="@color/black"
         android:background="#D8D8D8"
         />
+
 </FrameLayout>

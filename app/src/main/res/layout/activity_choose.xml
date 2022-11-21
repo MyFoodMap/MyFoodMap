@@ -29,9 +29,4 @@
         android:text="키워드 검색"
         android:textSize="20sp"/>
 
-    <Button
-        android:id="@+id/choose_SingUpButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="회원가입" />
 </LinearLayout>
