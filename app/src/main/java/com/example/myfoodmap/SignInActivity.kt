@@ -44,5 +44,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+
+       
     }
 }

@@ -2,37 +2,40 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
-    android:layout_height="800dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".AppMainActivity">
-    <ImageView
-        android:id="@+id/search_button"
-        android:layout_width="45dp"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="673dp"
-        android:background="@mipmap/search_button" />
-    <ImageView
-        android:id="@+id/profile_button"
-        android:layout_width="54dp"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="156dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="673dp"
-        android:background="@mipmap/profile_button" />
-    <ImageView
-        android:id="@+id/plus_button"
-        android:layout_width="53dp"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="278dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="673dp"
-        android:background="@mipmap/plus_button"
+    <com.naver.maps.map.MapView
+        android:id="@+id/login_Map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="60dp">
+        <ImageView
+            android:id="@+id/appMain_Search_Button"
+            android:layout_width="45dp"
+            android:layout_height="65dp"
+            android:src="@mipmap/search_button"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/appMain_Profile_Button"
+            android:layout_width="54dp"
+            android:layout_height="65dp"
+            android:src="@mipmap/profile_button"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/appMain_Plus_Button"
+            android:layout_width="53dp"
+            android:layout_height="65dp"
+            android:src="@mipmap/plus_button"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 </FrameLayout>

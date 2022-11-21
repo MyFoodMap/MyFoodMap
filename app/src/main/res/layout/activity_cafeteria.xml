@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="800dp"
+    android:background="@color/white"
+    tools:context=".CafeteriaActivity"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/score_Logo"
+        android:layout_width="127dp"
+        android:layout_height="40.95dp"
+        android:background="@color/gray"
+        android:layout_margin="10dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/cafeteria_PlaceName"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="이정도면다들어가겠지"
+            android:textColor="@color/black"
+            android:layout_gravity="start|center"
+            />
+        <ImageView
+            android:id="@+id/cafeteria_BookmarkPlus_Button"
+            android:layout_width="40dp"
+            android:layout_height="27.31dp"
+            android:background="@mipmap/bookmark_plus"
+            android:layout_gravity="end"
+            android:layout_marginRight="160dp"
+            />
+        <ImageView
+            android:id="@+id/cafeteria_Search_Button"
+            android:layout_width="146dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/place_name_search_button"
+            android:layout_gravity="end|center"
+            />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/cafeteria_Picture"
+        android:layout_width="118dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/peed_picture" />
+</LinearLayout>
