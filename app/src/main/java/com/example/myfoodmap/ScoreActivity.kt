@@ -12,13 +12,34 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_score.*
 import androidx.core.view.marginTop
+import com.bumptech.glide.Glide
+import com.example.myfoodmap.databinding.ActivityScoreBinding
+import com.example.myfoodmap.databinding.ActivitySignUpBinding
 import kotlinx.android.synthetic.main.activity_egg_score_test.*
 import kotlinx.android.synthetic.main.activity_score.*
+import kotlinx.android.synthetic.main.activity_score.addressName1
+import kotlinx.android.synthetic.main.activity_score.addressName2
+import kotlinx.android.synthetic.main.activity_score.addressName3
+import kotlinx.android.synthetic.main.activity_score.addressName4
+import kotlinx.android.synthetic.main.activity_score.addressName5
+import kotlinx.android.synthetic.main.activity_score.placeName1
+import kotlinx.android.synthetic.main.activity_score.placeName2
+import kotlinx.android.synthetic.main.activity_score.placeName3
+import kotlinx.android.synthetic.main.activity_score.placeName4
+import kotlinx.android.synthetic.main.activity_score.placeName5
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.roundToInt
 
 class ScoreActivity : AppCompatActivity() {
     private companion object {
         const val TAG = "게시들작성"
+        const val BASE_URL = "https://dapi.kakao.com/"
+        const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
 
     private lateinit var customProgress: CustomProgress
@@ -266,6 +287,37 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
+        score_StoreSearch_Button.setOnClickListener() {
+            score_SearchRange.visibility= View.VISIBLE
+            score_ScoreBackground.visibility= View.VISIBLE
+            var etTextKeyword=score_StoreName_EditText.text.toString()
+            searchKeyword(etTextKeyword)
+        }
+        score_AddressSearchResult1.setOnClickListener() {
+            score_SearchRange.visibility= View.INVISIBLE
+            score_ScoreBackground.visibility= View.INVISIBLE
+            score_StoreName_EditText.setText(placeName1.text)
+        }
+        score_AddressSearchResult2.setOnClickListener() {
+            score_SearchRange.visibility= View.INVISIBLE
+            score_ScoreBackground.visibility= View.INVISIBLE
+            score_StoreName_EditText.setText(placeName2.text)
+        }
+        score_AddressSearchResult3.setOnClickListener() {
+            score_SearchRange.visibility= View.INVISIBLE
+            score_ScoreBackground.visibility= View.INVISIBLE
+            score_StoreName_EditText.setText(placeName3.text)
+        }
+        score_AddressSearchResult4.setOnClickListener() {
+            score_SearchRange.visibility= View.INVISIBLE
+            score_ScoreBackground.visibility= View.INVISIBLE
+            score_StoreName_EditText.setText(placeName4.text)
+        }
+        score_AddressSearchResult5.setOnClickListener() {
+            score_SearchRange.visibility= View.INVISIBLE
+            score_ScoreBackground.visibility= View.INVISIBLE
+            score_StoreName_EditText.setText(placeName5.text)
+        }
     }
     fun averageSum() {
         val a=score_TasteScore.text.toString().toDouble()
@@ -288,6 +340,9 @@ class ScoreActivity : AppCompatActivity() {
             val uri=it.data!!.data // 사진 데이터 넣어야함
             score_Photo.setImageURI(uri)
             postInfo.imageUri = uri
+            Glide.with(this)
+                .load(uri)
+                .into(score_Photo)
         }
     }
 
@@ -363,5 +418,57 @@ class ScoreActivity : AppCompatActivity() {
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
     }
-    
+
+    // 키워드 검색 함수
+    private fun searchKeyword(keyword: String) {
+        val retrofit = Retrofit.Builder()   // Retrofit 구성
+            .baseUrl(ScoreActivity.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val api = retrofit.create(KakaoAPI::class.java)   // 통신 인터페이스를 객체로 생성
+        val call = api.getSearchKeyword(ScoreActivity.API_KEY, keyword)   // 검색 조건 입력
+
+        // API 서버에 요청
+        call.enqueue(object: Callback<KakaoData> {
+            override fun onResponse(
+                call: Call<KakaoData>,
+                response: Response<KakaoData>
+            ) {
+                // 통신 성공 (검색 결과는 response.body()에 담겨있음)
+                Log.d("Test", "${response.body()}")
+                response.body()?.let {
+                    for(index in 0 until it.documents.size) { // 키워드 검색으로 나온 데이터 출력
+                        Log.d("Address", "${it.documents[index].place_name}") // 장소
+                        Log.d("Address", "${it.documents[index].address_name}") // 주소
+                        Log.d("Address", "${it.documents[index].x}") // 경도
+                        Log.d("Address", "${it.documents[index].y}") // 위도
+                        var token=(it.documents[index].address_name).split(' ')
+                        Log.d("Address", "$token")
+                        when(index) {
+                            0 -> {
+                                placeName1.text="${it.documents[index].place_name}"
+                                addressName1.text="${it.documents[index].address_name}"
+                            } 1 -> {
+                                placeName2.text="${it.documents[index].place_name}"
+                                addressName2.text="${it.documents[index].address_name}"
+                            } 2 -> {
+                                placeName3.text="${it.documents[index].place_name}"
+                                addressName3.text="${it.documents[index].address_name}"
+                            } 3 -> {
+                                placeName4.text="${it.documents[index].place_name}"
+                                addressName4.text="${it.documents[index].address_name}"
+                            } 4 -> {
+                                placeName5.text="${it.documents[index].place_name}"
+                                addressName5.text="${it.documents[index].address_name}"
+                            }
+                        }
+                    }
+                }
+            }
+            override fun onFailure(call: Call<KakaoData>, t: Throwable) {
+                // 통신 실패
+                Log.w("MainActivity", "통신 실패: ${t.message}")
+            }
+        })
+    }
 }

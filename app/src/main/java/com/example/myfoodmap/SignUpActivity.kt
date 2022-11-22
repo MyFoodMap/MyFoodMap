@@ -2,21 +2,16 @@ package com.example.myfoodmap
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Nickname
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myfoodmap.databinding.ActivitySignUpBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import android.view.View
-import com.example.myfoodmap.KeywordSearchActivity.Companion.API_KEY
-import com.example.myfoodmap.KeywordSearchActivity.Companion.BASE_URL
-import com.example.myfoodmap.databinding.ActivityKeywordSearchBinding
-import com.example.myfoodmap.databinding.ActivitySignUpBinding
-import kotlinx.android.synthetic.main.activity_keyword_search.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +31,21 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var customProgress: CustomProgress
     private var checkOverlapId = false
     private var gender = ""
+    private var place = "광운대(장소)"
+    private var address = "서울특별시 노원구 월계동"
+    private var x = "1.223232xxx"
+    private var y = "1.223232xxx"
+    private var x1 = "1.223232xxx"
+    private var y1 = "1.223232xxx"
+    private var x2 = "1.223232xxx"
+    private var y2 = "1.223232xxx"
+    private var x3 = "1.223232xxx"
+    private var y3 = "1.223232xxx"
+    private var x4 = "1.223232xxx"
+    private var y4 = "1.223232xxx"
+    private var x5 = "1.223232xxx"
+    private var y5 = "1.223232xxx"
+
     private lateinit var binding : ActivitySignUpBinding
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -64,6 +74,63 @@ class SignUpActivity : AppCompatActivity() {
         signUp_SignUp_Button.setOnClickListener{
             singUp()
         } //화원가입
+
+        binding.signUpAddressSearchButton.setOnClickListener() {
+            var etTextKeyword=signUp_SignUpAddress_EditText.text.toString()
+            signUp_AddressSearch_EditText.setText(etTextKeyword)
+            searchKeyword(etTextKeyword)
+            signUp_SearchScroll.visibility= View.VISIBLE
+            signUp_SearchScrollBackground.visibility= View.VISIBLE
+        }
+        binding.signUpAddressSearchButton2.setOnClickListener() {
+            var etTextKeyword2=signUp_AddressSearch_EditText.text.toString()
+            searchKeyword(etTextKeyword2)
+        }
+        signUp_AddressSearchResult1.setOnClickListener() {
+            signUp_SearchScroll.visibility= View.INVISIBLE
+            signUp_SearchScrollBackground.visibility= View.INVISIBLE
+            signUp_SignUpAddress_EditText.setText(placeName1.text)
+            place=placeName1.text.toString()
+            address=addressName1.text.toString()
+            x=x1
+            y=y1
+        }
+        signUp_AddressSearchResult2.setOnClickListener() {
+            signUp_SearchScroll.visibility= View.INVISIBLE
+            signUp_SearchScrollBackground.visibility= View.INVISIBLE
+            signUp_SignUpAddress_EditText.setText(placeName2.text)
+            place=placeName2.text.toString()
+            address=addressName2.text.toString()
+            x=x2
+            y=y2
+        }
+        signUp_AddressSearchResult3.setOnClickListener() {
+            signUp_SearchScroll.visibility= View.INVISIBLE
+            signUp_SearchScrollBackground.visibility= View.INVISIBLE
+            signUp_SignUpAddress_EditText.setText(placeName3.text)
+            place=placeName3.text.toString()
+            address=addressName3.text.toString()
+            x=x3
+            y=y3
+        }
+        signUp_AddressSearchResult4.setOnClickListener() {
+            signUp_SearchScroll.visibility= View.INVISIBLE
+            signUp_SearchScrollBackground.visibility= View.INVISIBLE
+            signUp_SignUpAddress_EditText.setText(placeName4.text)
+            place=placeName4.text.toString()
+            address=addressName4.text.toString()
+            x=x4
+            y=y4
+        }
+        signUp_AddressSearchResult5.setOnClickListener() {
+            signUp_SearchScroll.visibility= View.INVISIBLE
+            signUp_SearchScrollBackground.visibility= View.INVISIBLE
+            signUp_SignUpAddress_EditText.setText(placeName5.text)
+            place=placeName5.text.toString()
+            address=addressName5.text.toString()
+            x=x5
+            y=y5
+        }
     }
 
     //아이디중복검사
@@ -91,14 +158,10 @@ class SignUpActivity : AppCompatActivity() {
         val password = signUp_Password_EditText.text.toString()
         val checkPassword = signUp_PasswordCheck_EditText.text.toString()
         val name = signUp_Name_EditText.text.toString()
-        val store = Firebase.firestore
+        val store = Firebase.firestore // 이건 무슨 작동인거죠
+        val nickname = signUp_Nickname_EditText.text.toString()
         //val address = signUp_SignUpAddress_EditText.text.toString()
         //수정해야함
-        val nickname = "jansoon"
-        val address = "서울특별시 ~~~(주소)"
-        val place = "광운대(장소)"
-        val x = "1.223232xxx"
-        val y = "1.223232xxx"
 
         if(checkEmpty(id,password,checkPassword,name,gender,address,nickname) && checkOverlapId){
             //로딩창
@@ -112,6 +175,13 @@ class SignUpActivity : AppCompatActivity() {
                         id, UserInfo(uid,id,name,gender,nickname,
                             place,address,x,y),
                         mSuccessHandlerUser = {
+                            Log.d(TAG, "$uid")
+                            Log.d(TAG, "$id")
+                            Log.d(TAG, "$name")
+                            Log.d(TAG, "$place")
+                            Log.d(TAG, "$address")
+                            Log.d(TAG, "$x")
+                            Log.d(TAG, "$y")
                             Log.d(TAG, "회원정보 등록 성공")
                             FireBaseAuth.auth.signOut()
                             hideProgressBar()
@@ -124,42 +194,6 @@ class SignUpActivity : AppCompatActivity() {
                     startToast("회원가입에 실패하였습니다.")
                 }
             )
-        }
-        binding.signUpAddressSearchButton.setOnClickListener() {
-            var etTextKeyword=signUp_SignUpAddress_EditText.text.toString()
-            signUp_AddressSearch_EditText.setText(etTextKeyword)
-            searchKeyword(etTextKeyword)
-            signUp_SearchScroll.visibility= View.VISIBLE
-            signUp_SearchScrollBackground.visibility= View.VISIBLE
-        }
-        binding.signUpAddressSearchButton2.setOnClickListener() {
-            var etTextKeyword2=signUp_AddressSearch_EditText.text.toString()
-            searchKeyword(etTextKeyword2)
-        }
-        signUp_AddressSearchResult1.setOnClickListener() {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName1.text)
-        }
-        signUp_AddressSearchResult2.setOnClickListener() {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName2.text)
-        }
-        signUp_AddressSearchResult3.setOnClickListener() {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName3.text)
-        }
-        signUp_AddressSearchResult4.setOnClickListener() {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName4.text)
-        }
-        signUp_AddressSearchResult5.setOnClickListener() {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName5.text)
         }
     }
 
@@ -188,25 +222,32 @@ class SignUpActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].y}") // 위도
                         var token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
-                        var siDo: List<String>
-                        var guGunDong: List<String>
-                        var dongEubMyeon: List<String>
                         when(index) {
                             0 -> {
                                 placeName1.text="${it.documents[index].place_name}"
                                 addressName1.text="${it.documents[index].address_name}"
+                                x1=it.documents[index].x
+                                y1=it.documents[index].y
                             } 1 -> {
                                 placeName2.text="${it.documents[index].place_name}"
                                 addressName2.text="${it.documents[index].address_name}"
+                                x2=it.documents[index].x
+                                y2=it.documents[index].y
                             } 2 -> {
                                 placeName3.text="${it.documents[index].place_name}"
                                 addressName3.text="${it.documents[index].address_name}"
+                                x3=it.documents[index].x
+                                y3=it.documents[index].y
                             } 3 -> {
                                 placeName4.text="${it.documents[index].place_name}"
                                 addressName4.text="${it.documents[index].address_name}"
+                                x4=it.documents[index].x
+                                y4=it.documents[index].y
                             } 4 -> {
                                 placeName5.text="${it.documents[index].place_name}"
                                 addressName5.text="${it.documents[index].address_name}"
+                                x5=it.documents[index].x
+                                y5=it.documents[index].y
                             }
                         }
                     }

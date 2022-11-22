@@ -49,12 +49,25 @@
                     android:layout_marginLeft="26dp"
                     />
             </LinearLayout>
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
-                android:textColor="@color/black"
-                />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="* 최소 6자리 이상 *"
+                    android:textSize="10sp"
+                    android:textColor="@color/dark_gray"
+                    />
+            </LinearLayout>
             <EditText
                 android:id="@+id/signUp_Password_EditText"
                 android:layout_width="match_parent"
@@ -89,6 +102,22 @@
                 />
             <EditText
                 android:id="@+id/signUp_Name_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:inputType="textPersonName"
+                android:background="@mipmap/signup_rectangle"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="별명"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                />
+            <EditText
+                android:id="@+id/signUp_Nickname_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:textColor="@color/black"
