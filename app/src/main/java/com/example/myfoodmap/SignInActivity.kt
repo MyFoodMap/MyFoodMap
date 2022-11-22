@@ -21,10 +21,6 @@ class SignInActivity : AppCompatActivity() {
 
         signIn_Login_Button.setOnClickListener{
             login()
-            val intent = Intent(this,AppMainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-            finish()
         }
     }
 
@@ -35,6 +31,7 @@ class SignInActivity : AppCompatActivity() {
         if (id.isNotBlank() && pw.isNotBlank()) {
             FireBaseAuth.signIn(id,pw,this,
                 mSuccessHandler = {
+                    gotoAppMain()
                     startToast("로그인에 성공하였습니다.") },
                 mFailureHandler = { e ->
                     startToast("로그인에 실패하였습니다")
@@ -42,9 +39,14 @@ class SignInActivity : AppCompatActivity() {
         }else startToast("아이디, 비밀번호를 입력해주세요")
     }
 
+    private fun gotoAppMain(){
+        val intent = Intent(this,AppMainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
+    }
+
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
-
-       
     }
 }

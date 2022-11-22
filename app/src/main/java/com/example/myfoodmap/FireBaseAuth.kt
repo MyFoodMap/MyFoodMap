@@ -11,7 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 object FireBaseAuth {
-    private val auth by lazy { Firebase.auth}
+    val auth by lazy { Firebase.auth}
 
     init{
         val currentUser = auth.currentUser
@@ -33,7 +33,6 @@ object FireBaseAuth {
                     //데이터베이스에 정보 저장
                     if (firebaseUser != null) {
                         mSuccessHandler(firebaseUser.uid)
-                        signOut()
                     }
                 } else {
                     task.exception?.let { mFailureHandler(it) }

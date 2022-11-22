@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -30,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val clickNo = getColor(R.color.dark_gray)
         val click = getColor(R.color.gray)
+        customProgress = CustomProgress(this)
 
         signUp_Man_Button.setOnClickListener{
             signUp_Woman_Button.setBackgroundColor(click)
@@ -43,15 +46,13 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         signUp_OverlapCheck_Button.setOnClickListener{ checkOverlapId() } //아이디 중복 검사
+
         signUp_SignUp_Button.setOnClickListener{
             singUp()
-            var intent = Intent(this,LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-            finish()
         } //화원가입
     }
 
+    //아이디중복검사
     private fun checkOverlapId(){
         val id = signUp_SignUpId_EditText.text.toString()
 
@@ -60,6 +61,7 @@ class SignUpActivity : AppCompatActivity() {
         else{
             FireBaseDataBase.getUserData(id,
                 mSuccessHandler = { document->
+                    Log.d(TAG,"아이디 중복 검사 : ${document}")
                     if(document != null){
                         checkOverlapId = true
                         startToast("사용할수 있는 아이디입니다")
@@ -69,33 +71,35 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
+    //회원가입
     private fun singUp() {
         val id = signUp_SignUpId_EditText.text.toString()
         val password = signUp_Password_EditText.text.toString()
         val checkPassword = signUp_PasswordCheck_EditText.text.toString()
+        val name = signUp_Name_EditText.text.toString()
+        val store = Firebase.firestore
+        //val address = signUp_SignUpAddress_EditText.text.toString()
         //수정해야함
-        val name = "son"
         val nickname = "jansoon"
-
-        val address = signUp_Address_EditText.text.toString()
+        val address = "광운대"
 
         if(checkEmpty(id,password,checkPassword,name,gender,address,nickname) && checkOverlapId){
             //로딩창
             showProgressBar()
-
             //회원 정보 등록
             FireBaseAuth.singUp(id,password,this,
                 mSuccessHandler = {uid ->
+                    startToast("데이터베이스 정보 저장 시작")
                     //데이터베이스에 정보 등록
                     FireBaseDataBase.uploadUserData(
                         id, UserInfo(uid,id,name,gender,address,nickname),
-                        mSuccessHandler = {
+                        mSuccessHandlerUser = {
                             Log.d(TAG, "회원정보 등록 성공")
-                            hideProgressBar() },
-                        mFailureHandler = {e -> Log.e(TAG, "회원정보 등록 실패",e)}
+                            FireBaseAuth.auth.signOut()
+                            hideProgressBar()
+                            gotoLogin()},
+                        mFailureHandlerUser = {e -> Log.e(TAG, "회원정보 등록 실패",e)}
                     )
-
-                    startToast("회원 가입에 성공하였습니다.")
                 },
                 mFailureHandler = { e ->
                     Log.w(TAG, "signInWithEmail:failure", e)
@@ -152,6 +156,17 @@ class SignUpActivity : AppCompatActivity() {
         return true
     }
 
+   private fun gotoLogin(){
+       var intent = Intent(this,LoginActivity::class.java)
+       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+       startActivity(intent)
+       finish()
+   }
+
+    private fun startToast(msg:String){
+        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+    }
+
     // 프로그레스바 보이기
     private fun showProgressBar() {
         blockLayoutTouch()
@@ -172,10 +187,6 @@ class SignUpActivity : AppCompatActivity() {
     // 화면 터치 풀기
     private fun clearBlockLayoutTouch() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-    }
-
-    private fun startToast(msg:String){
-        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
     }
 
 }
