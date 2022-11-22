@@ -23,5 +23,6 @@ class ChooseActivity : AppCompatActivity() {
             val intent= Intent(this,KeywordSearchActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

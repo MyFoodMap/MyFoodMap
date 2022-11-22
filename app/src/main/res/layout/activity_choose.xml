@@ -28,4 +28,5 @@
         android:id="@+id/btnKeywordSearch"
         android:text="키워드 검색"
         android:textSize="20sp"/>
+
 </LinearLayout>

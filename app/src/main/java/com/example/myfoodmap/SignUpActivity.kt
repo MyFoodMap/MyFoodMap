@@ -1,11 +1,19 @@
 package com.example.myfoodmap
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Nickname
 import android.util.Log
-import android.view.View
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import android.view.View
+import com.example.myfoodmap.KeywordSearchActivity.Companion.API_KEY
+import com.example.myfoodmap.KeywordSearchActivity.Companion.BASE_URL
 import com.example.myfoodmap.databinding.ActivityKeywordSearchBinding
 import com.example.myfoodmap.databinding.ActivitySignUpBinding
 import kotlinx.android.synthetic.main.activity_keyword_search.*
@@ -17,12 +25,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySignUpBinding
 
-    companion object {
+    private companion object {
+        const val TAG = "회원가입"
+        const val REQUEST_FIRST = 1000
         const val BASE_URL = "https://dapi.kakao.com/"
         const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
+
+    private lateinit var customProgress: CustomProgress
+    private var checkOverlapId = false
+    private var gender = ""
+    private lateinit var binding : ActivitySignUpBinding
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +46,84 @@ class SignUpActivity : AppCompatActivity() {
 
         val clickNo = getColor(R.color.dark_gray)
         val click = getColor(R.color.gray)
+        customProgress = CustomProgress(this)
 
-        signUp_Man_Button.setOnClickListener() {
+        signUp_Man_Button.setOnClickListener{
             signUp_Woman_Button.setBackgroundColor(click)
             signUp_Man_Button.setBackgroundColor(clickNo)
+            gender = "남"
         }
-        signUp_Woman_Button.setOnClickListener() {
+        signUp_Woman_Button.setOnClickListener{
             signUp_Woman_Button.setBackgroundColor(clickNo)
             signUp_Man_Button.setBackgroundColor(click)
+            gender = "여"
+        }
+
+        signUp_OverlapCheck_Button.setOnClickListener{ checkOverlapId() } //아이디 중복 검사
+
+        signUp_SignUp_Button.setOnClickListener{
+            singUp()
+        } //화원가입
+    }
+
+    //아이디중복검사
+    private fun checkOverlapId(){
+        val id = signUp_SignUpId_EditText.text.toString()
+
+        if(id.isBlank()){
+            startToast("아이디를 입력해주세요")}
+        else{
+            FireBaseDataBase.getUserData(id,
+                mSuccessHandler = { document->
+                    Log.d(TAG,"아이디 중복 검사 : ${document}")
+                    if(document != null){
+                        checkOverlapId = true
+                        startToast("사용할수 있는 아이디입니다")
+                    } },
+                mFailureHandler = {startToast("이미 존재하는 아이디입니다")})
+        }
+
+    }
+
+    //회원가입
+    private fun singUp() {
+        val id = signUp_SignUpId_EditText.text.toString()
+        val password = signUp_Password_EditText.text.toString()
+        val checkPassword = signUp_PasswordCheck_EditText.text.toString()
+        val name = signUp_Name_EditText.text.toString()
+        val store = Firebase.firestore
+        //val address = signUp_SignUpAddress_EditText.text.toString()
+        //수정해야함
+        val nickname = "jansoon"
+        val address = "서울특별시 ~~~(주소)"
+        val place = "광운대(장소)"
+        val x = "1.223232xxx"
+        val y = "1.223232xxx"
+
+        if(checkEmpty(id,password,checkPassword,name,gender,address,nickname) && checkOverlapId){
+            //로딩창
+            showProgressBar()
+            //회원 정보 등록
+            FireBaseAuth.singUp(id,password,this,
+                mSuccessHandler = {uid ->
+                    startToast("데이터베이스 정보 저장 시작")
+                    //데이터베이스에 정보 등록
+                    FireBaseDataBase.uploadUserData(
+                        id, UserInfo(uid,id,name,gender,nickname,
+                            place,address,x,y),
+                        mSuccessHandlerUser = {
+                            Log.d(TAG, "회원정보 등록 성공")
+                            FireBaseAuth.auth.signOut()
+                            hideProgressBar()
+                            gotoLogin()},
+                        mFailureHandlerUser = {e -> Log.e(TAG, "회원정보 등록 실패",e)}
+                    )
+                },
+                mFailureHandler = { e ->
+                    Log.w(TAG, "signInWithEmail:failure", e)
+                    startToast("회원가입에 실패하였습니다.")
+                }
+            )
         }
         binding.signUpAddressSearchButton.setOnClickListener() {
             var etTextKeyword=signUp_SignUpAddress_EditText.text.toString()
@@ -133,4 +218,85 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
     }
+
+    //비밀번호 일치 검사
+    private fun checkPassword(password: String, checkPassword:String):Boolean{//일치하면 참 아니면 거짓
+        if(password == checkPassword) return true
+        return false
+
+    }
+
+    //공백 검사
+    private fun checkEmpty(
+        id:String, password:String,checkPassword: String,
+        name:String, gender:String, address:String,nickname: String):Boolean{
+        if(id.isBlank()){
+            startToast("아이디를 입력하세요")
+            return false
+        }
+
+        if(password.isBlank()){
+            startToast("비밀번호를 입력하세요")
+            return false
+        }else if(!checkPassword(password,checkPassword)){
+            startToast("비밀번호가 일치하지 않습니다")
+            return false
+        }
+
+        if(name.isBlank()){
+            startToast("이름를 입력하세요")
+            return false
+        }
+
+        if(gender.isBlank()){
+            startToast("성별를 입력하세요")
+            return false
+        }
+
+        if(address.isBlank()){
+            startToast("주소를 입력하세요")
+            return false
+        }
+
+        if(nickname.isBlank()){
+            startToast("주소를 입력하세요")
+            return false
+        }
+
+        return true
+    }
+
+   private fun gotoLogin(){
+       var intent = Intent(this,LoginActivity::class.java)
+       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+       startActivity(intent)
+       finish()
+   }
+
+    private fun startToast(msg:String){
+        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+    }
+
+    // 프로그레스바 보이기
+    private fun showProgressBar() {
+        blockLayoutTouch()
+        customProgress.show()
+    }
+
+    // 프로그레스바 숨기기
+    private fun hideProgressBar() {
+        clearBlockLayoutTouch()
+        customProgress.dismiss()
+    }
+
+    // 화면 터치 막기
+    private fun blockLayoutTouch() {
+        window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
+    // 화면 터치 풀기
+    private fun clearBlockLayoutTouch() {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
 }

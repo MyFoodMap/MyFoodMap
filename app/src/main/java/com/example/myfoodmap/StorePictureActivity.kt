@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_store_picture.*
 
 class StorePictureActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_picture)
@@ -21,6 +22,7 @@ class StorePictureActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode== RESULT_OK && it.data!=null) {
@@ -31,6 +33,7 @@ class StorePictureActivity : AppCompatActivity() {
                 .into(wiv)
         }
     }
+
     private fun upload() {
         val intent=Intent(Intent.ACTION_PICK)
         intent.type="image/*"
