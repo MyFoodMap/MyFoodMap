@@ -9,7 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:id="@+id/signUp_SignUpScroll">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,6 +165,183 @@
                 android:layout_marginBottom="20dp"
                 />
         <!-- 글꼴 받으면 수정해야함 -->
+        </LinearLayout>
+    </ScrollView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99ffffff"
+        android:id="@+id/signUp_SearchScrollBackground"
+        android:visibility="invisible"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/signUp_SearchScroll"
+        android:layout_margin="40dp"
+        android:visibility="invisible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="받아온 주소 여기에"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:hint="주소 입력"
+                    android:textColorHint="@color/gray"
+                    android:id="@+id/signUp_AddressSearch_EditText"
+                    android:layout_weight="40"/>
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/overlap_check"
+                    android:layout_marginLeft="10dp"
+                    android:text="검색"
+                    android:textSize="7sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/signUp_AddressSearch_Button2"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@mipmap/signup_rectangle"
+                android:id="@+id/signUp_AddressSearchResult1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 건물명"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/placeName1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 도로주소"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/addressName1"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:background="@mipmap/signup_rectangle"
+                android:id="@+id/signUp_AddressSearchResult2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 건물명"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/placeName2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 도로주소"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/addressName2"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:background="@mipmap/signup_rectangle"
+                android:id="@+id/signUp_AddressSearchResult3">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 건물명"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/placeName3"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 도로주소"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/addressName3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:background="@mipmap/signup_rectangle"
+                android:id="@+id/signUp_AddressSearchResult4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 건물명"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/placeName4"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 도로주소"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/addressName4"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="2dp"
+                android:background="@mipmap/signup_rectangle"
+                android:id="@+id/signUp_AddressSearchResult5">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 건물명"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/placeName5"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="받아온 주소의 도로주소"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/addressName5"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
