@@ -21,7 +21,6 @@ data class RegionInfo(
 )
 
 data class Place(
-    var img: Drawable,
 //    var id: String,                     // 장소 ID
     var place_name: String,             // 장소명, 업체명
 //    var category_name: String,          // 카테고리 이름

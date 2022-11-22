@@ -13,5 +13,5 @@ interface KakaoAPI {
         // 매개변수 추가 가능
         // @Query("category_group_code") category: String
 
-    ): Call<KakaoData>    // 받아온 정보가 ResultSearchKeyword 클래스의 구조로 담김
+    ): Call<KakaoData>    // 받아온 정보가 클래스의 구조로 담김
 }

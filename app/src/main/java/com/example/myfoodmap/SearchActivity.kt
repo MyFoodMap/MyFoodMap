@@ -1,5 +1,4 @@
 package com.example.myfoodmap
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

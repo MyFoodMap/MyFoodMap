@@ -101,6 +101,11 @@ class SignUpActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
+                        var token=(it.documents[index].address_name).split(' ')
+                        Log.d("Address", "$token")
+                        var siDo: List<String>
+                        var guGunDong: List<String>
+                        var dongEubMyeon: List<String>
                         when(index) {
                             0 -> {
                                 placeName1.text="${it.documents[index].place_name}"
