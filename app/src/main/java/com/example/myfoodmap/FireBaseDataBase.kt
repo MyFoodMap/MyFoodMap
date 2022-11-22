@@ -66,6 +66,23 @@ object FireBaseDataBase {
             .addOnFailureListener { e -> mFailureHandlerPost(e) }
     }
 
+    fun getPostingDataForRestaurant(
+        post:PostInfo,
+        mSuccessHandlerPost:(DocumentSnapshot) -> Unit,
+        mFailureHandlerPost:(Exception) -> Unit){
+
+        val restaurantPost = store.collection("Posts").document(post.restaurantName)
+            .collection("Posting").document("Users")
+
+       restaurantPost.get()
+            .addOnSuccessListener { document->
+                mSuccessHandlerPost(document)
+            }
+            .addOnFailureListener { exception ->
+                mFailureHandlerPost(exception)
+            }
+    }
+
     /*
     fun getPostingDataForUser(
         uid: String, userEmail:String, post:PostInfo,
@@ -81,19 +98,7 @@ object FireBaseDataBase {
             }
     }
 
-    fun getPostingDataForRestaurant(
-        uid: String, userEmail:String, post:PostInfo,
-        mSuccessHandler:(DocumentSnapshot) -> Unit,
-        mFailureHandler:(Exception) -> Unit,){
 
-        store.collection(collection).document(document).get()
-            .addOnSuccessListener { document->
-                mSuccessHandler(document)
-            }
-            .addOnFailureListener { exception ->
-                mFailureHandler(exception)
-            }
-    }
     */
 
 }

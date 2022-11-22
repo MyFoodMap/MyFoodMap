@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -43,9 +44,6 @@ class ScoreActivity : AppCompatActivity() {
         score_Photo.setOnClickListener {
             upload()
         }
-        score_Save_Button.setOnClickListener {
-            savePost(restaurantName)
-        }
 
         var egg_1=1
         var egg_2=1
@@ -55,7 +53,7 @@ class ScoreActivity : AppCompatActivity() {
         var whatScore="Taste"
 
         score_TasteRange.setOnClickListener() {
-            score_ScoreBackground.visibility=View.VISIBLE
+            score_ScoreBackground.visibility= View.VISIBLE
             score_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1

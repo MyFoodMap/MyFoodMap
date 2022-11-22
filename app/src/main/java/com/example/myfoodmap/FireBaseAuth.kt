@@ -1,5 +1,6 @@
 package com.example.myfoodmap
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 
 object FireBaseAuth {
     val auth by lazy { Firebase.auth}
+    var user:FirebaseUser? = null
 
     init{
         val currentUser = auth.currentUser
@@ -40,21 +42,23 @@ object FireBaseAuth {
             }
     }
 
+
     fun signIn(email:String, password:String,
                activity: AppCompatActivity,
                mSuccessHandler:() -> Unit,
                mFailureHandler:(java.lang.Exception?) -> Unit
     ){
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity){ task ->
+            .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
-                    if(auth.currentUser != null)
+                    if (auth.currentUser != null) {
+                        user = auth.currentUser
                         mSuccessHandler()
-                } else {
-                    mFailureHandler( task.exception)
+                    } else {
+                        mFailureHandler(task.exception)
+                    }
                 }
             }
-
     }
 
     private fun signOut(){

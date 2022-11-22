@@ -11,9 +11,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
+import com.example.myfoodmap.KeywordSearchActivity.Companion.API_KEY
+import com.example.myfoodmap.KeywordSearchActivity.Companion.BASE_URL
 import com.example.myfoodmap.databinding.ActivityKeywordSearchBinding
 import com.example.myfoodmap.databinding.ActivitySignUpBinding
 import kotlinx.android.synthetic.main.activity_keyword_search.*
@@ -29,6 +29,8 @@ class SignUpActivity : AppCompatActivity() {
     private companion object {
         const val TAG = "회원가입"
         const val REQUEST_FIRST = 1000
+        const val BASE_URL = "https://dapi.kakao.com/"
+        const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
 
     private lateinit var customProgress: CustomProgress
@@ -36,10 +38,6 @@ class SignUpActivity : AppCompatActivity() {
     private var gender = ""
     private lateinit var binding : ActivitySignUpBinding
 
-    companion object {
-        const val BASE_URL = "https://dapi.kakao.com/"
-        const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
-    }
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +95,10 @@ class SignUpActivity : AppCompatActivity() {
         //val address = signUp_SignUpAddress_EditText.text.toString()
         //수정해야함
         val nickname = "jansoon"
-        val address = "광운대"
+        val address = "서울특별시 ~~~(주소)"
+        val place = "광운대(장소)"
+        val x = "1.223232xxx"
+        val y = "1.223232xxx"
 
         if(checkEmpty(id,password,checkPassword,name,gender,address,nickname) && checkOverlapId){
             //로딩창
@@ -108,7 +109,8 @@ class SignUpActivity : AppCompatActivity() {
                     startToast("데이터베이스 정보 저장 시작")
                     //데이터베이스에 정보 등록
                     FireBaseDataBase.uploadUserData(
-                        id, UserInfo(uid,id,name,gender,address,nickname),
+                        id, UserInfo(uid,id,name,gender,nickname,
+                            place,address,x,y),
                         mSuccessHandlerUser = {
                             Log.d(TAG, "회원정보 등록 성공")
                             FireBaseAuth.auth.signOut()
