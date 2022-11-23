@@ -17,6 +17,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private val LOCATION_PERMISSTION_REQUEST_CODE: Int = 1000
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
+    private lateinit var userInfo: UserInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +27,13 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
+        userInfo  = intent.getSerializableExtra("user") as UserInfo
+
         locationSource = FusedLocationSource(this, LOCATION_PERMISSTION_REQUEST_CODE)
 
         appMain_Profile_Button.setOnClickListener() {
             val intent= Intent(this,ProfileActivity::class.java)
+            intent.putExtra("user",userInfo)
             startActivity(intent)
         }
         appMain_Search_Button.setOnClickListener() {
@@ -38,6 +42,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         appMain_Plus_Button.setOnClickListener() {
             val intent= Intent(this,ScoreActivity::class.java)
+            intent.putExtra("user",userInfo)
             startActivity(intent)
         }
     }

@@ -10,10 +10,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myfoodmap.databinding.ActivityGalleryBinding
 import com.example.myfoodmap.databinding.ActivityProfileBinding
 import com.google.firebase.firestore.ktx.toObject
+import com.naver.maps.map.a.d
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -32,6 +34,22 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //유저 정보 받아오기
+        userInfo = intent.getSerializableExtra("user") as UserInfo
+        userInfo.photoUri?.let {
+            profile_BasicProfile.setImageURI(it)
+        }
+
+        FireBaseDataBase.getPostingDataForUser(userInfo.id,
+            mSuccessHandler = {
+                postInfoList.add(it.toObject<PostInfo>()!!)
+                startToast("정보받아오기 성공")
+                profile_PeedPicture.setImageURI(postInfoList[0].imageUri.toUri())},
+            mFailureHandler = {e->
+                startToast("프로필 게시물 정보 받아오기 실패")
+                Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
+        )
+
         //adapter 초기화
         galleryAdapter = GalleryAdapter(imageList, this)
 
@@ -39,6 +57,7 @@ class ProfileActivity : AppCompatActivity() {
         val gridLayoutManager = GridLayoutManager(this, 3) // 3개씩 보여주기
         binding.recyclerViewGallery.layoutManager = gridLayoutManager
         binding.recyclerViewGallery.adapter = galleryAdapter
+
 
 
         //버튼 이벤트
@@ -50,18 +69,7 @@ class ProfileActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             activityResult.launch(intent)
         }//Create
-//      프로필 들어가기만하면 앱 종료되서 주석처리
-//        FireBaseDataBase.getUserData(
-//            FireBaseAuth.user?.email!!,
-//            mSuccessHandler = {documentSnapshot ->
-//                userInfo = documentSnapshot.toObject<UserInfo>()!!
-//
-//                profile_BasicProfile.setImageURI(userInfo.photoUri)
-//                //profile_UserName.setImageURI(userInfo.nickname) 이름 등록
-//
-//                startToast("정보 불러오기 성공")
-//                Log.d(TAG,"정보 불러오기 성공") },
-//            mFailureHandler = {e->Log.e(TAG,"프로필 정보 불러오기 실패",e)})
+
 
         profile_PeedClickRange.setOnClickListener() {
             profile_PeedPage.visibility= View.VISIBLE
@@ -87,9 +95,10 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-//    private fun startToast(msg:String){
-//        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
-//    }
+    private fun startToast(msg:String){
+         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+   }
+
     @SuppressLint("SuspiciousIndentation")
     private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) {

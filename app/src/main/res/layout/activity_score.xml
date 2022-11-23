@@ -20,13 +20,14 @@
                 android:layout_height="40.95dp"
                 android:background="@color/gray"
                 android:layout_margin="10dp"/>
+
             <Button
+                android:id="@+id/score_Register"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end|center_vertical"
-                android:text="등 록"
                 android:layout_marginRight="20dp"
-                />
+                android:text="등 록" />
         </FrameLayout>
         <ScrollView
             android:layout_width="match_parent"
@@ -97,6 +98,13 @@
                             android:background="@mipmap/score_page_picture"
                             />
                     </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/score_SearchBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#99ffffff"
+                        android:visibility="invisible" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -478,13 +486,7 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#99ffffff"
-        android:id="@+id/score_SearchBackground"
-        android:visibility="invisible"
-        />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

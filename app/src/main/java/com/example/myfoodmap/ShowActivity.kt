@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_show.*
@@ -33,7 +34,7 @@ class ShowActivity : AppCompatActivity() {
 
     private fun loadingPost(postInfo: PostInfo){
         show_StoreName.setText(postInfo.restaurantName)
-        show_Photo.setImageURI(postInfo.imageUri)
+        show_Photo.setImageURI(postInfo.imageUri.toUri())
         //postInfo.tasteEvaluation.toDouble() 맛 점수
         //postInfo.costEvaluation.toDouble() 가격 점수
         //postInfo.cleanlinessEvaluation.toDouble() 청결 점수
