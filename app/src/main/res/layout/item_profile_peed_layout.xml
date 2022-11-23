@@ -19,11 +19,11 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/profile_PeedName"
+            <TextView
+                android:id="@+id/profile_PeedName_TextView"
                 android:layout_width="118dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/peed_place_name"
+                android:background="@mipmap/peed_place_name"
                 />
 <!--            추가되면 좋은 기능-->
 <!--            <ImageView-->
