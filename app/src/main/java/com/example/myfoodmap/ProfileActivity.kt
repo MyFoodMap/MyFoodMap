@@ -1,10 +1,18 @@
 package com.example.myfoodmap
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myfoodmap.databinding.ActivityGalleryBinding
+import com.example.myfoodmap.databinding.ActivityProfileBinding
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.android.synthetic.main.activity_profile.*
 
@@ -15,21 +23,45 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var userInfo: UserInfo
     private var postInfoList: ArrayList<PostInfo> = ArrayList()
 
+    lateinit var binding: ActivityProfileBinding
+    lateinit var galleryAdapter: GalleryAdapter
+    var imageList: ArrayList<Uri> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        FireBaseDataBase.getUserData(
-            FireBaseAuth.user?.email!!,
-            mSuccessHandler = {documentSnapshot ->
-                userInfo = documentSnapshot.toObject<UserInfo>()!!
+        //adapter 초기화
+        galleryAdapter = GalleryAdapter(imageList, this)
 
-                profile_BasicProfile.setImageURI(userInfo.photoUri)
-                //profile_UserName.setImageURI(userInfo.nickname) 이름 등록
+        //recyclerView 설정
+        val gridLayoutManager = GridLayoutManager(this, 3) // 3개씩 보여주기
+        binding.recyclerViewGallery.layoutManager = gridLayoutManager
+        binding.recyclerViewGallery.adapter = galleryAdapter
 
-                startToast("정보 불러오기 성공")
-                Log.d(TAG,"정보 불러오기 성공") },
-            mFailureHandler = {e->Log.e(TAG,"프로필 정보 불러오기 실패",e)})
+
+        //버튼 이벤트
+        binding.profilePeedPicture.setOnClickListener {
+            //갤러리 호출
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            //멀티 선택 기능
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            activityResult.launch(intent)
+        }//Create
+//      프로필 들어가기만하면 앱 종료되서 주석처리
+//        FireBaseDataBase.getUserData(
+//            FireBaseAuth.user?.email!!,
+//            mSuccessHandler = {documentSnapshot ->
+//                userInfo = documentSnapshot.toObject<UserInfo>()!!
+//
+//                profile_BasicProfile.setImageURI(userInfo.photoUri)
+//                //profile_UserName.setImageURI(userInfo.nickname) 이름 등록
+//
+//                startToast("정보 불러오기 성공")
+//                Log.d(TAG,"정보 불러오기 성공") },
+//            mFailureHandler = {e->Log.e(TAG,"프로필 정보 불러오기 실패",e)})
 
         profile_PeedClickRange.setOnClickListener() {
             profile_PeedPage.visibility= View.VISIBLE
@@ -45,17 +77,39 @@ class ProfileActivity : AppCompatActivity() {
             profile_SelectBookmark.visibility=View.VISIBLE
         }
 
-        profile_PeedPin_Button.setOnClickListener() {
-            profile_PeedPin_Button.visibility= View.INVISIBLE
-            profile_PeedPinSelected_Button.visibility= View.VISIBLE
+        profile_BookmarkPlus.setOnClickListener() {
+            profile_BookmarkPlus.visibility=View.INVISIBLE
+            profile_BookmarkNo.visibility=View.VISIBLE
         }
-        profile_PeedPinSelected_Button.setOnClickListener() {
-            profile_PeedPin_Button.visibility= View.VISIBLE
-            profile_PeedPinSelected_Button.visibility= View.INVISIBLE
+        profile_BookmarkNo.setOnClickListener() {
+            profile_BookmarkPlus.visibility=View.VISIBLE
+            profile_BookmarkNo.visibility=View.INVISIBLE
         }
     }
 
-    private fun startToast(msg:String){
-        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+//    private fun startToast(msg:String){
+//        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+//    }
+    @SuppressLint("SuspiciousIndentation")
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+        //결과 코드 OK, 결과값 null 아니면
+        if(it.resultCode== RESULT_OK) {
+            if(it.data!!.clipData != null) {// 멀티 이미지
+                //선택한 이미지 개수
+                val count=it.data!!.clipData!!.itemCount
+
+                for(index in 0 until count) {
+                    //이미지 담기
+                    val imageUri=it.data!!.clipData!!.getItemAt(index).uri
+                    //이미지 추가  // 다중선택일때 넣어야하는 데이터 imageUri
+                    imageList.add(imageUri)
+                }
+            } else { //싱글 이미지 // 하나선택했을때 넣어야하는 데이터 imageSingleUri
+                val imageSingleUri=it.data!!.data
+                imageList.add(imageSingleUri!!)
+            }
+            galleryAdapter.notifyDataSetChanged()
+        }
     }
 }

@@ -21,7 +21,7 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     // 화면 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater=LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.item_gallery_layout, parent, false)
+        val view: View = inflater.inflate(R.layout.item_profile_peed_layout, parent, false)
         return ViewHolder(view)
     }
     // 데이터 설정
@@ -35,6 +35,6 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         return imageList.size
     }
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        var galleryView: ImageView = view.findViewById(R.id.galleryView)
+        var galleryView: ImageView = view.findViewById(R.id.profile_PeedPicture)
     }
 }

@@ -172,33 +172,17 @@
                     android:layout_height="118dp"
                     android:src="@mipmap/peed_picture"
                     />
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/profile_PeedName"
-                        android:layout_width="118dp"
-                        android:layout_height="20dp"
-                        android:src="@mipmap/peed_place_name"
-                        />
-                    <ImageView
-                        android:id="@+id/profile_PeedPinSelected_Button"
-                        android:layout_width="28dp"
-                        android:layout_height="23dp"
-                        android:src="@mipmap/peed_pin_selected_button"
-                        android:layout_gravity="end"
-                        android:visibility="invisible"
-                        />
-                    <ImageView
-                        android:id="@+id/profile_PeedPin_Button"
-                        android:layout_width="18dp"
-                        android:layout_height="23dp"
-                        android:src="@mipmap/peed_pin_button"
-                        android:layout_gravity="end"
-                        android:layout_marginRight="5dp"
-                        />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/profile_PeedName"
+                    android:layout_width="118dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/peed_place_name"
+                    />
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewGallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
         <FrameLayout
             android:id="@+id/profile_BookmarkPage"
@@ -219,6 +203,14 @@
                 android:layout_height="31dp"
                 android:src="@mipmap/bookmark_plus"
                 android:layout_gravity="end"
+                />
+            <ImageView
+                android:id="@+id/profile_BookmarkNo"
+                android:layout_width="42dp"
+                android:layout_height="31dp"
+                android:src="@mipmap/bookmark_no"
+                android:layout_gravity="end"
+                android:visibility="invisible"
                 />
         </FrameLayout>
     </FrameLayout>

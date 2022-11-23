@@ -20,6 +20,7 @@
                 android:id="@+id/signUp_logo"
                 android:layout_width="321dp"
                 android:layout_height="117dp"
+                android:layout_marginTop="200dp"
                 android:src="#D8D8D8" />
             <TextView
                 android:layout_width="wrap_content"
@@ -38,6 +39,7 @@
                     android:layout_height="30dp"
                     android:textColor="@color/black"
                     android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/signup_rectangle"
                     />
@@ -76,6 +78,7 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/signup_rectangle"
+                android:paddingLeft="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -92,6 +95,7 @@
                 android:inputType="textPassword"
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/signup_rectangle"
+                android:paddingLeft="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -108,6 +112,7 @@
                 android:layout_marginTop="10dp"
                 android:inputType="textPersonName"
                 android:background="@mipmap/signup_rectangle"
+                android:paddingLeft="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -122,6 +127,7 @@
                 android:layout_height="30dp"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
                 android:inputType="textPersonName"
                 android:background="@mipmap/signup_rectangle"
                 />
@@ -176,6 +182,7 @@
                     android:inputType="text"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/signup_rectangle"
+                    android:paddingLeft="5dp"
                     />
                 <ImageView
                     android:id="@+id/signUp_AddressSearch_Button"
