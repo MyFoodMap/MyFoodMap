@@ -15,9 +15,6 @@
         app:navermap_latitude="37.6192404638865"
         app:navermap_longitude="127.058270608867"
         />
-    <!-- 배경 하얀색으로 되어있음 수정해야함 -->
-    <!-- 레이아웃 문제로 Top-200상태 -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

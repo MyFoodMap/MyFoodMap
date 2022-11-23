@@ -1,14 +1,15 @@
 package com.example.myfoodmap
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.widget.LocationButtonView
 import kotlinx.android.synthetic.main.activity_app_main.*
 
 class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -22,7 +23,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_main)
 
-        mapView = findViewById(R.id.login_Map)
+        mapView = findViewById(R.id.appMain_map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
@@ -50,7 +51,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
         uiSettings.isCompassEnabled = false
-        uiSettings.isLocationButtonEnabled = true
+        uiSettings.isLocationButtonEnabled = false
     }
 
     override fun onStart() {
