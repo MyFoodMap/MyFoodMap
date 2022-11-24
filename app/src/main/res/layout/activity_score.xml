@@ -16,11 +16,10 @@
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/score_Logo"
-                android:layout_width="127dp"
-                android:layout_height="40.95dp"
-                android:background="@color/gray"
+                android:layout_width="121dp"
+                android:layout_height="63dp"
+                android:background="@mipmap/main_logo"
                 android:layout_margin="10dp"/>
-
             <Button
                 android:id="@+id/score_Register"
                 android:layout_width="wrap_content"
@@ -519,7 +518,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/score_SearchRange"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="126dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center_horizontal|start"

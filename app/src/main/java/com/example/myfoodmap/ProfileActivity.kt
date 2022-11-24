@@ -31,7 +31,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var galleryAdapter: GalleryAdapter
     var imageList: ArrayList<Uri> = ArrayList()
 
-    var bookamrkList = arrayListOf<BookmarkData>()
+    var bookmarkList = arrayListOf<BookmarkData>()
     lateinit var bookmarkAdapter: BookmarkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,28 +39,28 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //유저 정보 받아오기
-        userInfo = intent.getSerializableExtra("user") as UserInfo
-        userInfo.photoUri?.let {
-            profile_BasicProfile.setImageURI(it)
-        }
+//        //유저 정보 받아오기
+//        userInfo = intent.getSerializableExtra("user") as UserInfo
+//        userInfo.photoUri?.let {
+//            profile_BasicProfile.setImageURI(it)
+//        }
 
-        //데이터 베이스 등록
-        FireBaseDataBase.getPostingDataForUser(userInfo.id,
-            mSuccessHandler = { result->
-                val glide = Glide.with(this)
-                for( document in result)
-                    postInfoList.add(document.toObject<PostInfo>())
-                startToast("정보받아오기 성공")
-                Log.d(TAG,"정보받아오기 성공 : ${postInfoList[0].imageUri.toUri()}")
-                //for(user in postInfoList)
-                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
-                profile_PeedName.text = postInfoList[0].restaurantName
-            },
-            mFailureHandler = {e->
-                startToast("프로필 게시물 정보 받아오기 실패")
-                Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
-        )
+//        //데이터 베이스 등록
+//        FireBaseDataBase.getPostingDataForUser(userInfo.id,
+//            mSuccessHandler = { result->
+//                val glide = Glide.with(this)
+//                for( document in result)
+//                    postInfoList.add(document.toObject<PostInfo>())
+//                startToast("정보받아오기 성공")
+//                Log.d(TAG,"정보받아오기 성공 : ${postInfoList[0].imageUri.toUri()}")
+//                //for(user in postInfoList)
+//                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
+//                profile_PeedName.text = postInfoList[0].restaurantName
+//            },
+//            mFailureHandler = {e->
+//                startToast("프로필 게시물 정보 받아오기 실패")
+//                Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
+//        )
 
         //adapter 초기화
         galleryAdapter = GalleryAdapter(imageList, this)
@@ -98,13 +98,13 @@ class ProfileActivity : AppCompatActivity() {
             profile_SelectBookmark.visibility=View.VISIBLE
             profile_Bookmark_ListView.visibility=View.VISIBLE
 
-            bookmarkAdapter = BookmarkAdapter(this, bookamrkList)
+            bookmarkAdapter = BookmarkAdapter(this, bookmarkList)
             profile_Bookmark_ListView.adapter = bookmarkAdapter
 
-            bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
-            bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
+            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
             for(index in 0 until 10) {
-                bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+                bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
             }
             bookmarkAdapter.notifyDataSetChanged()
         }
@@ -116,6 +116,10 @@ class ProfileActivity : AppCompatActivity() {
         profile_BookmarkNo.setOnClickListener {
             profile_BookmarkPlus.visibility=View.VISIBLE
             profile_BookmarkNo.visibility=View.INVISIBLE
+        }
+
+        profile_Bookmark_ListView.setOnItemClickListener { adapterView, view, i, l ->
+            // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
         }
     }
 

@@ -12,10 +12,12 @@
         android:orientation="vertical"
         android:layout_gravity="center">
         <ImageView
+            android:layout_marginTop="20dp"
             android:id="@+id/signIn_Logo"
-            android:layout_width="321dp"
-            android:layout_height="117dp"
-            android:src="#D8D8D8"
+            android:layout_width="264dp"
+            android:layout_height="251dp"
+            android:src="@mipmap/login_logo"
+            android:layout_gravity="center"
             />
         <EditText
             android:id="@+id/signIn_IdEditText"
@@ -58,6 +60,7 @@
             android:textSize="15sp"
             android:gravity="center"
             android:fontFamily="@font/nanum_squareround_l"
+            android:layout_marginBottom="30dp"
             />
     </LinearLayout>
 </FrameLayout>

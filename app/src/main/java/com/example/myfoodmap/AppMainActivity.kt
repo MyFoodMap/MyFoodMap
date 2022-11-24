@@ -4,19 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.toObject
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapView
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.widget.LocationButtonView
+import android.view.View
 import kotlinx.android.synthetic.main.activity_app_main.*
 
-class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
+
+class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClickListener {
     private companion object {
         const val TAG = "메인"
     }
@@ -76,6 +82,22 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(@NonNull naverMap: NaverMap) {
         val uiSettings = naverMap.uiSettings
+        // 지도상에 마커 표시
+        val marker = Marker()
+        marker.position = LatLng(37.6203077604657, 127.057193096323)
+        marker.map = naverMap
+
+        marker.width = 100
+        marker.height = 100
+        marker.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
+
+        val marker1 = Marker()
+        marker1.position = LatLng(37.6192404638865, 127.058270608867)
+        marker1.map = naverMap
+
+        marker1.width = 100
+        marker1.height = 100
+        marker1.icon = OverlayImage.fromResource(R.drawable.peed_marker)
 
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
@@ -144,6 +166,10 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onClick(p0: Overlay): Boolean {
+        TODO("Not yet implemented")
     }
 
 }
