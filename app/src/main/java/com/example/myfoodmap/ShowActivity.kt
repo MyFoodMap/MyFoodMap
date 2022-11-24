@@ -33,7 +33,7 @@ class ShowActivity : AppCompatActivity() {
     }
 
     private fun loadingPost(postInfo: PostInfo){
-        show_StoreName.setText(postInfo.restaurantName)
+        show_StoreName.text = postInfo.restaurantName
         show_Photo.setImageURI(postInfo.imageUri.toUri())
         //postInfo.tasteEvaluation.toDouble() 맛 점수
         //postInfo.costEvaluation.toDouble() 가격 점수

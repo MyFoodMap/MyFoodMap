@@ -12,16 +12,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // 로딩화면, 계란 4번 누르면 ChooseActivity 이동
-        mainactivity_loading_1.setOnClickListener() {
+        mainactivity_loading_1.setOnClickListener {
             mainactivity_loading_1.visibility= View.INVISIBLE
         }
-        mainactivity_loading_2.setOnClickListener() {
+        mainactivity_loading_2.setOnClickListener {
             mainactivity_loading_2.visibility= View.INVISIBLE
         }
-        mainactivity_loading_3.setOnClickListener() {
+        mainactivity_loading_3.setOnClickListener {
             mainactivity_loading_3.visibility= View.INVISIBLE
         }
-        mainactivity_loading_4.setOnClickListener() {
+        mainactivity_loading_4.setOnClickListener {
             val intent= Intent(this,LoginActivity::class.java)
             startActivity(intent)
         }

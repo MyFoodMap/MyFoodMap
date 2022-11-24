@@ -53,14 +53,9 @@ object FireBaseStorage {
         downloadUris.child("${restaurantName}.png").downloadUrl
             .addOnSuccessListener { photoUri->
                 mSuccessHandler(photoUri)
-                //postInfo.imageUris.add(photoUri)
-                //Log.i(TAG,"사진 다운로드 성공")
-                //startToast("사진 저장에 성공했습니다")
             }
             .addOnFailureListener { e->
                 mFailureHandler(e)
-                //startToast("사진 다운로드에 실패했습니다")
-                //Log.e(TAG,"사진 다운로드 실패",it)
             }
 
         /*

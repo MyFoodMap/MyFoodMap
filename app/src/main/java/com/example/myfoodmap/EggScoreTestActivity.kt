@@ -18,7 +18,7 @@ class EggScoreTestActivity : AppCompatActivity() {
         var egg_5=1
         var whatScore="Taste"
 
-        eggScoreTest_TasteRange.setOnClickListener() {
+        eggScoreTest_TasteRange.setOnClickListener {
             eggScoreTest_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
@@ -33,7 +33,7 @@ class EggScoreTestActivity : AppCompatActivity() {
             eggScoreTest_score.text = "0.0"
             whatScore="Taste"
         }
-        eggScoreTest_PriceRange.setOnClickListener() {
+        eggScoreTest_PriceRange.setOnClickListener {
             eggScoreTest_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
@@ -48,7 +48,7 @@ class EggScoreTestActivity : AppCompatActivity() {
             eggScoreTest_score.text = "0.0"
             whatScore="Price"
         }
-        eggScoreTest_CleanRange.setOnClickListener() {
+        eggScoreTest_CleanRange.setOnClickListener {
             eggScoreTest_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
@@ -63,7 +63,7 @@ class EggScoreTestActivity : AppCompatActivity() {
             eggScoreTest_score.text = "0.0"
             whatScore="Clean"
         }
-        eggScoreTest_Save.setOnClickListener() {
+        eggScoreTest_Save.setOnClickListener {
             when(whatScore) {
                 "Taste" -> {
                     eggScoreTest_TasteScore.text=eggScoreTest_score.text
@@ -92,7 +92,7 @@ class EggScoreTestActivity : AppCompatActivity() {
             }
             eggScoreTest_ScoreRange.visibility=View.INVISIBLE
         }
-        eggScoreTest_1.setOnClickListener() {
+        eggScoreTest_1.setOnClickListener {
             eggScoreTest_2.setImageResource(R.mipmap.score_zero)
             eggScoreTest_3.setImageResource(R.mipmap.score_zero)
             eggScoreTest_4.setImageResource(R.mipmap.score_zero)
@@ -119,7 +119,7 @@ class EggScoreTestActivity : AppCompatActivity() {
                 }
             }
         }
-        eggScoreTest_2.setOnClickListener() {
+        eggScoreTest_2.setOnClickListener {
             eggScoreTest_1.setImageResource(R.mipmap.score_full)
             eggScoreTest_3.setImageResource(R.mipmap.score_zero)
             eggScoreTest_4.setImageResource(R.mipmap.score_zero)
@@ -146,7 +146,7 @@ class EggScoreTestActivity : AppCompatActivity() {
                 }
             }
         }
-        eggScoreTest_3.setOnClickListener() {
+        eggScoreTest_3.setOnClickListener {
             eggScoreTest_1.setImageResource(R.mipmap.score_full)
             eggScoreTest_2.setImageResource(R.mipmap.score_full)
             eggScoreTest_4.setImageResource(R.mipmap.score_zero)
@@ -173,7 +173,7 @@ class EggScoreTestActivity : AppCompatActivity() {
                 }
             }
         }
-        eggScoreTest_4.setOnClickListener() {
+        eggScoreTest_4.setOnClickListener {
             eggScoreTest_1.setImageResource(R.mipmap.score_full)
             eggScoreTest_2.setImageResource(R.mipmap.score_full)
             eggScoreTest_3.setImageResource(R.mipmap.score_full)
@@ -200,7 +200,7 @@ class EggScoreTestActivity : AppCompatActivity() {
                 }
             }
         }
-        eggScoreTest_5.setOnClickListener() {
+        eggScoreTest_5.setOnClickListener {
             eggScoreTest_1.setImageResource(R.mipmap.score_full)
             eggScoreTest_2.setImageResource(R.mipmap.score_full)
             eggScoreTest_3.setImageResource(R.mipmap.score_full)
