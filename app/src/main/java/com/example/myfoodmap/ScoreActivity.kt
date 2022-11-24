@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_score.*
 import androidx.core.view.marginTop
@@ -44,23 +45,25 @@ class ScoreActivity : AppCompatActivity() {
 
     private lateinit var customProgress: CustomProgress
     private lateinit var postInfo: PostInfo
+    private lateinit var userInfo: UserInfo
     private lateinit var user: FirebaseUser
+
+    override fun onStart() {
+        super.onStart()
+
+
+    }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
 
-        //임시변수
-        var restaurantName = "고씨네"
-        var taste = 4.5
-        var cost = 3.5
-        var clean = 1.0
-        user = FireBaseAuth.auth.currentUser!!
 
         //사용하는 변수
-        postInfo = PostInfo(restaurantName)
-        postInfo.saveEvaluation(taste,cost,clean)
         customProgress = CustomProgress(this)
+        user = FireBaseAuth.auth.currentUser!!
+        postInfo = PostInfo()
+        userInfo = intent.getSerializableExtra("user") as UserInfo
 
         score_Photo.setOnClickListener {
             upload()
@@ -318,6 +321,7 @@ class ScoreActivity : AppCompatActivity() {
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName5.text)
         }
+        score_Register.setOnClickListener { savePost() }
     }
     fun averageSum() {
         val a=score_TasteScore.text.toString().toDouble()
@@ -339,33 +343,37 @@ class ScoreActivity : AppCompatActivity() {
         if(it.resultCode== RESULT_OK && it.data!=null) {
             val uri=it.data!!.data // 사진 데이터 넣어야함
             score_Photo.setImageURI(uri)
-            postInfo.imageUri = uri
+            postInfo.imageUri = uri.toString()
             Glide.with(this)
                 .load(uri)
                 .into(score_Photo)
         }
     }
 
-    private fun savePost(restaurantName:String){
-        if(!postInfo.isEmpty()){
+    private fun savePost(){
+        postInfo.set(score_StoreName_EditText.text.toString(),
+            score_TasteScore.text.toString(),score_PriceScore.text.toString(),score_CleanScore.text.toString(),
+            score_AverageScore.text.toString(),
+            score_Review.text.toString(),"광운대")
+        if(checkEmpty(postInfo)){
             if (user != null) {
                 showProgressBar()
                 // 사진 업로드
-                FireBaseStorage.uploadPostingImage(user.uid, restaurantName, postInfo.imageUri!!,
+                FireBaseStorage.uploadPostingImage(user.uid, postInfo.restaurantName, postInfo.imageUri.toUri(),
                     mSuccessHandler = {
                         startToast("사진 저장 성공했습니다")
 
                         //업로드 사진 download uri 불러오기
                         FireBaseStorage.downloadImageUri(
-                            user.uid,restaurantName,
+                            user.uid,postInfo.restaurantName,
                             mSuccessHandler = { uri ->
-                                postInfo.imageUri = uri
+                                postInfo.imageUri = uri.toString()
                                 Log.i(TAG,"사진 다운로드 성공")
                                 startToast("사진 저장에 성공했습니다")
 
                                 //게시물 dataBase에 등록
                                 FireBaseDataBase.uploadPostingData(
-                                    user.uid,user.email!!,postInfo,
+                                    user.uid,userInfo.id,postInfo,
                                     mSuccessHandlerUser = {startToast("개인 사용자 폴더에 저장 성공")
                                                             hideProgressBar()},
                                     mFailureHandlerUser = {e ->
@@ -392,6 +400,33 @@ class ScoreActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkEmpty(postInfo: PostInfo):Boolean{
+        if(postInfo.restaurantName.isBlank()){
+            startToast("가게이름을 입력해주세요")
+            return false
+        }
+        if(postInfo.imageUri == null){
+            startToast("가게이름을 입력해주세요")
+            return false
+        }
+        if(postInfo.tasteEvaluation.isBlank()){
+            startToast("맛 평점을 선택해주세요")
+            return false
+        }
+        if(postInfo.costEvaluation.isBlank()){
+            startToast("가격 평점을 선택해주세요")
+            return false
+        }
+        if(postInfo.cleanlinessEvaluation.isBlank()){
+            startToast("평점 평점을 선택해주세요")
+            return false
+        }
+        if(postInfo.oneLineComment.isBlank()){
+            startToast("한줄평을 작성해주세요")
+            return false
+        }
+        return true
+    }
 
     // 프로그레스바 보이기
     private fun showProgressBar() {

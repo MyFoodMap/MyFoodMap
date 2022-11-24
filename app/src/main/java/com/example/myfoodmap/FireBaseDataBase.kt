@@ -83,15 +83,18 @@ object FireBaseDataBase {
             }
     }
 
-    /*
+
     fun getPostingDataForUser(
-        uid: String, userEmail:String, post:PostInfo,
+        userEmail:String,
         mSuccessHandler:(DocumentSnapshot) -> Unit,
         mFailureHandler:(Exception) -> Unit,){
 
-        store.collection(collection).document(document).get()
-            .addOnSuccessListener { document->
-                mSuccessHandler(document)
+        val userPost = store.collection("Users").document(userEmail).collection("UserPosting")
+
+       userPost.get()
+            .addOnSuccessListener { result->
+                for (document in result)
+                    mSuccessHandler(document)
             }
             .addOnFailureListener { exception ->
                 mFailureHandler(exception)
@@ -99,6 +102,6 @@ object FireBaseDataBase {
     }
 
 
-    */
+
 
 }

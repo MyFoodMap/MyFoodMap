@@ -15,13 +15,6 @@ object FireBaseAuth {
     val auth by lazy { Firebase.auth}
     var user:FirebaseUser? = null
 
-    init{
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            signOut()
-        }
-    }
-
     fun singUp(email:String, password:String,
                       activity: AppCompatActivity,
                       mSuccessHandler:(String) -> Unit,
