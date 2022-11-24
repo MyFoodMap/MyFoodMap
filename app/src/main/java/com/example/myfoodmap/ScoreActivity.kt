@@ -12,12 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_score.*
-import androidx.core.view.marginTop
 import com.bumptech.glide.Glide
-import com.example.myfoodmap.databinding.ActivityScoreBinding
-import com.example.myfoodmap.databinding.ActivitySignUpBinding
-import kotlinx.android.synthetic.main.activity_egg_score_test.*
-import kotlinx.android.synthetic.main.activity_score.*
 import kotlinx.android.synthetic.main.activity_score.addressName1
 import kotlinx.android.synthetic.main.activity_score.addressName2
 import kotlinx.android.synthetic.main.activity_score.addressName3
@@ -28,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_score.placeName2
 import kotlinx.android.synthetic.main.activity_score.placeName3
 import kotlinx.android.synthetic.main.activity_score.placeName4
 import kotlinx.android.synthetic.main.activity_score.placeName5
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,16 +42,9 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var userInfo: UserInfo
     private lateinit var user: FirebaseUser
 
-    override fun onStart() {
-        super.onStart()
-
-
-    }
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
-
 
         //사용하는 변수
         customProgress = CustomProgress(this)
@@ -76,7 +63,7 @@ class ScoreActivity : AppCompatActivity() {
         var egg_5=1
         var whatScore="Taste"
 
-        score_TasteRange.setOnClickListener() {
+        score_TasteRange.setOnClickListener {
             score_ScoreBackground.visibility= View.VISIBLE
             score_ScoreRange.visibility= View.VISIBLE
             egg_1=1
@@ -92,7 +79,7 @@ class ScoreActivity : AppCompatActivity() {
             score_Score.text = "0.0"
             whatScore="Taste"
         }
-        score_PriceRange.setOnClickListener() {
+        score_PriceRange.setOnClickListener {
             score_ScoreBackground.visibility=View.VISIBLE
             score_ScoreRange.visibility= View.VISIBLE
             egg_1=1
@@ -108,7 +95,7 @@ class ScoreActivity : AppCompatActivity() {
             score_Score.text = "0.0"
             whatScore="Price"
         }
-        score_CleanRange.setOnClickListener() {
+        score_CleanRange.setOnClickListener {
             score_ScoreBackground.visibility=View.VISIBLE
             score_ScoreRange.visibility= View.VISIBLE
             egg_1=1
@@ -124,7 +111,7 @@ class ScoreActivity : AppCompatActivity() {
             score_Score.text = "0.0"
             whatScore="Clean"
         }
-        score_Save.setOnClickListener() {
+        score_Save.setOnClickListener {
             when(whatScore) {
                 "Taste" -> {
                     score_TasteScore.text=score_Score.text
@@ -155,7 +142,7 @@ class ScoreActivity : AppCompatActivity() {
             score_ScoreBackground.visibility= View.INVISIBLE
             averageSum()
         }
-        score_Score1.setOnClickListener() {
+        score_Score1.setOnClickListener {
             score_Score2.setImageResource(R.mipmap.score_zero)
             score_Score3.setImageResource(R.mipmap.score_zero)
             score_Score4.setImageResource(R.mipmap.score_zero)
@@ -182,7 +169,7 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-        score_Score2.setOnClickListener() {
+        score_Score2.setOnClickListener {
             score_Score1.setImageResource(R.mipmap.score_full)
             score_Score3.setImageResource(R.mipmap.score_zero)
             score_Score4.setImageResource(R.mipmap.score_zero)
@@ -209,7 +196,7 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-        score_Score3.setOnClickListener() {
+        score_Score3.setOnClickListener {
             score_Score1.setImageResource(R.mipmap.score_full)
             score_Score2.setImageResource(R.mipmap.score_full)
             score_Score4.setImageResource(R.mipmap.score_zero)
@@ -236,7 +223,7 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-        score_Score4.setOnClickListener() {
+        score_Score4.setOnClickListener {
             score_Score1.setImageResource(R.mipmap.score_full)
             score_Score2.setImageResource(R.mipmap.score_full)
             score_Score3.setImageResource(R.mipmap.score_full)
@@ -263,7 +250,7 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-        score_Score5.setOnClickListener() {
+        score_Score5.setOnClickListener {
             score_Score1.setImageResource(R.mipmap.score_full)
             score_Score2.setImageResource(R.mipmap.score_full)
             score_Score3.setImageResource(R.mipmap.score_full)
@@ -290,33 +277,33 @@ class ScoreActivity : AppCompatActivity() {
                 }
             }
         }
-        score_StoreSearch_Button.setOnClickListener() {
+        score_StoreSearch_Button.setOnClickListener {
             score_SearchRange.visibility= View.VISIBLE
             score_ScoreBackground.visibility= View.VISIBLE
-            var etTextKeyword=score_StoreName_EditText.text.toString()
+            val etTextKeyword=score_StoreName_EditText.text.toString()
             searchKeyword(etTextKeyword)
         }
-        score_AddressSearchResult1.setOnClickListener() {
+        score_AddressSearchResult1.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName1.text)
         }
-        score_AddressSearchResult2.setOnClickListener() {
+        score_AddressSearchResult2.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName2.text)
         }
-        score_AddressSearchResult3.setOnClickListener() {
+        score_AddressSearchResult3.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName3.text)
         }
-        score_AddressSearchResult4.setOnClickListener() {
+        score_AddressSearchResult4.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName4.text)
         }
-        score_AddressSearchResult5.setOnClickListener() {
+        score_AddressSearchResult5.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName5.text)
@@ -350,53 +337,52 @@ class ScoreActivity : AppCompatActivity() {
         }
     }
 
+    //포스터 등록
     private fun savePost(){
-        postInfo.set(score_StoreName_EditText.text.toString(),
-            score_TasteScore.text.toString(),score_PriceScore.text.toString(),score_CleanScore.text.toString(),
-            score_AverageScore.text.toString(),
-            score_Review.text.toString(),"광운대")
+        postInfo.set(score_Review.text.toString())
+        postInfo.evaluationSet( score_TasteScore.text.toString(),score_PriceScore.text.toString(),score_CleanScore.text.toString(),
+            score_AverageScore.text.toString())
         if(checkEmpty(postInfo)){
-            if (user != null) {
-                showProgressBar()
-                // 사진 업로드
-                FireBaseStorage.uploadPostingImage(user.uid, postInfo.restaurantName, postInfo.imageUri.toUri(),
-                    mSuccessHandler = {
-                        startToast("사진 저장 성공했습니다")
+            showProgressBar()
+            // 사진 업로드
+            FireBaseStorage.uploadPostingImage(user.uid, postInfo.restaurantName, postInfo.imageUri.toUri(),
+                mSuccessHandler = {
+                    startToast("사진 저장 성공했습니다")
 
-                        //업로드 사진 download uri 불러오기
-                        FireBaseStorage.downloadImageUri(
-                            user.uid,postInfo.restaurantName,
-                            mSuccessHandler = { uri ->
-                                postInfo.imageUri = uri.toString()
-                                Log.i(TAG,"사진 다운로드 성공")
-                                startToast("사진 저장에 성공했습니다")
+                    //업로드 사진 download uri 불러오기
+                    FireBaseStorage.downloadImageUri(
+                        user.uid,postInfo.restaurantName,
+                        mSuccessHandler = { uri ->
+                            postInfo.imageUri = uri.toString()
+                            Log.i(TAG,"사진 다운로드 성공")
+                            startToast("사진 저장에 성공했습니다")
 
-                                //게시물 dataBase에 등록
-                                FireBaseDataBase.uploadPostingData(
-                                    user.uid,userInfo.id,postInfo,
-                                    mSuccessHandlerUser = {startToast("개인 사용자 폴더에 저장 성공")
-                                                            hideProgressBar()},
-                                    mFailureHandlerUser = {e ->
-                                        Log.w(TAG, "데이터베이스에 사용자 정보 추가 실패", e)
-                                        hideProgressBar()},
-                                    mSuccessHandlerPost = {startToast("공용 식당 폴더에 저장 성공")},
-                                    mFailureHandlerPost = {e->
-                                        Log.w(TAG, "데이터베이스에 식당 정보 추가 실패", e)
-                                        hideProgressBar()})
-                            },
-                            mFailureHandler = {
-                                startToast("사진 다운로드에 실패했습니다")
-                                Log.e(TAG,"사진 다운로드 실패",it)
-                                hideProgressBar()
-                            })},
-                    mFailureHandler = {
-                        startToast("사진 저장에 실패했습니다")
-                        hideProgressBar()},
-                    mFailureHandlerException = {e->
-                        startToast("애러발생")
-                        Log.e(TAG,"사진 업로드 실패",e)
-                        hideProgressBar()})
-            }
+                            //게시물 dataBase에 등록
+                            FireBaseDataBase.uploadPostingData(
+                                user.uid,userInfo.id,postInfo,
+                                mSuccessHandlerUser = {startToast("개인 사용자 폴더에 저장 성공")
+                                    hideProgressBar()},
+                                mFailureHandlerUser = {e ->
+                                    Log.w(TAG, "데이터베이스에 사용자 정보 추가 실패", e)
+                                    hideProgressBar()},
+                                mSuccessHandlerPost = {startToast("공용 식당 폴더에 저장 성공")},
+                                mFailureHandlerPost = {e->
+                                    Log.w(TAG, "데이터베이스에 식당 정보 추가 실패", e)
+                                    hideProgressBar()})
+                        },
+                        mFailureHandler = {
+                            startToast("사진 다운로드에 실패했습니다")
+                            Log.e(TAG,"사진 다운로드 실패",it)
+                            hideProgressBar()
+                        })},
+                mFailureHandler = {
+                    startToast("사진 저장에 실패했습니다")
+                    hideProgressBar()},
+                mFailureHandlerException = {e->
+                    startToast("애러발생")
+                    Log.e(TAG,"사진 업로드 실패",e)
+                    hideProgressBar()})
+
         }
     }
 
@@ -405,7 +391,7 @@ class ScoreActivity : AppCompatActivity() {
             startToast("가게이름을 입력해주세요")
             return false
         }
-        if(postInfo.imageUri == null){
+        if(postInfo.imageUri.isBlank()){
             startToast("가게이름을 입력해주세요")
             return false
         }
@@ -457,11 +443,11 @@ class ScoreActivity : AppCompatActivity() {
     // 키워드 검색 함수
     private fun searchKeyword(keyword: String) {
         val retrofit = Retrofit.Builder()   // Retrofit 구성
-            .baseUrl(ScoreActivity.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val api = retrofit.create(KakaoAPI::class.java)   // 통신 인터페이스를 객체로 생성
-        val call = api.getSearchKeyword(ScoreActivity.API_KEY, keyword)   // 검색 조건 입력
+        val call = api.getSearchKeyword(API_KEY, keyword)   // 검색 조건 입력
 
         // API 서버에 요청
         call.enqueue(object: Callback<KakaoData> {
@@ -477,7 +463,9 @@ class ScoreActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
-                        var token=(it.documents[index].address_name).split(' ')
+                        postInfo.placeSet(it.documents[index].place_name,it.documents[index].address_name,
+                            it.documents[index].x,it.documents[index].y)
+                        val token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
                         when(index) {
                             0 -> {

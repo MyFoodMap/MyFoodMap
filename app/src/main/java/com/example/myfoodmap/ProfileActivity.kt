@@ -17,6 +17,7 @@ import com.example.myfoodmap.databinding.ActivityProfileBinding
 import com.google.firebase.firestore.ktx.toObject
 import com.naver.maps.map.a.d
 import kotlinx.android.synthetic.main.activity_profile.*
+import com.bumptech.glide.Glide
 
 class ProfileActivity : AppCompatActivity() {
     private companion object{
@@ -40,11 +41,18 @@ class ProfileActivity : AppCompatActivity() {
             profile_BasicProfile.setImageURI(it)
         }
 
+        //데이터 베이스 등록
         FireBaseDataBase.getPostingDataForUser(userInfo.id,
-            mSuccessHandler = {
-                postInfoList.add(it.toObject<PostInfo>()!!)
+            mSuccessHandler = { result->
+                val glide = Glide.with(this)
+                for( document in result)
+                    postInfoList.add(document.toObject<PostInfo>())
                 startToast("정보받아오기 성공")
-                profile_PeedPicture.setImageURI(postInfoList[0].imageUri.toUri())},
+                Log.d(TAG,"정보받아오기 성공 : ${postInfoList[0].imageUri.toUri()}")
+                //for(user in postInfoList)
+                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
+                profile_PeedName.text = postInfoList[0].restaurantName
+            },
             mFailureHandler = {e->
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
@@ -71,25 +79,25 @@ class ProfileActivity : AppCompatActivity() {
         }//Create
 
 
-        profile_PeedClickRange.setOnClickListener() {
+        profile_PeedClickRange.setOnClickListener {
             profile_PeedPage.visibility= View.VISIBLE
             profile_BookmarkPage.visibility= View.INVISIBLE
             profile_SelectPeed.visibility=View.VISIBLE
             profile_SelectBookmark.visibility=View.INVISIBLE
         }
 
-        profile_BookmarkClickRange.setOnClickListener() {
+        profile_BookmarkClickRange.setOnClickListener {
             profile_PeedPage.visibility= View.INVISIBLE
             profile_BookmarkPage.visibility= View.VISIBLE
             profile_SelectPeed.visibility=View.INVISIBLE
             profile_SelectBookmark.visibility=View.VISIBLE
         }
 
-        profile_BookmarkPlus.setOnClickListener() {
+        profile_BookmarkPlus.setOnClickListener {
             profile_BookmarkPlus.visibility=View.INVISIBLE
             profile_BookmarkNo.visibility=View.VISIBLE
         }
-        profile_BookmarkNo.setOnClickListener() {
+        profile_BookmarkNo.setOnClickListener {
             profile_BookmarkPlus.visibility=View.VISIBLE
             profile_BookmarkNo.visibility=View.INVISIBLE
         }

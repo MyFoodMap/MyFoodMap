@@ -172,11 +172,12 @@
                     android:layout_height="118dp"
                     android:src="@mipmap/peed_picture"
                     />
-                <ImageView
+                <TextView
                     android:id="@+id/profile_PeedName"
                     android:layout_width="118dp"
                     android:layout_height="20dp"
                     android:src="@mipmap/peed_place_name"
+                    android:textColor="@color/black"
                     />
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView

@@ -75,18 +75,18 @@ class SignUpActivity : AppCompatActivity() {
             singUp()
         } //화원가입
 
-        binding.signUpAddressSearchButton.setOnClickListener() {
+        binding.signUpAddressSearchButton.setOnClickListener {
             var etTextKeyword=signUp_SignUpAddress_EditText.text.toString()
             signUp_AddressSearch_EditText.setText(etTextKeyword)
             searchKeyword(etTextKeyword)
             signUp_SearchScroll.visibility= View.VISIBLE
             signUp_SearchScrollBackground.visibility= View.VISIBLE
         }
-        binding.signUpAddressSearchButton2.setOnClickListener() {
+        binding.signUpAddressSearchButton2.setOnClickListener {
             var etTextKeyword2=signUp_AddressSearch_EditText.text.toString()
             searchKeyword(etTextKeyword2)
         }
-        signUp_AddressSearchResult1.setOnClickListener() {
+        signUp_AddressSearchResult1.setOnClickListener {
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
             signUp_SignUpAddress_EditText.setText(placeName1.text)
@@ -95,7 +95,7 @@ class SignUpActivity : AppCompatActivity() {
             x=x1
             y=y1
         }
-        signUp_AddressSearchResult2.setOnClickListener() {
+        signUp_AddressSearchResult2.setOnClickListener {
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
             signUp_SignUpAddress_EditText.setText(placeName2.text)
@@ -104,7 +104,7 @@ class SignUpActivity : AppCompatActivity() {
             x=x2
             y=y2
         }
-        signUp_AddressSearchResult3.setOnClickListener() {
+        signUp_AddressSearchResult3.setOnClickListener {
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
             signUp_SignUpAddress_EditText.setText(placeName3.text)
@@ -113,7 +113,7 @@ class SignUpActivity : AppCompatActivity() {
             x=x3
             y=y3
         }
-        signUp_AddressSearchResult4.setOnClickListener() {
+        signUp_AddressSearchResult4.setOnClickListener {
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
             signUp_SignUpAddress_EditText.setText(placeName4.text)
@@ -122,7 +122,7 @@ class SignUpActivity : AppCompatActivity() {
             x=x4
             y=y4
         }
-        signUp_AddressSearchResult5.setOnClickListener() {
+        signUp_AddressSearchResult5.setOnClickListener {
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
             signUp_SignUpAddress_EditText.setText(placeName5.text)

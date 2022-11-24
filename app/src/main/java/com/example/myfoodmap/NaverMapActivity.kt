@@ -32,7 +32,7 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSTION_REQUEST_CODE)
 
-        btn_xy.setOnClickListener() {
+        btn_xy.setOnClickListener {
             et_text_address=et_address.text.toString()
             getAddress() }
     }

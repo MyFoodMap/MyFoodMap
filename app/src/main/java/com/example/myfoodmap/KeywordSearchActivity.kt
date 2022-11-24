@@ -26,7 +26,7 @@ class KeywordSearchActivity : AppCompatActivity() {
         binding = ActivityKeywordSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSearch.setOnClickListener() {
+        binding.btnSearch.setOnClickListener {
             var etTextKeyword=keyword.text.toString()
             searchKeyword(etTextKeyword)
         }

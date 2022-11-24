@@ -14,10 +14,10 @@ class StorePictureActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_picture)
 
-        picture_single_upload.setOnClickListener() {
+        picture_single_upload.setOnClickListener {
             upload()
         }
-        picture_multi_upload.setOnClickListener() {
+        picture_multi_upload.setOnClickListener {
             val intent=Intent(this,GalleryActivity::class.java)
             startActivity(intent)
         }

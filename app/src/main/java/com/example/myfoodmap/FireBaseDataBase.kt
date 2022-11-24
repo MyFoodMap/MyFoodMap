@@ -1,8 +1,7 @@
 package com.example.myfoodmap
 
 import android.util.Log
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.core.UserData
 import com.google.firebase.firestore.ktx.firestore
@@ -17,13 +16,15 @@ object FireBaseDataBase {
         mSuccessHandlerUser:() -> Unit,
         mFailureHandlerUser:(Exception) -> Unit,
     ) {
-        store.collection("Users").document(userEmail).set(userInfo)
+        val user = store.collection("Users").document(userEmail)
+        user.set(userInfo)
             .addOnSuccessListener {
                 mSuccessHandlerUser()
             }
             .addOnFailureListener { e ->
                 mFailureHandlerUser(e)
             }
+
     }
 
     fun getUserData(
@@ -52,10 +53,7 @@ object FireBaseDataBase {
 
         //개인 사용자 폴더에 저장
         userPost.set(post)
-            .addOnSuccessListener {
-                mSuccessHandlerUser()
-
-            }
+            .addOnSuccessListener { mSuccessHandlerUser() }
             .addOnFailureListener { e -> mFailureHandlerUser(e)/**/}
 
         //식당 정보 폴더에 저장
@@ -75,31 +73,76 @@ object FireBaseDataBase {
             .collection("Posting").document("Users")
 
        restaurantPost.get()
-            .addOnSuccessListener { document->
-                mSuccessHandlerPost(document)
-            }
-            .addOnFailureListener { exception ->
-                mFailureHandlerPost(exception)
-            }
+            .addOnSuccessListener { document-> mSuccessHandlerPost(document) }
+            .addOnFailureListener { exception -> mFailureHandlerPost(exception) }
     }
 
 
     fun getPostingDataForUser(
         userEmail:String,
-        mSuccessHandler:(DocumentSnapshot) -> Unit,
-        mFailureHandler:(Exception) -> Unit,){
+        mSuccessHandler:(QuerySnapshot) -> Unit,
+        mFailureHandler:(Exception) -> Unit){
 
         val userPost = store.collection("Users").document(userEmail).collection("UserPosting")
 
        userPost.get()
-            .addOnSuccessListener { result->
-                for (document in result)
-                    mSuccessHandler(document)
-            }
-            .addOnFailureListener { exception ->
-                mFailureHandler(exception)
-            }
+            .addOnSuccessListener { result-> mSuccessHandler(result) }
+            .addOnFailureListener { exception -> mFailureHandler(exception) }
     }
+
+    fun loadBookMark(userEmail:String?,
+                     mSuccessHandler:(DocumentSnapshot) -> Unit,
+                     mFailureHandler:(Exception) -> Unit){
+        val bookMark = store.collection("Users").document(userEmail!!)
+            .collection("UserPosting").document("BookMark")
+        bookMark.get().addOnSuccessListener{ document-> mSuccessHandler(document) }
+            .addOnFailureListener{e-> mFailureHandler(e)}
+
+    }
+
+    fun addBookMark( userEmail:String?, restaurantName:String, address:String,
+                     mSuccessHandler:() -> Unit,
+                     mFailureHandler:(Exception) -> Unit){
+        val bookMark = store.collection("Users").document(userEmail!!)
+            .collection("UserPosting").document("BookMark")
+
+        val pair = Pair(hashMapOf("address" to address ), hashMapOf("time" to System.currentTimeMillis()))
+        val update = hashMapOf<String,Any>(restaurantName to pair)
+
+        bookMark.get().addOnCompleteListener{ task->
+            if(task.isSuccessful){
+                val document = task.result
+                if(document.exists()) {
+                    bookMark.update(update)
+                        .addOnSuccessListener { mSuccessHandler() }
+                        .addOnFailureListener { e -> mFailureHandler(e) }
+                }else{
+                    bookMark.set(update)
+                        .addOnSuccessListener { mSuccessHandler() }
+                        .addOnFailureListener { e -> mFailureHandler(e)}
+                }
+            }
+        }
+
+
+    }
+
+    fun delBookMark( userEmail:String?, restaurantName:String, address:String,
+                     mSuccessHandler:() -> Unit,
+                     mFailureHandler:(Exception) -> Unit){
+        val bookMark = store.collection("Users").document(userEmail!!).collection("UserPosting").document("BookMark")
+        val update = hashMapOf<String,Any>(restaurantName to FieldValue.delete())
+
+        bookMark.update(update)
+            .addOnSuccessListener{
+                mSuccessHandler()
+            }.addOnFailureListener{ e->
+                mFailureHandler(e)
+            }
+
+    }
+
+
 
 
 
