@@ -44,11 +44,11 @@
                     android:layout_gravity="end"
                     />
             </FrameLayout>
-            <ImageView
+            <TextView
                 android:id="@+id/profile_UserName"
                 android:layout_width="192dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/user_name"
+                android:background="@mipmap/user_name"
                 android:layout_marginTop="10dp"
                 />
             <ImageView

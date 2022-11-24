@@ -7,7 +7,7 @@
     android:background="@color/white"
     tools:context=".AppMainActivity">
     <com.naver.maps.map.MapView
-        android:id="@+id/login_Map"
+        android:id="@+id/appMain_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
