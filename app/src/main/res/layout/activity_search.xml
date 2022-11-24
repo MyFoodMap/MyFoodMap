@@ -104,13 +104,14 @@
                 android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:layout_marginRight="20dp"
-                android:hint="가게 이름을 입력하세요"
+                android:hint="가게 이름을 입력"
                 android:paddingLeft="50dp"
                 android:background="@mipmap/place_name_search_button"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:textColorHint="@color/black"
-                android:fontFamily="@font/nanum_squareround_l"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_gray"
+                android:fontFamily="@font/nanum_squareround_l" />
             <Button
                 android:layout_width="70dp"
                 android:layout_height="40dp"

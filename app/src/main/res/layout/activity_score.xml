@@ -23,7 +23,7 @@
 
             <Button
                 android:id="@+id/score_Register"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginRight="20dp"
@@ -54,17 +54,22 @@
                             android:inputType="text"
                             android:textColorHint="@color/dark_gray"
                             android:textColor="@color/black"
+                            android:textSize="20dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/nanum_squareround_b"
                             />
                         <Button
                             android:id="@+id/score_StoreSearch_Button"
-                            android:layout_width="50dp"
-                            android:layout_height="20dp"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
                             android:layout_marginLeft="40dp"
                             android:background="@mipmap/overlap_check"
                             android:layout_gravity="end|center_vertical"
                             android:layout_marginRight="10dp"
+                            android:text="검 색"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:gravity="center"
                             />
                     </FrameLayout>
                     <ImageView
@@ -429,6 +434,7 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:id="@+id/score_ScoreRange"
+        android:visibility="invisible"
         >
         <FrameLayout
             android:layout_width="match_parent"

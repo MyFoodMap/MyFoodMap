@@ -44,13 +44,18 @@
             android:fontFamily="@font/nanum_squareround_l"
             android:layout_gravity="center"
             />
-        <ImageView
+        <TextView
             android:id="@+id/signIn_Login_Button"
             android:layout_width="290dp"
             android:layout_height="34dp"
-            android:src="@mipmap/login_in_button"
+            android:background="@mipmap/login_in_button"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
+            android:text="로그인"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:fontFamily="@font/nanum_squareround_l"
             />
     </LinearLayout>
 </FrameLayout>
