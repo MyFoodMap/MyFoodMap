@@ -45,6 +45,7 @@
                     android:background="@mipmap/signup_rectangle"
                     android:fontFamily="@font/nanum_squareround_l"
                     android:layout_weight="1"
+                    android:textSize="15sp"
                     />
                 <TextView
                     android:id="@+id/signUp_OverlapCheck_Button"
@@ -55,9 +56,10 @@
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/nanum_squareround_l"
                     android:layout_weight="1"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
             <LinearLayout
@@ -92,6 +94,7 @@
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
                 android:fontFamily="@font/nanum_squareround_l"
+                android:textSize="15sp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -111,6 +114,7 @@
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
                 android:fontFamily="@font/nanum_squareround_l"
+                android:textSize="15sp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -130,6 +134,7 @@
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
                 android:fontFamily="@font/nanum_squareround_l"
+                android:textSize="15sp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -149,6 +154,7 @@
                 android:inputType="textPersonName"
                 android:background="@mipmap/signup_rectangle"
                 android:fontFamily="@font/nanum_squareround_l"
+                android:textSize="15sp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -173,6 +179,7 @@
                     android:background="#D8D8D8"
                     android:layout_weight="1"
                     android:fontFamily="@font/nanum_squareround_l"
+                    android:textSize="15sp"
                     />
                 <Button
                     android:id="@+id/signUp_Woman_Button"
@@ -183,6 +190,7 @@
                     android:background="#D8D8D8"
                     android:layout_weight="1"
                     android:fontFamily="@font/nanum_squareround_l"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
             <TextView
@@ -207,6 +215,7 @@
                     android:background="@mipmap/signup_rectangle"
                     android:paddingLeft="5dp"
                     android:fontFamily="@font/nanum_squareround_l"
+                    android:textSize="15sp"
                     />
                 <TextView
                     android:id="@+id/signUp_AddressSearch_Button"
@@ -219,6 +228,7 @@
                     android:fontFamily="@font/nanum_squareround_l"
                     android:background="@mipmap/overlap_check"
                     android:layout_marginLeft="26dp"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
             <TextView
@@ -248,13 +258,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/signUp_SearchScroll"
-        android:layout_margin="40dp"
-        android:visibility="invisible">
+        android:layout_margin="40dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:visibility="invisible">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -272,12 +282,12 @@
                     android:layout_weight="40"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <Button
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
                     android:src="@mipmap/overlap_check"
                     android:layout_marginLeft="10dp"
-                    android:text="검색"
-                    android:textSize="7sp"
+                    android:text="검 색"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:id="@+id/signUp_AddressSearch_Button2"
                     android:layout_weight="1"
@@ -287,7 +297,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@mipmap/signup_rectangle"
+                android:background="@mipmap/search_rectangle"
                 android:id="@+id/signUp_AddressSearchResult1">
                 <TextView
                     android:layout_width="wrap_content"
@@ -296,7 +306,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:id="@+id/placeName1"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
@@ -304,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:text="받아온 주소의 도로주소"
                     android:textColor="@color/dark_gray"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
                     android:id="@+id/addressName1"
@@ -315,7 +325,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="2dp"
-                android:background="@mipmap/signup_rectangle"
+                android:background="@mipmap/search_rectangle"
                 android:id="@+id/signUp_AddressSearchResult2">
                 <TextView
                     android:layout_width="wrap_content"
@@ -324,7 +334,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:id="@+id/placeName2"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
@@ -332,7 +342,7 @@
                     android:layout_height="wrap_content"
                     android:text="받아온 주소의 도로주소"
                     android:textColor="@color/dark_gray"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
                     android:id="@+id/addressName2"
@@ -343,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="2dp"
-                android:background="@mipmap/signup_rectangle"
+                android:background="@mipmap/search_rectangle"
                 android:id="@+id/signUp_AddressSearchResult3">
                 <TextView
                     android:layout_width="wrap_content"
@@ -352,7 +362,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:id="@+id/placeName3"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
@@ -360,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:text="받아온 주소의 도로주소"
                     android:textColor="@color/dark_gray"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
                     android:id="@+id/addressName3"
@@ -371,7 +381,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="2dp"
-                android:background="@mipmap/signup_rectangle"
+                android:background="@mipmap/search_rectangle"
                 android:id="@+id/signUp_AddressSearchResult4">
                 <TextView
                     android:layout_width="wrap_content"
@@ -380,7 +390,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:id="@+id/placeName4"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
@@ -388,7 +398,7 @@
                     android:layout_height="wrap_content"
                     android:text="받아온 주소의 도로주소"
                     android:textColor="@color/dark_gray"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
                     android:id="@+id/addressName4"
@@ -399,7 +409,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="2dp"
-                android:background="@mipmap/signup_rectangle"
+                android:background="@mipmap/search_rectangle"
                 android:id="@+id/signUp_AddressSearchResult5">
                 <TextView
                     android:layout_width="wrap_content"
@@ -408,7 +418,7 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:id="@+id/placeName5"
                     android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
@@ -416,7 +426,7 @@
                     android:layout_height="wrap_content"
                     android:text="받아온 주소의 도로주소"
                     android:textColor="@color/dark_gray"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
                     android:id="@+id/addressName5"

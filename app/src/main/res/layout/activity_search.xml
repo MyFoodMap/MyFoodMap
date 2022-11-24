@@ -111,6 +111,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_gray"
+                android:textSize="15sp"
                 android:fontFamily="@font/nanum_squareround_l" />
             <Button
                 android:layout_width="70dp"

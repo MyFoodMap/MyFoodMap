@@ -2,7 +2,6 @@ package com.example.myfoodmap
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_search.*
@@ -34,7 +33,6 @@ class SearchActivity : AppCompatActivity() {
             var etTextKeyword2=search_DetailSearch_EditText.text.toString()
             searchKeyword(etTextKeyword2)
         }
-        var temp=1
         search_SearchResult_ListView.setOnItemClickListener { adapterView, view, i, l ->
             when(searchList[i].bookmark) {
                 "@mipmap/bookmark_no" -> {
@@ -45,7 +43,6 @@ class SearchActivity : AppCompatActivity() {
                         (i + 1).toString() + "번째 아이템이 북마크되었습니다..",
                         Toast.LENGTH_SHORT
                     ).show()
-                    temp=2
                 }
                 "@mipmap/bookmark_plus" -> {
                     searchList[i].bookmark="@mipmap/bookmark_no"
@@ -55,7 +52,6 @@ class SearchActivity : AppCompatActivity() {
                         (i + 1).toString() + "번째 아이템이 북마크가 해제되었습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    temp=1
                 }
             }
 
@@ -88,7 +84,8 @@ class SearchActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
                         searchList.add(PlaceSearchData("@mipmap/basic_profile", "${it.documents[index].place_name}",
-                            "${it.documents[index].address_name}", "@mipmap/bookmark_no"))
+                            "${it.documents[index].address_name}", "@mipmap/bookmark_no",
+                            "${it.documents[index].x}", "${it.documents[index].y}"))
                     }
                 }
             }

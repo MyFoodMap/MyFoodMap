@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -74,7 +74,7 @@
                     </FrameLayout>
                     <ImageView
                         android:id="@+id/score_Photo"
-                        android:layout_width="290dp"
+                        android:layout_width="match_parent"
                         android:layout_height="290dp"
                         android:src="@color/gray"
                         />
@@ -117,21 +117,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="40">
+                        android:layout_weight="30">
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:id="@+id/score_TasteRange"
+                            android:layout_marginRight="20dp"
                             >
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:text="맛"
                                 android:textSize="30sp"
@@ -140,46 +141,47 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
-                            <ImageView
-                                android:id="@+id/score_Taste1"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="30dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                            />
-                            <ImageView
-                                android:id="@+id/score_Taste2"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_marginLeft="10dp"
-                                android:layout_weight="1"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="2">
+                                <ImageView
+                                    android:id="@+id/score_Taste1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
                                 />
-                            <ImageView
-                                android:id="@+id/score_Taste3"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Taste4"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Taste5"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
+                                <ImageView
+                                    android:id="@+id/score_Taste2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:src="@mipmap/score_zero"
+                                    android:layout_marginLeft="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Taste3"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Taste4"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Taste5"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -188,19 +190,21 @@
                                 android:textSize="30sp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_gravity="center"
+                                android:gravity="center"
                                 android:id="@+id/score_TasteScore"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:id="@+id/score_PriceRange"
+                            android:layout_marginRight="20dp"
                             >
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:text="가격"
                                 android:textSize="30sp"
@@ -209,46 +213,47 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
-                            <ImageView
-                                android:id="@+id/score_Price1"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="11.5dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Price2"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_marginLeft="10dp"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Price3"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Price4"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Price5"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="2">
+                                <ImageView
+                                    android:id="@+id/score_Price1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Price2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:src="@mipmap/score_zero"
+                                    android:layout_marginLeft="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Price3"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Price4"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Price5"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -259,17 +264,19 @@
                                 android:layout_gravity="center"
                                 android:id="@+id/score_PriceScore"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:id="@+id/score_CleanRange"
+                            android:layout_marginRight="20dp"
                             >
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:text="청결"
                                 android:textSize="30sp"
@@ -278,46 +285,47 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
-                            <ImageView
-                                android:id="@+id/score_Clean1"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="11.5dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Clean2"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_marginLeft="10dp"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Clean3"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Clean4"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
-                            <ImageView
-                                android:id="@+id/score_Clean5"
-                                android:layout_width="25dp"
-                                android:layout_height="38.8dp"
-                                android:layout_marginLeft="10dp"
-                                android:src="@mipmap/score_zero"
-                                android:layout_weight="1"
-                                />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="3">
+                                <ImageView
+                                    android:id="@+id/score_Clean1"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Clean2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:src="@mipmap/score_zero"
+                                    android:layout_marginLeft="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Clean3"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Clean4"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                                <ImageView
+                                    android:id="@+id/score_Clean5"
+                                    android:layout_width="25dp"
+                                    android:layout_height="38.8dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@mipmap/score_zero"
+                                    />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -328,6 +336,7 @@
                                 android:layout_gravity="center"
                                 android:id="@+id/score_CleanScore"
                                 android:layout_weight="1"
+                                android:gravity="center"
                                 android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
@@ -337,13 +346,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_weight="1"
+                        android:layout_marginRight="5dp"
                         android:layout_gravity="bottom">
                         <TextView
                             android:id="@+id/score_AverageScore"
-                            android:layout_width="55dp"
-                            android:layout_height="32dp"
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
                             android:text="0.0점"
-                            android:textSize="30sp"
+                            android:textSize="25sp"
                             android:textColor="@color/black"
                             android:gravity="center"
                             android:background="@mipmap/average_score"
@@ -381,9 +391,9 @@
                     <EditText
                         android:id="@+id/score_Review"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:hint="글을 입력하세요."
-                        android:textSize="15sp"
+                        android:textSize="12sp"
                         android:textColor="@color/black"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
@@ -505,18 +515,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/score_SearchRange"
         android:layout_marginTop="106dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal|start"
         android:visibility="invisible">
         <LinearLayout
-            android:layout_width="290dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/signup_rectangle"
+            android:background="@mipmap/search_rectangle"
             android:id="@+id/score_AddressSearchResult1">
             <TextView
                 android:layout_width="wrap_content"
@@ -525,14 +537,14 @@
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:id="@+id/placeName1"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="받아온 주소의 도로주소"
                 android:textColor="@color/dark_gray"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:id="@+id/addressName1"/>
@@ -541,7 +553,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/signup_rectangle"
+            android:background="@mipmap/search_rectangle"
             android:id="@+id/score_AddressSearchResult2">
             <TextView
                 android:layout_width="wrap_content"
@@ -550,14 +562,14 @@
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:id="@+id/placeName2"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="받아온 주소의 도로주소"
                 android:textColor="@color/dark_gray"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:id="@+id/addressName2"/>
@@ -566,7 +578,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/signup_rectangle"
+            android:background="@mipmap/search_rectangle"
             android:id="@+id/score_AddressSearchResult3">
             <TextView
                 android:layout_width="wrap_content"
@@ -575,14 +587,14 @@
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:id="@+id/placeName3"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="받아온 주소의 도로주소"
                 android:textColor="@color/dark_gray"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:id="@+id/addressName3"/>
@@ -591,7 +603,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/signup_rectangle"
+            android:background="@mipmap/search_rectangle"
             android:id="@+id/score_AddressSearchResult4">
             <TextView
                 android:layout_width="wrap_content"
@@ -600,14 +612,14 @@
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:id="@+id/placeName4"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="받아온 주소의 도로주소"
                 android:textColor="@color/dark_gray"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:id="@+id/addressName4"/>
@@ -616,7 +628,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@mipmap/signup_rectangle"
+            android:background="@mipmap/search_rectangle"
             android:id="@+id/score_AddressSearchResult5">
             <TextView
                 android:layout_width="wrap_content"
@@ -625,14 +637,14 @@
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:id="@+id/placeName5"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="받아온 주소의 도로주소"
                 android:textColor="@color/dark_gray"
-                android:textSize="10sp"
+                android:textSize="8sp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="3dp"
                 android:id="@+id/addressName5"/>

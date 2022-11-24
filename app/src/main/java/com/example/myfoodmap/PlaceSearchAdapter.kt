@@ -18,6 +18,8 @@ class PlaceSearchAdapter(val context: Context, val searchList: ArrayList<PlaceSe
         val searchPlaceName = view.findViewById<TextView>(R.id.itemSearch_PlaceName)
         val searchPlaceAddress = view.findViewById<TextView>(R.id.itemSearch_PlaceAddress)
         val searchBookmark = view.findViewById<ImageView>(R.id.itemSearch_Bookmark)
+        val searchX = view.findViewById<TextView>(R.id.itemSearch_X)
+        val searchY = view.findViewById<TextView>(R.id.itemSearch_Y)
 
         /* ArrayList<PlaceSearch>의 변수 dog의 이미지와 데이터를 ImageView와 TextView에 담는다. */
         val search = searchList[position]
@@ -29,7 +31,8 @@ class PlaceSearchAdapter(val context: Context, val searchList: ArrayList<PlaceSe
         searchPlaceName.text = search.placeName
         searchPlaceAddress.text = search.placeAddress
         searchBookmark.setImageResource(resourceBookmark)
-
+        searchX.text = search.search_x
+        searchY.text = search.search_y
         return view
     }
 

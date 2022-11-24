@@ -17,6 +17,7 @@ import com.example.myfoodmap.databinding.ActivityProfileBinding
 import com.google.firebase.firestore.ktx.toObject
 import com.naver.maps.map.a.d
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_search.*
 
 class ProfileActivity : AppCompatActivity() {
     private companion object{
@@ -28,6 +29,9 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileBinding
     lateinit var galleryAdapter: GalleryAdapter
     var imageList: ArrayList<Uri> = ArrayList()
+
+    var bookamrkList = arrayListOf<BookmarkData>()
+    lateinit var bookmarkAdapter: BookmarkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,7 @@ class ProfileActivity : AppCompatActivity() {
             profile_BookmarkPage.visibility= View.INVISIBLE
             profile_SelectPeed.visibility=View.VISIBLE
             profile_SelectBookmark.visibility=View.INVISIBLE
+            profile_Bookmark_ListView.visibility=View.INVISIBLE
         }
 
         profile_BookmarkClickRange.setOnClickListener() {
@@ -83,6 +88,17 @@ class ProfileActivity : AppCompatActivity() {
             profile_BookmarkPage.visibility= View.VISIBLE
             profile_SelectPeed.visibility=View.INVISIBLE
             profile_SelectBookmark.visibility=View.VISIBLE
+            profile_Bookmark_ListView.visibility=View.VISIBLE
+
+            bookmarkAdapter = BookmarkAdapter(this, bookamrkList)
+            profile_Bookmark_ListView.adapter = bookmarkAdapter
+
+            bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+            bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
+            for(index in 0 until 10) {
+                bookamrkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+            }
+            bookmarkAdapter.notifyDataSetChanged()
         }
 
         profile_BookmarkPlus.setOnClickListener() {

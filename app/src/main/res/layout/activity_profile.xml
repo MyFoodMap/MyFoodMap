@@ -138,7 +138,8 @@
             android:id="@+id/profile_PeedPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,51 +202,62 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-        <FrameLayout
-            android:id="@+id/profile_BookmarkPage"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:visibility="invisible"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:id="@+id/profile_BookmarkPage"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-                <ImageView
-                    android:id="@+id/profile_SpoonSelect_Button"
-                    android:layout_width="73dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/spoon_select_button"
-                    android:layout_gravity="center_vertical"
-                    />
-                <TextView
+                android:layout_margin="10dp"
+                android:visibility="invisible"
+                >
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="북마크 EX 고씨네"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/nanum_squareround_eb"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+                    <ImageView
+                        android:id="@+id/profile_SpoonSelect_Button"
+                        android:layout_width="73dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/spoon_select_button"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="북마크 EX 고씨네"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nanum_squareround_eb"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30dp"
+                        />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/profile_BookmarkPlus"
+                    android:layout_width="42dp"
+                    android:layout_height="31dp"
+                    android:src="@mipmap/bookmark_plus"
+                    android:layout_gravity="end"
                     />
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/profile_BookmarkPlus"
-                android:layout_width="42dp"
-                android:layout_height="31dp"
-                android:src="@mipmap/bookmark_plus"
-                android:layout_gravity="end"
-                />
-            <ImageView
-                android:id="@+id/profile_BookmarkNo"
-                android:layout_width="42dp"
-                android:layout_height="31dp"
-                android:src="@mipmap/bookmark_no"
-                android:layout_gravity="end"
-                android:visibility="invisible"
-                />
-        </FrameLayout>
+                <ImageView
+                    android:id="@+id/profile_BookmarkNo"
+                    android:layout_width="42dp"
+                    android:layout_height="31dp"
+                    android:src="@mipmap/bookmark_no"
+                    android:layout_gravity="end"
+                    android:visibility="invisible"
+                    />
+            </FrameLayout>
+            <ListView
+                android:id="@+id/profile_Bookmark_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:listitem="@layout/item_bookmark_layout"
+                android:visibility="invisible"/>
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>
