@@ -28,11 +28,13 @@
                     android:layout_height="wrap_content"
                     android:text="Place_Name"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/nanum_squareround_l"
                     android:id="@+id/itemSearch_PlaceName"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/nanum_squareround_l"
                     android:textColor="@color/dark_gray"
                     android:text="Place_Address"
                     android:textSize="10sp"

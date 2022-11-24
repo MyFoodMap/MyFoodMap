@@ -26,6 +26,7 @@
                 android:layout_gravity="end|center_vertical"
                 android:text="등 록"
                 android:layout_marginRight="20dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
         </FrameLayout>
         <ScrollView
@@ -53,6 +54,7 @@
                             android:textColorHint="@color/dark_gray"
                             android:textColor="@color/black"
                             android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/nanum_squareround_b"
                             />
                         <Button
                             android:id="@+id/score_StoreSearch_Button"
@@ -119,10 +121,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="맛"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:textColor="@color/black"
                                 android:layout_gravity="center|start"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                             <ImageView
                                 android:id="@+id/score_Taste1"
@@ -169,11 +172,12 @@
                                 android:layout_height="wrap_content"
                                 android:text="0.0"
                                 android:textColor="@color/black"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_gravity="center"
                                 android:id="@+id/score_TasteScore"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -186,10 +190,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="가격"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:textColor="@color/black"
                                 android:layout_gravity="center|start"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                             <ImageView
                                 android:id="@+id/score_Price1"
@@ -236,11 +241,12 @@
                                 android:layout_height="wrap_content"
                                 android:text="0.0"
                                 android:textColor="@color/black"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_gravity="center"
                                 android:id="@+id/score_PriceScore"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
                         <LinearLayout
@@ -253,10 +259,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="청결"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:textColor="@color/black"
                                 android:layout_gravity="center|start"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                             <ImageView
                                 android:id="@+id/score_Clean1"
@@ -303,11 +310,12 @@
                                 android:layout_height="wrap_content"
                                 android:text="0.0"
                                 android:textColor="@color/black"
-                                android:textSize="20sp"
+                                android:textSize="30sp"
                                 android:layout_marginLeft="20dp"
                                 android:layout_gravity="center"
                                 android:id="@+id/score_CleanScore"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/nanum_masissneunce"
                                 />
                         </LinearLayout>
                     </LinearLayout>
@@ -322,11 +330,11 @@
                             android:layout_width="55dp"
                             android:layout_height="32dp"
                             android:text="0.0점"
-                            android:textSize="20sp"
+                            android:textSize="30sp"
                             android:textColor="@color/black"
-                            android:paddingTop="3dp"
-                            android:paddingLeft="4dp"
+                            android:gravity="center"
                             android:background="@mipmap/average_score"
+                            android:fontFamily="@font/nanum_masissneunce"
                             />
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -368,6 +376,7 @@
                         android:paddingRight="30dp"
                         android:textColorHint="@color/gray"
                         android:background="@mipmap/review"
+                        android:fontFamily="@font/nanum_squareround_l"
                         />
 <!--                    필요없을 것 같아서 우선 지워놓음-->
 <!--                    <ImageView-->
@@ -393,6 +402,7 @@
                         android:layout_height="wrap_content"
                         android:text="나의 한줄평"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/nanum_squareround_l"
                         />
                 </FrameLayout>
             </LinearLayout>
@@ -411,7 +421,6 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:id="@+id/score_ScoreRange"
-        android:visibility="invisible"
         >
         <FrameLayout
             android:layout_width="match_parent"
@@ -425,16 +434,18 @@
                 android:textSize="40sp"
                 android:id="@+id/score_Score"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/nanum_masissneunce"
                 />
             <Button
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:id="@+id/score_Save"
                 android:text="완료"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:background="#FDE934"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/nanum_masissneunce"
                 />
         </FrameLayout>
         <LinearLayout

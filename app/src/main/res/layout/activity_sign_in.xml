@@ -25,6 +25,7 @@
             android:textColorHint="#D8D8D8"
             android:textColor="@color/black"
             android:inputType="textEmailAddress"
+            android:fontFamily="@font/nanum_squareround_l"
             android:paddingLeft="20dp"
             android:background="@mipmap/sign_in_id"
             android:layout_gravity="center"
@@ -40,6 +41,7 @@
             android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:background="@mipmap/sign_in_password"
+            android:fontFamily="@font/nanum_squareround_l"
             android:layout_gravity="center"
             />
         <ImageView

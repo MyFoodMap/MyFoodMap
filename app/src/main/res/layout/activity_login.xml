@@ -20,19 +20,31 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="60dp" >
-        <ImageView
+        android:layout_marginBottom="40dp" >
+        <TextView
             android:id="@+id/login_SignIn_Button"
             android:layout_width="161dp"
             android:layout_height="76dp"
-            android:src="@mipmap/sign_in_button"
+            android:text="로그인"
+            android:textSize="30sp"
+            android:fontFamily="@font/nanum_masissneunce"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:background="@mipmap/sign_in_button"
+            android:layout_margin="20dp"
             android:layout_weight="1"
             />
-        <ImageView
+        <TextView
             android:id="@+id/login_SignUp_Button"
-            android:layout_width="162dp"
+            android:layout_width="161dp"
             android:layout_height="76dp"
-            android:src="@mipmap/sign_up_button"
+            android:text="회원가입"
+            android:textSize="30sp"
+            android:fontFamily="@font/nanum_masissneunce"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:background="@mipmap/sign_up_button"
             android:layout_weight="1"
             />
     </LinearLayout>

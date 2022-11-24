@@ -24,6 +24,12 @@
                 android:layout_width="118dp"
                 android:layout_height="20dp"
                 android:background="@mipmap/peed_place_name"
+                android:text="가게이름"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanum_squareround_l"
+                android:textSize="10sp"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
                 />
 <!--            추가되면 좋은 기능-->
 <!--            <ImageView-->

@@ -28,6 +28,7 @@
                 android:text="아이디"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,24 +43,32 @@
                     android:paddingLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/signup_rectangle"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
-                <ImageView
+                <TextView
                     android:id="@+id/signUp_OverlapCheck_Button"
                     android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/overlap_check"
+                    android:layout_height="30dp"
+                    android:background="@mipmap/overlap_check"
+                    android:text="중복 확인"
+                    android:textColor="@color/black"
+                    android:gravity="center"
                     android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="비밀번호"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,6 +77,7 @@
                     android:text="* 최소 6자리 이상 *"
                     android:textSize="10sp"
                     android:textColor="@color/dark_gray"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
             </LinearLayout>
             <EditText
@@ -79,6 +89,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -86,6 +97,7 @@
                 android:text="비밀번호 확인"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <EditText
                 android:id="@+id/signUp_PasswordCheck_EditText"
@@ -96,6 +108,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -103,6 +116,7 @@
                 android:text="이름"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <EditText
                 android:id="@+id/signUp_Name_EditText"
@@ -113,6 +127,7 @@
                 android:inputType="textPersonName"
                 android:background="@mipmap/signup_rectangle"
                 android:paddingLeft="5dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -120,6 +135,7 @@
                 android:text="별명"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <EditText
                 android:id="@+id/signUp_Nickname_EditText"
@@ -130,6 +146,7 @@
                 android:paddingLeft="5dp"
                 android:inputType="textPersonName"
                 android:background="@mipmap/signup_rectangle"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -137,6 +154,7 @@
                 android:text="성별"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -152,6 +170,7 @@
                     android:textColor="@color/black"
                     android:background="#D8D8D8"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
                 <Button
                     android:id="@+id/signUp_Woman_Button"
@@ -161,6 +180,7 @@
                     android:textColor="@color/black"
                     android:background="#D8D8D8"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
             </LinearLayout>
             <TextView
@@ -169,6 +189,7 @@
                 android:text="주소"
                 android:textColor="@color/black"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanum_squareround_l"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -183,12 +204,18 @@
                     android:layout_marginTop="10dp"
                     android:background="@mipmap/signup_rectangle"
                     android:paddingLeft="5dp"
+                    android:fontFamily="@font/nanum_squareround_l"
                     />
-                <ImageView
+                <TextView
                     android:id="@+id/signUp_AddressSearch_Button"
                     android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/overlap_check"
+                    android:layout_height="30dp"
+                    android:text="검 색"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:fontFamily="@font/nanum_squareround_l"
+                    android:background="@mipmap/overlap_check"
                     android:layout_marginLeft="26dp"
                     />
             </LinearLayout>
@@ -236,7 +263,8 @@
                     android:hint="주소 입력"
                     android:textColorHint="@color/gray"
                     android:id="@+id/signUp_AddressSearch_EditText"
-                    android:layout_weight="40"/>
+                    android:layout_weight="40"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <Button
                     android:layout_width="40dp"
                     android:layout_height="30dp"
@@ -263,7 +291,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
-                    android:id="@+id/placeName1"/>
+                    android:id="@+id/placeName1"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -272,7 +301,8 @@
                     android:textSize="10sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:id="@+id/addressName1"/>
+                    android:id="@+id/addressName1"
+                    android:fontFamily="@font/nanum_squareround_l"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -289,7 +319,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
-                    android:id="@+id/placeName2"/>
+                    android:id="@+id/placeName2"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -298,7 +329,8 @@
                     android:textSize="10sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:id="@+id/addressName2"/>
+                    android:id="@+id/addressName2"
+                    android:fontFamily="@font/nanum_squareround_l"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -315,7 +347,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
-                    android:id="@+id/placeName3"/>
+                    android:id="@+id/placeName3"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -324,7 +357,8 @@
                     android:textSize="10sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:id="@+id/addressName3"/>
+                    android:id="@+id/addressName3"
+                    android:fontFamily="@font/nanum_squareround_l"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -341,7 +375,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
-                    android:id="@+id/placeName4"/>
+                    android:id="@+id/placeName4"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -350,7 +385,8 @@
                     android:textSize="10sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:id="@+id/addressName4"/>
+                    android:id="@+id/addressName4"
+                    android:fontFamily="@font/nanum_squareround_l"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -367,7 +403,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
-                    android:id="@+id/placeName5"/>
+                    android:id="@+id/placeName5"
+                    android:fontFamily="@font/nanum_squareround_l"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -376,7 +413,8 @@
                     android:textSize="10sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
-                    android:id="@+id/addressName5"/>
+                    android:id="@+id/addressName5"
+                    android:fontFamily="@font/nanum_squareround_l"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
