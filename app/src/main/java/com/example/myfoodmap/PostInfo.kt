@@ -7,7 +7,8 @@ import java.io.Serializable
 class PostInfo (restaurantName:String = "",
                tasteEvaluation:String="", costEvaluation:String="",cleanlinessEvaluation:String="",
                totalEvalaution:String = "", oneLineComment:String="",
-                address: String="",x:String = "",y:String = "") : Serializable {
+                address: String="",x:String = "",y:String = "",
+                imageUri:String = "", time:Long = 0) : Serializable {
     var restaurantName:String = restaurantName
     var tasteEvaluation:String = tasteEvaluation
     var costEvaluation:String = costEvaluation
@@ -17,8 +18,8 @@ class PostInfo (restaurantName:String = "",
     var address:String = address
     var x:String = x
     var y:String = y
-    var time:Long = 0
-    var imageUri:String = ""
+    var time:Long = time
+    var imageUri:String = imageUri
     //var imageUris:ArrayList<Uri> = ArrayList()
 
     fun set( oneLineComment:String=""){

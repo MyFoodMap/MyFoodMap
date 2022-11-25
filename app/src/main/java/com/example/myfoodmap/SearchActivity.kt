@@ -16,28 +16,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SearchActivity : AppCompatActivity() {
 
     private companion object {
-        const val TAG = "검색"
+        const val TAG = "검색엑티비티"
         const val BASE_URL = "https://dapi.kakao.com/"
         const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
 
     var searchList = arrayListOf<PlaceSearchData>()
     lateinit var searchAdapter: PlaceSearchAdapter
-    private lateinit var bookmarkList:HashMap<String,Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-/*
-        bookmarkList = HashMap<String,Any>() //Key가 식당이름이야 이거 비교해서 일치하면 북마크 표사하면서 될듯
-        FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
-            mSuccessHandler = {result->
-                if(result != null) bookmarkList = result.toObject()!!
-                Log.d(TAG,"북마크정보 불러오기 성공")},
-            mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
 
-*/
+
 
         search_DetailSearch_Button.setOnClickListener {
             searchAdapter = PlaceSearchAdapter(this, searchList)
@@ -57,13 +49,14 @@ class SearchActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     //데이터 베이스 등록
-                    /*FireBaseDataBase.addBookMark(FireBaseAuth.user!!.email,searchList[i].placeName,"임시주소",
+                    FireBaseDataBase.addBookMark(FireBaseAuth.user!!.email,
+                                                searchList[i].placeName,searchList[i].search_x ,searchList[i].search_y,
                                                 mSuccessHandler = {startToast("북마크 등록")},
                                                 mFailureHandler = {e->
                                                     startToast("북마크 등록 실패")
                                                     Log.e(TAG,"북마크 등록 실패",e)})
 
-                     */
+
                 }
                 "@mipmap/bookmark_plus" -> {
                     searchList[i].bookmark="@mipmap/bookmark_no"
@@ -75,15 +68,15 @@ class SearchActivity : AppCompatActivity() {
                         (i + 1).toString() + "번째 아이템이 북마크가 해제되었습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    /*
-                    //데이터 베이스 등록
-                    FireBaseDataBase.delBookMark(FireBaseAuth.user!!.email,searchList[i].placeName,"임시주소",
+
+                    //데이터 베이스 삭제
+                    FireBaseDataBase.delBookMark(FireBaseAuth.user!!.email,searchList[i].placeName,
                         mSuccessHandler = {startToast("북마크 삭제")},
                         mFailureHandler = {e->
                             startToast("북마크 삭제 실패")
                             Log.e(TAG,"북마크 삭제 실패",e)})
                             
-                     */
+
                 }
             }
 

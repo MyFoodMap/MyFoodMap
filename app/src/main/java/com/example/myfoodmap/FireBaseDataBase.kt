@@ -1,9 +1,6 @@
 package com.example.myfoodmap
 
-import android.util.Log
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.core.UserData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
@@ -100,13 +97,14 @@ object FireBaseDataBase {
 
     }
 
-    fun addBookMark( userEmail:String?, restaurantName:String, address:String,
+    fun addBookMark( userEmail:String?,
+                     restaurantName:String, x:String, y:String,
                      mSuccessHandler:() -> Unit,
                      mFailureHandler:(Exception) -> Unit){
         val bookMark = store.collection("Users").document(userEmail!!)
             .collection("UserPosting").document("BookMark")
 
-        val pair = Pair(hashMapOf("address" to address ), hashMapOf("time" to System.currentTimeMillis()))
+        val pair = hashMapOf("x" to x, "y" to y , "time" to System.currentTimeMillis())
         val update = hashMapOf<String,Any>(restaurantName to pair)
 
         bookMark.get().addOnCompleteListener{ task->
@@ -127,9 +125,10 @@ object FireBaseDataBase {
 
     }
 
-    fun delBookMark( userEmail:String?, restaurantName:String, address:String,
+    fun delBookMark( userEmail:String?, restaurantName:String,
                      mSuccessHandler:() -> Unit,
                      mFailureHandler:(Exception) -> Unit){
+
         val bookMark = store.collection("Users").document(userEmail!!).collection("UserPosting").document("BookMark")
         val update = hashMapOf<String,Any>(restaurantName to FieldValue.delete())
 
