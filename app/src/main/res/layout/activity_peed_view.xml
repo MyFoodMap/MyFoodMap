@@ -20,14 +20,6 @@
                 android:layout_height="63dp"
                 android:background="@mipmap/main_logo"
                 android:layout_margin="10dp"/>
-            <Button
-                android:id="@+id/score_Register"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/nanum_squareround_l"
-                android:text="등 록" />
         </FrameLayout>
         <ScrollView
             android:layout_width="match_parent"
@@ -45,30 +37,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <EditText
+                        <TextView
                             android:id="@+id/score_StoreName_EditText"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="가게이름을 입력하세요"
-                            android:inputType="text"
                             android:textColorHint="@color/dark_gray"
                             android:textColor="@color/black"
+                            android:text="가게 이름"
                             android:textSize="20dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/nanum_squareround_b"
-                            />
-                        <Button
-                            android:id="@+id/score_StoreSearch_Button"
-                            android:layout_width="60dp"
-                            android:layout_height="30dp"
-                            android:layout_marginLeft="40dp"
-                            android:background="@mipmap/overlap_check"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:text="검 색"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
-                            android:gravity="center"
                             />
                     </FrameLayout>
                     <ImageView
@@ -372,16 +350,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp">
-                    <EditText
+                    <TextView
                         android:id="@+id/score_Review"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:hint="글을 입력하세요."
+                        android:text="글을 입력하세요."
                         android:textSize="12sp"
                         android:textColor="@color/black"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
-                        android:textColorHint="@color/gray"
+                        android:gravity="center_vertical"
                         android:background="@mipmap/review"
                         android:fontFamily="@font/nanum_squareround_l"
                         />

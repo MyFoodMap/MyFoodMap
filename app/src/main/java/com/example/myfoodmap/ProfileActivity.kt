@@ -115,6 +115,11 @@ class ProfileActivity : AppCompatActivity() {
         profile_Bookmark_ListView.setOnItemClickListener { adapterView, view, i, l ->
             // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
         }
+
+        profile_PeedPicture.setOnClickListener() {
+            val intent = Intent(this, PeedViewActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun startToast(msg:String){

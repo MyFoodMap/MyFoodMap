@@ -2,10 +2,16 @@ package com.example.myfoodmap
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.toObject
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.item_search_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +28,7 @@ class SearchActivity : AppCompatActivity() {
 
     var searchList = arrayListOf<PlaceSearchData>()
     lateinit var searchAdapter: PlaceSearchAdapter
+    private lateinit var naverMap: NaverMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +41,6 @@ class SearchActivity : AppCompatActivity() {
             var etTextKeyword2=search_DetailSearch_EditText.text.toString()
             searchKeyword(etTextKeyword2)
         }
-
         search_SearchResult_ListView.setOnItemClickListener { adapterView, view, i, l ->
             when(searchList[i].bookmark) {
                 "@mipmap/bookmark_no" -> {
@@ -47,11 +53,11 @@ class SearchActivity : AppCompatActivity() {
                     ).show()
                     //데이터 베이스 등록
                     FireBaseDataBase.addBookMark(FireBaseAuth.user!!.email,
-                                                searchList[i].placeName,searchList[i].search_x ,searchList[i].search_y,
-                                                mSuccessHandler = {startToast("북마크 등록")},
-                                                mFailureHandler = {e->
-                                                    startToast("북마크 등록 실패")
-                                                    Log.e(TAG,"북마크 등록 실패",e)})
+                        searchList[i].placeName,searchList[i].search_x ,searchList[i].search_y,
+                        mSuccessHandler = {startToast("북마크 등록")},
+                        mFailureHandler = {e->
+                            startToast("북마크 등록 실패")
+                            Log.e(TAG,"북마크 등록 실패",e)})
                 }
                 "@mipmap/bookmark_plus" -> {
                     searchList[i].bookmark="@mipmap/bookmark_no"

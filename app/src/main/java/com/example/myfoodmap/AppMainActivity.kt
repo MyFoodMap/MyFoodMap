@@ -92,24 +92,23 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
         // 지도상에 마커 표시
         val marker = Marker()
 
-
-        FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
-            mSuccessHandler = {result->
-                if(result != null) bookmarkList = result.data as HashMap<String, HashMap<String,String>>
-                Log.d(TAG,"북마크정보 불러오기 성공 ${bookmarkList.toString()}")
-                var markerList = ArrayList<Marker>()
-                for(bookMark in bookmarkList.values){
-                    Log.d(TAG,"북마크정보 ${bookMark["x"]}, ${bookMark["y"]}")
-                    val markerTemp = Marker()
-                    markerTemp.position = LatLng(bookMark["y"]!!.toDouble(), bookMark["x"]!!.toDouble())
-                    markerTemp.map = naverMap
-
-                    markerTemp.width = 100
-                    markerTemp.height = 100
-                    markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker) }
-            },
-            mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
-
+//  로그인하면 꺼지는데..?
+//        FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
+//            mSuccessHandler = {result->
+//                if(result != null) bookmarkList = result.data as HashMap<String, HashMap<String,String>>
+//                Log.d(TAG,"북마크정보 불러오기 성공 ${bookmarkList.toString()}")
+//                var markerList = ArrayList<Marker>()
+//                for(bookMark in bookmarkList.values){
+//                    Log.d(TAG,"북마크정보 ${bookMark["x"]}, ${bookMark["y"]}")
+//                    val markerTemp = Marker()
+//                    markerTemp.position = LatLng(bookMark["y"]!!.toDouble(), bookMark["x"]!!.toDouble())
+//                    markerTemp.map = naverMap
+//
+//                    markerTemp.width = 100
+//                    markerTemp.height = 100
+//                    markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker) }
+//            },
+//            mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
 
         marker.position = LatLng(37.6203077604657, 127.057193096323)
         marker.map = naverMap
