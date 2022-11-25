@@ -12,7 +12,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class SearchActivity : AppCompatActivity() {
 
     private companion object {
@@ -36,7 +35,6 @@ class SearchActivity : AppCompatActivity() {
                 if(result != null) bookmarkList = result.toObject()!!
                 Log.d(TAG,"북마크정보 불러오기 성공")},
             mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
-
 */
 
         search_DetailSearch_Button.setOnClickListener {
@@ -46,6 +44,7 @@ class SearchActivity : AppCompatActivity() {
             var etTextKeyword2=search_DetailSearch_EditText.text.toString()
             searchKeyword(etTextKeyword2)
         }
+
         search_SearchResult_ListView.setOnItemClickListener { adapterView, view, i, l ->
             when(searchList[i].bookmark) {
                 "@mipmap/bookmark_no" -> {
@@ -62,13 +61,11 @@ class SearchActivity : AppCompatActivity() {
                                                 mFailureHandler = {e->
                                                     startToast("북마크 등록 실패")
                                                     Log.e(TAG,"북마크 등록 실패",e)})
-
                      */
                 }
                 "@mipmap/bookmark_plus" -> {
                     searchList[i].bookmark="@mipmap/bookmark_no"
                     searchAdapter.notifyDataSetChanged()
-
 
                     Toast.makeText(
                         applicationContext,
@@ -82,11 +79,9 @@ class SearchActivity : AppCompatActivity() {
                         mFailureHandler = {e->
                             startToast("북마크 삭제 실패")
                             Log.e(TAG,"북마크 삭제 실패",e)})
-                            
                      */
                 }
             }
-
         }
     }
 
@@ -110,7 +105,7 @@ class SearchActivity : AppCompatActivity() {
                 searchList.removeAll(searchList)
                 response.body()?.let {
                     for(index in 0 until it.documents.size) { // 키워드 검색으로 나온 데이터 출력
-                        if(index>10) {break}
+                        if(index>9) {break}
                         Log.d("Address", "${it.documents[index].place_name}") // 장소
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
@@ -132,5 +127,4 @@ class SearchActivity : AppCompatActivity() {
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
     }
-
 }
