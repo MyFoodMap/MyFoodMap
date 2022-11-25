@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide
 
 class ProfileActivity : AppCompatActivity() {
     private companion object{
-        const val TAG = "프로필"
+        const val TAG = "프로필엑티비티"
     }
     private lateinit var userInfo: UserInfo
     private var postInfoList: ArrayList<PostInfo> = ArrayList()
@@ -39,47 +39,41 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        //유저 정보 받아오기
-//        userInfo = intent.getSerializableExtra("user") as UserInfo
-//        userInfo.photoUri?.let {
-//            profile_BasicProfile.setImageURI(it)
-//        }
+        //유저 정보 받아오기
+        userInfo = intent.getSerializableExtra("user") as UserInfo
+        userInfo.photoUri?.let {
+            profile_BasicProfile.setImageURI(it)
+        }
+        profile_UserName.text = userInfo.nickname
 
-//        //데이터 베이스 등록
-//        FireBaseDataBase.getPostingDataForUser(userInfo.id,
-//            mSuccessHandler = { result->
-//                val glide = Glide.with(this)
-//                for( document in result)
-//                    postInfoList.add(document.toObject<PostInfo>())
-//                startToast("정보받아오기 성공")
-//                Log.d(TAG,"정보받아오기 성공 : ${postInfoList[0].imageUri.toUri()}")
-//                //for(user in postInfoList)
-//                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
-//                profile_PeedName.text = postInfoList[0].restaurantName
-//            },
-//            mFailureHandler = {e->
-//                startToast("프로필 게시물 정보 받아오기 실패")
-//                Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
-//        )
+        //데이터 베이스
+        /*
+        FireBaseDataBase.getPostingDataForUser(userInfo.id,
+            mSuccessHandler = { result->
+                val glide = Glide.with(this)
+                for( document in result) {
+                        val post = PostInfo(document.data["restaurantName"].toString(),
+                        document.data["tasteEvaluation"].toString(),document.data["costEvaluation"].toString(),document.data["cleanlinessEvaluation"].toString(),
+                        document.data["totalEvalaution"].toString(),document.data["oneLineComment"].toString(),
+                        document.data["address"].toString(),"0","0",
+                        document.data["imageUri"].toString(),0)
 
-        //adapter 초기화
-        galleryAdapter = GalleryAdapter(imageList, this)
-
-        //recyclerView 설정
-        val gridLayoutManager = GridLayoutManager(this, 3) // 3개씩 보여주기
-        binding.recyclerViewGallery.layoutManager = gridLayoutManager
-        binding.recyclerViewGallery.adapter = galleryAdapter
-
-
+                    postInfoList.add(post)
+                    Log.d(TAG,"document : ${document.data}")
+                }
+                Log.d(TAG,"정보받아오기 성공 \n url : ${postInfoList[0].imageUri.toUri()}" +
+                                "\nname :  ${postInfoList[0].restaurantName}")
+                //for(user in postInfoList)
+                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
+                profile_PeedName.text = postInfoList[0].restaurantName
+            },
+            mFailureHandler = {e->
+                startToast("프로필 게시물 정보 받아오기 실패")
+                Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
+        )*/
 
         //버튼 이벤트
         binding.profilePeedPicture.setOnClickListener {
-            //갤러리 호출
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            //멀티 선택 기능
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            activityResult.launch(intent)
         }//Create
 
 
@@ -126,27 +120,4 @@ class ProfileActivity : AppCompatActivity() {
     private fun startToast(msg:String){
          Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
    }
-
-    @SuppressLint("SuspiciousIndentation")
-    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) {
-        //결과 코드 OK, 결과값 null 아니면
-        if(it.resultCode== RESULT_OK) {
-            if(it.data!!.clipData != null) {// 멀티 이미지
-                //선택한 이미지 개수
-                val count=it.data!!.clipData!!.itemCount
-
-                for(index in 0 until count) {
-                    //이미지 담기
-                    val imageUri=it.data!!.clipData!!.getItemAt(index).uri
-                    //이미지 추가  // 다중선택일때 넣어야하는 데이터 imageUri
-                    imageList.add(imageUri)
-                }
-            } else { //싱글 이미지 // 하나선택했을때 넣어야하는 데이터 imageSingleUri
-                val imageSingleUri=it.data!!.data
-                imageList.add(imageSingleUri!!)
-            }
-            galleryAdapter.notifyDataSetChanged()
-        }
-    }
 }

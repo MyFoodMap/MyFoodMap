@@ -19,12 +19,13 @@ import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import android.view.View
+import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.android.synthetic.main.activity_app_main.*
 
 
 class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClickListener {
     private companion object {
-        const val TAG = "메인"
+        const val TAG = "메인엑티비티"
     }
 
     private lateinit var mapView: MapView
@@ -33,6 +34,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
 
     private lateinit var userInfo: UserInfo
+    private lateinit var bookmarkList:HashMap<String,HashMap<String,String>>
     private lateinit var postInfoList: ArrayList<PostInfo>
     private lateinit var customProgress: CustomProgress
 
@@ -40,42 +42,47 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app_main)
 
+        postInfoList = ArrayList<PostInfo>()
+        customProgress = CustomProgress(this)
+
+        //데이터 베이스 정보
+        showProgressBar()
 
 
         mapView = findViewById(R.id.appMain_map)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        customProgress = CustomProgress(this)
-        postInfoList = ArrayList<PostInfo>()
 
-        showProgressBar()
-        userInfo  = intent.getSerializableExtra("user") as UserInfo
+        userInfo = intent.getSerializableExtra("user") as UserInfo
         FireBaseDataBase.getPostingDataForUser(userInfo.id,
-            mSuccessHandler = {result->
-                for(document in result)
+            mSuccessHandler = { result ->
+                for (document in result)
                     postInfoList.add(document.toObject<PostInfo>())
-                Log.d(TAG,"포스터 정보 받아오기 성공")
-                hideProgressBar()},
-            mFailureHandler = {e->
-                Log.e(TAG,"포스터 정보 받아오기 실패",e)
+                Log.d(TAG, "포스터 정보 받아오기 성공")
+                hideProgressBar()
+            },
+            mFailureHandler = { e ->
+                Log.e(TAG, "포스터 정보 받아오기 실패", e)
                 startToast("포스터 정보 받아오기 실패")
                 hideProgressBar()
             })
 
+
+
         locationSource = FusedLocationSource(this, LOCATION_PERMISSTION_REQUEST_CODE)
 
         appMain_Profile_Button.setOnClickListener {
-            val intent= Intent(this,ProfileActivity::class.java)
-            intent.putExtra("user",userInfo)
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("user", userInfo)
             startActivity(intent)
         }
         appMain_Search_Button.setOnClickListener {
-            val intent= Intent(this,SearchActivity::class.java)
+            val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
         appMain_Plus_Button.setOnClickListener {
-            val intent= Intent(this,ScoreActivity::class.java)
-            intent.putExtra("user",userInfo)
+            val intent = Intent(this, ScoreActivity::class.java)
+            intent.putExtra("user", userInfo)
             startActivity(intent)
         }
     }
@@ -84,6 +91,26 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
         val uiSettings = naverMap.uiSettings
         // 지도상에 마커 표시
         val marker = Marker()
+
+
+        FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
+            mSuccessHandler = {result->
+                if(result != null) bookmarkList = result.data as HashMap<String, HashMap<String,String>>
+                Log.d(TAG,"북마크정보 불러오기 성공 ${bookmarkList.toString()}")
+                var markerList = ArrayList<Marker>()
+                for(bookMark in bookmarkList.values){
+                    Log.d(TAG,"북마크정보 ${bookMark["x"]}, ${bookMark["y"]}")
+                    val markerTemp = Marker()
+                    markerTemp.position = LatLng(bookMark["y"]!!.toDouble(), bookMark["x"]!!.toDouble())
+                    markerTemp.map = naverMap
+
+                    markerTemp.width = 100
+                    markerTemp.height = 100
+                    markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker) }
+            },
+            mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
+
+
         marker.position = LatLng(37.6203077604657, 127.057193096323)
         marker.map = naverMap
 
@@ -115,12 +142,15 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
+
     }
 
     override fun onPause() {
         super.onPause()
         mapView.onPause()
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

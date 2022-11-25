@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
     private companion object {
-        val TAG = "로그인"
+        val TAG = "로그인엑티비티"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

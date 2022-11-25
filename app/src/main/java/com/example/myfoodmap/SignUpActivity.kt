@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SignUpActivity : AppCompatActivity() {
 
     private companion object {
-        const val TAG = "회원가입"
+        const val TAG = "회원가입엑티비티"
         const val REQUEST_FIRST = 1000
         const val BASE_URL = "https://dapi.kakao.com/"
         const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
@@ -143,11 +143,15 @@ class SignUpActivity : AppCompatActivity() {
             FireBaseDataBase.getUserData(id,
                 mSuccessHandler = { document->
                     Log.d(TAG,"아이디 중복 검사 : ${document}")
-                    if(document != null){
+                    if(document == null){
                         checkOverlapId = true
                         startToast("사용할수 있는 아이디입니다")
-                    } },
-                mFailureHandler = {startToast("이미 존재하는 아이디입니다")})
+                    }else{
+                        checkOverlapId = false
+                        startToast("이미 존재하는 아이디입니다")
+                    }
+                },
+                mFailureHandler = {Log.e(TAG,"아이디 중복 검사 오류",it)})
         }
 
     }
@@ -158,12 +162,9 @@ class SignUpActivity : AppCompatActivity() {
         val password = signUp_Password_EditText.text.toString()
         val checkPassword = signUp_PasswordCheck_EditText.text.toString()
         val name = signUp_Name_EditText.text.toString()
-        val store = Firebase.firestore // 이건 무슨 작동인거죠
         val nickname = signUp_Nickname_EditText.text.toString()
-        //val address = signUp_SignUpAddress_EditText.text.toString()
-        //수정해야함
 
-        if(checkEmpty(id,password,checkPassword,name,gender,address,nickname) && checkOverlapId){
+        if(checkEmpty(id,password,checkPassword,name,gender,address,nickname)){
             //로딩창
             showProgressBar()
             //회원 정보 등록
@@ -271,6 +272,10 @@ class SignUpActivity : AppCompatActivity() {
     private fun checkEmpty(
         id:String, password:String,checkPassword: String,
         name:String, gender:String, address:String,nickname: String):Boolean{
+        if(checkOverlapId) {
+            startToast("아이디를 중복검사를 해주세요")
+            return false
+        }
         if(id.isBlank()){
             startToast("아이디를 입력하세요")
             return false
