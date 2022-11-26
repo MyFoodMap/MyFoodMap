@@ -70,7 +70,6 @@ class ProfileActivity : AppCompatActivity() {
                             "${post.restaurantName},${post.oneLineComment}\n" +
                             "${postInfoList.size}")
                 }
-
                 for(post in postInfoList){
                     imageList.add(post.imageUri.toUri())
                     nameList.add(post.restaurantName)
@@ -84,8 +83,6 @@ class ProfileActivity : AppCompatActivity() {
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
         )
         //버튼 이벤트
-        binding.profilePeedPicture.setOnClickListener {
-        }//Create
 
 
         profile_PeedClickRange.setOnClickListener {
@@ -116,22 +113,8 @@ class ProfileActivity : AppCompatActivity() {
             bookmarkAdapter.notifyDataSetChanged()
         }
 
-        profile_BookmarkPlus.setOnClickListener {
-            profile_BookmarkPlus.visibility=View.INVISIBLE
-            profile_BookmarkNo.visibility=View.VISIBLE
-        }
-        profile_BookmarkNo.setOnClickListener {
-            profile_BookmarkPlus.visibility=View.VISIBLE
-            profile_BookmarkNo.visibility=View.INVISIBLE
-        }
-
         profile_Bookmark_ListView.setOnItemClickListener { adapterView, view, i, l ->
             // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
-        }
-
-        profile_PeedPicture.setOnClickListener() {
-            val intent = Intent(this, PeedViewActivity::class.java)
-            startActivity(intent)
         }
     }
 

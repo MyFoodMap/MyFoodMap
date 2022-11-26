@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_score.placeName2
 import kotlinx.android.synthetic.main.activity_score.placeName3
 import kotlinx.android.synthetic.main.activity_score.placeName4
 import kotlinx.android.synthetic.main.activity_score.placeName5
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +42,19 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var postInfo: PostInfo
     private lateinit var userInfo: UserInfo
     private lateinit var user: FirebaseUser
+
+    private var x = "1.223232xxx"
+    private var y = "1.223232xxx"
+    private var x1 = "1.223232xxx"
+    private var y1 = "1.223232xxx"
+    private var x2 = "1.223232xxx"
+    private var y2 = "1.223232xxx"
+    private var x3 = "1.223232xxx"
+    private var y3 = "1.223232xxx"
+    private var x4 = "1.223232xxx"
+    private var y4 = "1.223232xxx"
+    private var x5 = "1.223232xxx"
+    private var y5 = "1.223232xxx"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -287,26 +301,31 @@ class ScoreActivity : AppCompatActivity() {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName1.text)
+            postInfo.placeSet(placeName1.text.toString(), addressName1.text.toString(), x1, y1)
         }
         score_AddressSearchResult2.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName2.text)
+            postInfo.placeSet(placeName2.text.toString(), addressName2.text.toString(), x2, y2)
         }
         score_AddressSearchResult3.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName3.text)
+            postInfo.placeSet(placeName3.text.toString(), addressName3.text.toString(), x3, y3)
         }
         score_AddressSearchResult4.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName4.text)
+            postInfo.placeSet(placeName4.text.toString(), addressName4.text.toString(), x4, y4)
         }
         score_AddressSearchResult5.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName5.text)
+            postInfo.placeSet(placeName5.text.toString(), addressName5.text.toString(), x5, y5)
         }
         score_Register.setOnClickListener { savePost() }
     }
@@ -463,26 +482,35 @@ class ScoreActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
-                        postInfo.placeSet(it.documents[index].place_name,it.documents[index].address_name,
-                            it.documents[index].x,it.documents[index].y)
+
                         val token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
                         when(index) {
                             0 -> {
                                 placeName1.text="${it.documents[index].place_name}"
                                 addressName1.text="${it.documents[index].address_name}"
+                                x1=it.documents[index].x
+                                y1=it.documents[index].y
                             } 1 -> {
                                 placeName2.text="${it.documents[index].place_name}"
                                 addressName2.text="${it.documents[index].address_name}"
+                                x2=it.documents[index].x
+                                y2=it.documents[index].y
                             } 2 -> {
                                 placeName3.text="${it.documents[index].place_name}"
                                 addressName3.text="${it.documents[index].address_name}"
+                                x3=it.documents[index].x
+                                y3=it.documents[index].y
                             } 3 -> {
                                 placeName4.text="${it.documents[index].place_name}"
                                 addressName4.text="${it.documents[index].address_name}"
+                                x4=it.documents[index].x
+                                y4=it.documents[index].y
                             } 4 -> {
                                 placeName5.text="${it.documents[index].place_name}"
                                 addressName5.text="${it.documents[index].address_name}"
+                                x5=it.documents[index].x
+                                y5=it.documents[index].y
                             }
                         }
                     }

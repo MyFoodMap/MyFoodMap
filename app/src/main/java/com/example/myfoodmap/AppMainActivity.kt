@@ -81,8 +81,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
     override fun onMapReady(@NonNull naverMap: NaverMap) {
         val uiSettings = naverMap.uiSettings
 
-
-        //로그인하면 꺼지는데..?
+        // 로그인하면 꺼지는데?
         FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
             mSuccessHandler = {result->
                 if(result != null) {
@@ -150,13 +149,13 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
 //        marker1.width = 100
 //        marker1.height = 100
 //        marker1.icon = OverlayImage.fromResource(R.drawable.peed_marker)
-//
-//        this.naverMap = naverMap
-//        naverMap.locationSource = locationSource
-//        naverMap.locationTrackingMode = LocationTrackingMode.Follow
-//
-//        uiSettings.isCompassEnabled = false
-//        uiSettings.isLocationButtonEnabled = false
+
+        this.naverMap = naverMap
+        naverMap.locationSource = locationSource
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+        uiSettings.isCompassEnabled = false
+        uiSettings.isLocationButtonEnabled = false
     }
 
     override fun onStart() {
