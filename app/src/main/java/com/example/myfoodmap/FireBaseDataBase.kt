@@ -82,7 +82,7 @@ object FireBaseDataBase {
 
         val userPost = store.collection("Users").document(userEmail).collection("UserPosting")
 
-       userPost.get()
+       userPost.whereNotEqualTo("restaurantName",null).get()
             .addOnSuccessListener { result-> mSuccessHandler(result) }
             .addOnFailureListener { exception -> mFailureHandler(exception) }
     }

@@ -22,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var userInfo: UserInfo
     private var postInfoList: ArrayList<PostInfo> = ArrayList()
+    private lateinit var bookmarkDataList:HashMap<String,HashMap<String,String>>
 
     lateinit var binding: ActivityProfileBinding
 
@@ -50,12 +51,13 @@ class ProfileActivity : AppCompatActivity() {
         userInfo.photoUri?.let {
             profile_BasicProfile.setImageURI(it)
         }
+        bookmarkDataList = intent.getSerializableExtra("bookmark") as HashMap<String,HashMap<String,String>>
+
         profile_UserName.text = userInfo.nickname
 
         //데이터 베이스
         FireBaseDataBase.getPostingDataForUser(userInfo.id,
             mSuccessHandler = { result->
-                val glide = Glide.with(this)
                 for( document in result) {
                     val post = PostInfo(document.data["restaurantName"].toString(),
                         document.data["tasteEvaluation"].toString(),document.data["costEvaluation"].toString(),document.data["cleanlinessEvaluation"].toString(),
@@ -68,20 +70,19 @@ class ProfileActivity : AppCompatActivity() {
                             "${post.restaurantName},${post.oneLineComment}\n" +
                             "${postInfoList.size}")
                 }
-                Log.d(TAG,"정보받아오기 성공 \n url : ${postInfoList[1].imageUri.toUri()}" +
-                                "\nname :  ${postInfoList[1].restaurantName}")
-                //for(user in postInfoList)
-                glide.load(postInfoList[1].imageUri.toUri()).into(profile_PeedPicture)
-                profile_PeedName.text = postInfoList[1].restaurantName
 
-                imageList.add(postInfoList[1].imageUri.toUri())
-                nameList.add(postInfoList[1].restaurantName)
+                for(post in postInfoList){
+                    imageList.add(post.imageUri.toUri())
+                    nameList.add(post.restaurantName)
+                }
+                imageList.removeAt(0)
+                nameList.removeAt(0)
+                galleryAdapter.notifyDataSetChanged()
             },
             mFailureHandler = {e->
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
         )
-        galleryAdapter.notifyDataSetChanged()
         //버튼 이벤트
         binding.profilePeedPicture.setOnClickListener {
         }//Create
@@ -105,11 +106,13 @@ class ProfileActivity : AppCompatActivity() {
             bookmarkAdapter = BookmarkAdapter(this, bookmarkList)
             profile_Bookmark_ListView.adapter = bookmarkAdapter
 
-            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
-            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
-            for(index in 0 until 10) {
-                bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
-            }
+            for(bookmarkRestaurantName in bookmarkDataList.keys)
+                bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", bookmarkRestaurantName, "mipmap/bookmark_plus"))
+//            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+//            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
+//            for(index in 0 until 10) {
+//                bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
+//            }
             bookmarkAdapter.notifyDataSetChanged()
         }
 

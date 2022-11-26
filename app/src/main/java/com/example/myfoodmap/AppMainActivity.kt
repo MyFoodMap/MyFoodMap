@@ -51,21 +51,10 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
 
         mapView = findViewById(R.id.appMain_map)
         mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
+
+
 
         userInfo = intent.getSerializableExtra("user") as UserInfo
-        FireBaseDataBase.getPostingDataForUser(userInfo.id,
-            mSuccessHandler = { result ->
-                for (document in result)
-                    postInfoList.add(document.toObject())
-                Log.d(TAG, "포스터 정보 받아오기 성공")
-                hideProgressBar()
-            },
-            mFailureHandler = { e ->
-                Log.e(TAG, "포스터 정보 받아오기 실패", e)
-                startToast("포스터 정보 받아오기 실패")
-                hideProgressBar()
-            })
 
 
 
@@ -74,6 +63,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
         appMain_Profile_Button.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             intent.putExtra("user", userInfo)
+            intent.putExtra("bookmark",bookmarkList)
             startActivity(intent)
         }
         appMain_Search_Button.setOnClickListener {
@@ -97,46 +87,76 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
             mSuccessHandler = {result->
                 if(result != null) {
                     bookmarkList = result.data as HashMap<String, HashMap<String, String>>
-                    Log.d(TAG, "북마크정보 불러오기 성공 ${bookmarkList.toString()}")
+                    if(bookmarkList.isNotEmpty()){
+                        Log.d(TAG, "북마크정보 불러오기 성공 ${bookmarkList.toString()}")
 
-                    for (bookMark in bookmarkList.values) {
-                        Log.d(TAG, "북마크정보 ${bookMark["x"]}, ${bookMark["y"]}")
-                        val markerTemp = Marker()
-                        markerTemp.position =
-                            LatLng(bookMark["y"]!!.toDouble(), bookMark["x"]!!.toDouble())
-                        markerTemp.map = naverMap
+                        for (bookMark in bookmarkList.values) {
+                            Log.d(TAG, "북마크정보 ${bookMark["x"]}, ${bookMark["y"]}")
 
-                        markerTemp.width = 100
-                        markerTemp.height = 100
-                        markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
+                            //마커 추가
+                            val markerTemp = Marker()
+                            markerTemp.position =
+                                LatLng(bookMark["y"]!!.toDouble(), bookMark["x"]!!.toDouble())
+                            markerTemp.map = naverMap
+
+                            markerTemp.width = 100
+                            markerTemp.height = 100
+                            markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
+                        }
                     }
                 }
             },
             mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})
 
-        // 지도상에 마커 표시
-        val marker = Marker()
-        marker.position = LatLng(37.6203077604657, 127.057193096323)
-        marker.map = naverMap
+        FireBaseDataBase.getPostingDataForUser(userInfo.id,
+            mSuccessHandler = { result ->
+                for (document in result) {
+                    Log.d(TAG,"문서 : ${document.data}")
+                    val documentToObject = document.toObject<PostInfo>()
+                    postInfoList.add(documentToObject)
 
-        marker.width = 100
-        marker.height = 100
-        marker.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
+                    //마커 추가
+                    Log.d(TAG,"x: ${documentToObject.x}, y : ${documentToObject.y}")
+                    val marker = Marker()
+                    marker.position = LatLng(documentToObject.y.toDouble(),documentToObject.x.toDouble())
+                    marker.map = naverMap
 
-        val marker1 = Marker()
-        marker1.position = LatLng(37.6192404638865, 127.058270608867)
-        marker1.map = naverMap
+                    marker.width = 100
+                    marker.height = 100
+                    marker.icon = OverlayImage.fromResource(R.drawable.peed_marker)
+                }
+                Log.d(TAG, "포스터 정보 받아오기 성공")
+                hideProgressBar()
+            },
+            mFailureHandler = { e ->
+                Log.e(TAG, "포스터 정보 받아오기 실패", e)
+                startToast("포스터 정보 받아오기 실패")
+                hideProgressBar()
+            })
 
-        marker1.width = 100
-        marker1.height = 100
-        marker1.icon = OverlayImage.fromResource(R.drawable.peed_marker)
-
-        this.naverMap = naverMap
-        naverMap.locationSource = locationSource
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
-
-        uiSettings.isCompassEnabled = false
-        uiSettings.isLocationButtonEnabled = false
+//        // 지도상에 마커 표시
+//        val marker = Marker()
+//        marker.position = LatLng(37.6203077604657, 127.057193096323)
+//        marker.map = naverMap
+//
+//        marker.width = 100
+//        marker.height = 100
+//        marker.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
+//
+//        val marker1 = Marker()
+//        marker1.position = LatLng(37.6192404638865, 127.058270608867)
+//        marker1.map = naverMap
+//
+//        marker1.width = 100
+//        marker1.height = 100
+//        marker1.icon = OverlayImage.fromResource(R.drawable.peed_marker)
+//
+//        this.naverMap = naverMap
+//        naverMap.locationSource = locationSource
+//        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+//
+//        uiSettings.isCompassEnabled = false
+//        uiSettings.isLocationButtonEnabled = false
     }
 
     override fun onStart() {
