@@ -28,11 +28,16 @@ class SearchActivity : AppCompatActivity() {
 
     var searchList = arrayListOf<PlaceSearchData>()
     lateinit var searchAdapter: PlaceSearchAdapter
-    private lateinit var naverMap: NaverMap
+
+
+    private lateinit var bookmarkList:HashMap<String,HashMap<String,String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+
+        bookmarkList = intent.getSerializableExtra("bookmark") as HashMap<String,HashMap<String,String>>
 
         search_DetailSearch_Button.setOnClickListener {
             searchAdapter = PlaceSearchAdapter(this, searchList)
@@ -46,14 +51,11 @@ class SearchActivity : AppCompatActivity() {
                 "@mipmap/bookmark_no" -> {
                     searchList[i].bookmark="@mipmap/bookmark_plus"
                     searchAdapter.notifyDataSetChanged()
-                    Toast.makeText(
-                        applicationContext,
-                        (i + 1).toString() + "번째 아이템이 북마크되었습니다..",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    startToast( (i + 1).toString() + "번째 아이템이 북마크되었습니다..")
+
                     //데이터 베이스 등록
                     FireBaseDataBase.addBookMark(FireBaseAuth.user!!.email,
-                        searchList[i].placeName,searchList[i].search_x ,searchList[i].search_y,
+                        searchList[i].placeName,searchList[i].search_x ,searchList[i].search_y, searchList[i].placeAddress,
                         mSuccessHandler = {startToast("북마크 등록")},
                         mFailureHandler = {e->
                             startToast("북마크 등록 실패")
@@ -98,16 +100,32 @@ class SearchActivity : AppCompatActivity() {
                 // 통신 성공 (검색 결과는 response.body()에 담겨있음)
                 Log.d("Test", "${response.body()}")
                 searchList.removeAll(searchList)
+
                 response.body()?.let {
                     for(index in 0 until it.documents.size) { // 키워드 검색으로 나온 데이터 출력
+                        var checkBookMark = false
+
                         if(index>9) {break}
                         Log.d("Address", "${it.documents[index].place_name}") // 장소
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
-                        searchList.add(PlaceSearchData("@mipmap/basic_profile", "${it.documents[index].place_name}",
-                            "${it.documents[index].address_name}", "@mipmap/bookmark_no",
-                            "${it.documents[index].x}", "${it.documents[index].y}"))
+                        Log.d(TAG,bookmarkList.contains(it.documents[index].place_name).toString())
+                        if(bookmarkList.contains(it.documents[index].place_name)) {
+                            Log.d(TAG,"document :${bookmarkList[it.documents[index].place_name]!!.values} ${bookmarkList[it.documents[index].place_name]!!["address"]}\nit: ${it.documents[index].address_name}")
+                            if (bookmarkList[it.documents[index].place_name]!!["address"] == it.documents[index].address_name)
+                                checkBookMark = true
+                        }
+
+                        if(checkBookMark){
+                              searchList.add(PlaceSearchData("@mipmap/basic_profile", "${it.documents[index].place_name}",
+                                "${it.documents[index].address_name}", "@mipmap/bookmark_plus",
+                                    "${it.documents[index].x}", "${it.documents[index].y}"))
+                        }else{
+                            searchList.add(PlaceSearchData("@mipmap/basic_profile", "${it.documents[index].place_name}",
+                                "${it.documents[index].address_name}", "@mipmap/bookmark_no",
+                                "${it.documents[index].x}", "${it.documents[index].y}"))
+                        }
                     }
                 }
             }

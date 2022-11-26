@@ -1,7 +1,5 @@
 package com.example.myfoodmap
 
-import android.net.Uri
-import androidx.core.net.toUri
 import java.io.Serializable
 
 class PostInfo (restaurantName:String = "",

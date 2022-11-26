@@ -28,8 +28,6 @@ class ProfileActivity : AppCompatActivity() {
     private var postInfoList: ArrayList<PostInfo> = ArrayList()
 
     lateinit var binding: ActivityProfileBinding
-    lateinit var galleryAdapter: GalleryAdapter
-    var imageList: ArrayList<Uri> = ArrayList()
 
     var bookmarkList = arrayListOf<BookmarkData>()
     lateinit var bookmarkAdapter: BookmarkAdapter
@@ -47,30 +45,32 @@ class ProfileActivity : AppCompatActivity() {
         profile_UserName.text = userInfo.nickname
 
         //데이터 베이스
-        /*
+
         FireBaseDataBase.getPostingDataForUser(userInfo.id,
             mSuccessHandler = { result->
                 val glide = Glide.with(this)
                 for( document in result) {
-                        val post = PostInfo(document.data["restaurantName"].toString(),
+                    val post = PostInfo(document.data["restaurantName"].toString(),
                         document.data["tasteEvaluation"].toString(),document.data["costEvaluation"].toString(),document.data["cleanlinessEvaluation"].toString(),
                         document.data["totalEvalaution"].toString(),document.data["oneLineComment"].toString(),
                         document.data["address"].toString(),"0","0",
                         document.data["imageUri"].toString(),0)
 
                     postInfoList.add(post)
-                    Log.d(TAG,"document : ${document.data}")
+                    Log.d(TAG,"document : ${document.data}\n" +
+                            "${post.restaurantName},${post.oneLineComment}\n" +
+                            "${postInfoList.size}")
                 }
-                Log.d(TAG,"정보받아오기 성공 \n url : ${postInfoList[0].imageUri.toUri()}" +
-                                "\nname :  ${postInfoList[0].restaurantName}")
+                Log.d(TAG,"정보받아오기 성공 \n url : ${postInfoList[1].imageUri.toUri()}" +
+                                "\nname :  ${postInfoList[1].restaurantName}")
                 //for(user in postInfoList)
-                glide.load(postInfoList[0].imageUri.toUri()).into(profile_PeedPicture)
-                profile_PeedName.text = postInfoList[0].restaurantName
+                glide.load(postInfoList[1].imageUri.toUri()).into(profile_PeedPicture)
+                profile_PeedName.text = postInfoList[1].restaurantName
             },
             mFailureHandler = {e->
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
-        )*/
+        )
 
         //버튼 이벤트
         binding.profilePeedPicture.setOnClickListener {

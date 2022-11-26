@@ -98,14 +98,14 @@ object FireBaseDataBase {
     }
 
     fun addBookMark( userEmail:String?,
-                     restaurantName:String, x:String, y:String,
+                     restaurantName:String, x:String, y:String, address:String,
                      mSuccessHandler:() -> Unit,
                      mFailureHandler:(Exception) -> Unit){
         val bookMark = store.collection("Users").document(userEmail!!)
             .collection("UserPosting").document("BookMark")
 
-        val pair = hashMapOf("x" to x, "y" to y , "time" to System.currentTimeMillis())
-        val update = hashMapOf<String,Any>(restaurantName to pair)
+        val data = hashMapOf("x" to x, "y" to y ,"address" to address, "time" to System.currentTimeMillis())
+        val update = hashMapOf<String,Any>(restaurantName to data)
 
         bookMark.get().addOnCompleteListener{ task->
             if(task.isSuccessful){
