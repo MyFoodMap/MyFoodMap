@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ class GalleryActivity : AppCompatActivity() {
     lateinit var binding: ActivityGalleryBinding
     lateinit var galleryAdapter: GalleryAdapter
     var imageList: ArrayList<Uri> = ArrayList()
+    var nameList: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,7 @@ class GalleryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //adapter 초기화
-        galleryAdapter = GalleryAdapter(imageList, this)
+        galleryAdapter = GalleryAdapter(imageList, nameList, this)
 
         //recyclerView 설정
         val gridLayoutManager = GridLayoutManager(this, 3) // 3개씩 보여주기

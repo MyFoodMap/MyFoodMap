@@ -197,20 +197,20 @@
                     android:paddingLeft="5dp"
                     />
             </LinearLayout>
-            <ListView
-                android:id="@+id/profile_Bookmark_ListView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_Peed_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="invisible"
-                tools:listitem="@layout/item_bookmark_layout" />
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_profile_peed_layout"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/profile_BookmarkPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
             <FrameLayout
-                android:id="@+id/profile_BookmarkPage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -254,7 +254,12 @@
                     android:visibility="invisible"
                     />
             </FrameLayout>
-
+            <ListView
+                android:id="@+id/profile_Bookmark_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:listitem="@layout/item_bookmark_layout"/>
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

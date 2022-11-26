@@ -1,29 +1,25 @@
 package com.example.myfoodmap
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myfoodmap.databinding.ActivityGalleryBinding
+import com.bumptech.glide.Glide
 import com.example.myfoodmap.databinding.ActivityProfileBinding
-import com.google.firebase.firestore.ktx.toObject
-import com.naver.maps.map.a.d
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_search.*
-import com.bumptech.glide.Glide
+
 
 class ProfileActivity : AppCompatActivity() {
     private companion object{
         const val TAG = "프로필엑티비티"
     }
+
     private lateinit var userInfo: UserInfo
     private var postInfoList: ArrayList<PostInfo> = ArrayList()
 
@@ -32,10 +28,22 @@ class ProfileActivity : AppCompatActivity() {
     var bookmarkList = arrayListOf<BookmarkData>()
     lateinit var bookmarkAdapter: BookmarkAdapter
 
+    private lateinit var galleryAdapter: GalleryAdapter
+    var imageList: ArrayList<Uri> = ArrayList()
+    var nameList: ArrayList<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //adapter 초기화
+        galleryAdapter = GalleryAdapter(imageList, nameList, this)
+
+        //recyclerView 설정
+        val gridLayoutManager = GridLayoutManager(this, 3) // 3개씩 보여주기
+        binding.profilePeedRecyclerView.layoutManager = gridLayoutManager
+        binding.profilePeedRecyclerView.adapter = galleryAdapter
 
         //유저 정보 받아오기
         userInfo = intent.getSerializableExtra("user") as UserInfo
@@ -45,7 +53,6 @@ class ProfileActivity : AppCompatActivity() {
         profile_UserName.text = userInfo.nickname
 
         //데이터 베이스
-
         FireBaseDataBase.getPostingDataForUser(userInfo.id,
             mSuccessHandler = { result->
                 val glide = Glide.with(this)
@@ -66,12 +73,15 @@ class ProfileActivity : AppCompatActivity() {
                 //for(user in postInfoList)
                 glide.load(postInfoList[1].imageUri.toUri()).into(profile_PeedPicture)
                 profile_PeedName.text = postInfoList[1].restaurantName
+
+                imageList.add(postInfoList[1].imageUri.toUri())
+                nameList.add(postInfoList[1].restaurantName)
             },
             mFailureHandler = {e->
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
         )
-
+        galleryAdapter.notifyDataSetChanged()
         //버튼 이벤트
         binding.profilePeedPicture.setOnClickListener {
         }//Create
