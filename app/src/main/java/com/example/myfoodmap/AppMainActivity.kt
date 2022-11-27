@@ -79,13 +79,10 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
     }
 
     override fun onMapReady(@NonNull naverMap: NaverMap) {
-        val uiSettings = naverMap.uiSettings
-
-
         //로그인하면 꺼지는데..?
         FireBaseDataBase.loadBookMark(FireBaseAuth.user!!.email,
             mSuccessHandler = {result->
-                if(result != null) {
+                if(result.data != null) {
                     bookmarkList = result.data as HashMap<String, HashMap<String, String>>
                     if(bookmarkList.isNotEmpty()){
                         Log.d(TAG, "북마크정보 불러오기 성공 ${bookmarkList.toString()}")
@@ -104,6 +101,8 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
                             markerTemp.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
                         }
                     }
+                }else{
+                    bookmarkList = HashMap()
                 }
             },
             mFailureHandler = {e-> Log.e(TAG,"북마크정보 불러오기 실패",e)})

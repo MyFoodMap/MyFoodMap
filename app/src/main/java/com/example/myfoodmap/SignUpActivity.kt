@@ -142,8 +142,9 @@ class SignUpActivity : AppCompatActivity() {
         else{
             FireBaseDataBase.getUserData(id,
                 mSuccessHandler = { document->
-                    Log.d(TAG,"아이디 중복 검사 : ${document}")
-                    if(document == null){
+                    Log.d(TAG,"아이디 중복 검사 : ${document.data}")
+
+                    if(document.data == null){
                         checkOverlapId = true
                         startToast("사용할수 있는 아이디입니다")
                     }else{
@@ -272,7 +273,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun checkEmpty(
         id:String, password:String,checkPassword: String,
         name:String, gender:String, address:String,nickname: String):Boolean{
-        if(checkOverlapId) {
+        if(!checkOverlapId) {
             startToast("아이디를 중복검사를 해주세요")
             return false
         }

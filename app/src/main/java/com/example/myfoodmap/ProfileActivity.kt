@@ -51,7 +51,7 @@ class ProfileActivity : AppCompatActivity() {
         userInfo.photoUri?.let {
             profile_BasicProfile.setImageURI(it)
         }
-        bookmarkDataList = intent.getSerializableExtra("bookmark") as HashMap<String,HashMap<String,String>>
+         bookmarkDataList = intent.getSerializableExtra("bookmark") as HashMap<String,HashMap<String,String>>
 
         profile_UserName.text = userInfo.nickname
 
@@ -75,17 +75,16 @@ class ProfileActivity : AppCompatActivity() {
                     imageList.add(post.imageUri.toUri())
                     nameList.add(post.restaurantName)
                 }
-                imageList.removeAt(0)
-                nameList.removeAt(0)
+                if(postInfoList.isNotEmpty()) {
+                    imageList.removeAt(0)
+                    nameList.removeAt(0)
+                }
                 galleryAdapter.notifyDataSetChanged()
             },
             mFailureHandler = {e->
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
         )
-        //버튼 이벤트
-        binding.profilePeedPicture.setOnClickListener {
-        }//Create
 
 
         profile_PeedClickRange.setOnClickListener {
@@ -106,15 +105,19 @@ class ProfileActivity : AppCompatActivity() {
             bookmarkAdapter = BookmarkAdapter(this, bookmarkList)
             profile_Bookmark_ListView.adapter = bookmarkAdapter
 
+            bookmarkDataList
             for(bookmarkRestaurantName in bookmarkDataList.keys)
                 bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", bookmarkRestaurantName, "mipmap/bookmark_plus"))
-//            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
-//            bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "이층집", "mipmap/bookmark_plus"))
-//            for(index in 0 until 10) {
-//                bookmarkList.add(BookmarkData("@mipmap/spoon_select_button", "고씨네", "mipmap/bookmark_plus"))
-//            }
             bookmarkAdapter.notifyDataSetChanged()
         }
+
+        galleryAdapter.setItemClickListener(object : GalleryAdapter.onItemClickListener{
+            override fun OnClick(v: View, position: Int) {
+                val intent = Intent(v.context,ShowActivity::class.java)
+                intent.putExtra("post",postInfoList[position+1])
+                startActivity(intent)
+            }
+        })
 
         profile_BookmarkPlus.setOnClickListener {
             profile_BookmarkPlus.visibility=View.INVISIBLE
@@ -129,10 +132,6 @@ class ProfileActivity : AppCompatActivity() {
             // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
         }
 
-        profile_PeedPicture.setOnClickListener() {
-            val intent = Intent(this, PeedViewActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun startToast(msg:String){

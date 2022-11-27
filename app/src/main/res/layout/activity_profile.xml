@@ -173,30 +173,6 @@
                     android:layout_weight="2"
                     />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="5dp">
-                <ImageView
-                    android:id="@+id/profile_PeedPicture"
-                    android:layout_width="118dp"
-                    android:layout_height="118dp"
-                    android:src="@mipmap/peed_picture"
-                    />
-                <TextView
-                    android:id="@+id/profile_PeedName"
-                    android:layout_width="118dp"
-                    android:layout_height="20dp"
-                    android:background="@mipmap/peed_place_name"
-                    android:text="가게이름"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/nanum_squareround_l"
-                    android:textSize="10sp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    />
-            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profile_Peed_RecyclerView"
                 android:layout_width="match_parent"

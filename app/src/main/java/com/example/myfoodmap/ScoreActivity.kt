@@ -41,6 +41,7 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var postInfo: PostInfo
     private lateinit var userInfo: UserInfo
     private lateinit var user: FirebaseUser
+    private var xyList = ArrayList<Pair<String,String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,7 @@ class ScoreActivity : AppCompatActivity() {
         score_Photo.setOnClickListener {
             upload()
         }
+
 
         var egg_1=1
         var egg_2=1
@@ -287,26 +289,36 @@ class ScoreActivity : AppCompatActivity() {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName1.text)
+            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
+                xyList[0].first,xyList[0].second)
         }
         score_AddressSearchResult2.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName2.text)
+            postInfo.placeSet(placeName2.text.toString(),addressName2.text.toString(),
+                xyList[2].first,xyList[2].second)
         }
         score_AddressSearchResult3.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName3.text)
+            postInfo.placeSet(placeName3.text.toString(),addressName3.text.toString(),
+                xyList[3].first,xyList[3].second)
         }
         score_AddressSearchResult4.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName4.text)
+            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
+                xyList[4].first,xyList[4].second)
         }
         score_AddressSearchResult5.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName5.text)
+            postInfo.placeSet(placeName5.text.toString(),addressName5.text.toString(),
+                xyList[5].first,xyList[5].second)
         }
         score_Register.setOnClickListener { savePost() }
     }
@@ -463,26 +475,32 @@ class ScoreActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
-                        postInfo.placeSet(it.documents[index].place_name,it.documents[index].address_name,
-                            it.documents[index].x,it.documents[index].y)
+
+
+
                         val token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
                         when(index) {
                             0 -> {
                                 placeName1.text="${it.documents[index].place_name}"
                                 addressName1.text="${it.documents[index].address_name}"
+                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                             } 1 -> {
                                 placeName2.text="${it.documents[index].place_name}"
                                 addressName2.text="${it.documents[index].address_name}"
+                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                             } 2 -> {
                                 placeName3.text="${it.documents[index].place_name}"
                                 addressName3.text="${it.documents[index].address_name}"
+                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                             } 3 -> {
                                 placeName4.text="${it.documents[index].place_name}"
                                 addressName4.text="${it.documents[index].address_name}"
+                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                             } 4 -> {
                                 placeName5.text="${it.documents[index].place_name}"
                                 addressName5.text="${it.documents[index].address_name}"
+                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                             }
                         }
                     }

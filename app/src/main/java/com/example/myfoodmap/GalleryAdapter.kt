@@ -25,6 +25,7 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater=LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.item_profile_peed_layout, parent, false)
+
         return ViewHolder(view)
     }
     // 데이터 설정
@@ -33,6 +34,9 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
             .load(imageList[position]) // 이미지 위치
             .into(holder.peedView) // 보여줄 위치
         holder.peedName.text = nameList[position]
+        holder.itemView.setOnClickListener{
+            itemClickListener.OnClick(it, position)
+        }
     }
     // 아이템 개수
     override fun getItemCount(): Int {
@@ -42,4 +46,14 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         var peedView: ImageView = view.findViewById(R.id.itemProfilePeed_PeedPicture)
         var peedName: TextView = view.findViewById(R.id.itemProfilePeed_PeedName_TextView)
     }
+
+    interface onItemClickListener{
+        fun OnClick(v:View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: onItemClickListener){
+        this.itemClickListener = onItemClickListener
+    }
+
+    private lateinit var itemClickListener: onItemClickListener
 }
