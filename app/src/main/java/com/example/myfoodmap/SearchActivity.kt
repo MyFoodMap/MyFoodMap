@@ -36,7 +36,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-
         bookmarkList = intent.getSerializableExtra("bookmark") as HashMap<String,HashMap<String,String>>
 
         search_DetailSearch_Button.setOnClickListener {

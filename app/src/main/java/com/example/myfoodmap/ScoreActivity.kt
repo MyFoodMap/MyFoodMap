@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_score.placeName2
 import kotlinx.android.synthetic.main.activity_score.placeName3
 import kotlinx.android.synthetic.main.activity_score.placeName4
 import kotlinx.android.synthetic.main.activity_score.placeName5
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +43,19 @@ class ScoreActivity : AppCompatActivity() {
     private lateinit var userInfo: UserInfo
     private lateinit var user: FirebaseUser
     private var xyList = ArrayList<Pair<String,String>>()
+
+    private var x = "1.223232xxx"
+    private var y = "1.223232xxx"
+    private var x1 = "1.223232xxx"
+    private var y1 = "1.223232xxx"
+    private var x2 = "1.223232xxx"
+    private var y2 = "1.223232xxx"
+    private var x3 = "1.223232xxx"
+    private var y3 = "1.223232xxx"
+    private var x4 = "1.223232xxx"
+    private var y4 = "1.223232xxx"
+    private var x5 = "1.223232xxx"
+    private var y5 = "1.223232xxx"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -291,6 +305,7 @@ class ScoreActivity : AppCompatActivity() {
             score_StoreName_EditText.setText(placeName1.text)
             postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
                 xyList[0].first,xyList[0].second)
+
         }
         score_AddressSearchResult2.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
@@ -302,9 +317,9 @@ class ScoreActivity : AppCompatActivity() {
         score_AddressSearchResult3.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
-            score_StoreName_EditText.setText(placeName3.text)
             postInfo.placeSet(placeName3.text.toString(),addressName3.text.toString(),
                 xyList[3].first,xyList[3].second)
+
         }
         score_AddressSearchResult4.setOnClickListener {
             score_SearchRange.visibility= View.INVISIBLE
@@ -317,8 +332,8 @@ class ScoreActivity : AppCompatActivity() {
             score_SearchRange.visibility= View.INVISIBLE
             score_ScoreBackground.visibility= View.INVISIBLE
             score_StoreName_EditText.setText(placeName5.text)
-            postInfo.placeSet(placeName5.text.toString(),addressName5.text.toString(),
-                xyList[5].first,xyList[5].second)
+
+            postInfo.placeSet(placeName5.text.toString(), addressName5.text.toString(), x5, y5)
         }
         score_Register.setOnClickListener { savePost() }
     }
@@ -477,7 +492,6 @@ class ScoreActivity : AppCompatActivity() {
                         Log.d("Address", "${it.documents[index].y}") // 위도
 
 
-
                         val token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
                         when(index) {
@@ -501,6 +515,7 @@ class ScoreActivity : AppCompatActivity() {
                                 placeName5.text="${it.documents[index].place_name}"
                                 addressName5.text="${it.documents[index].address_name}"
                                 xyList.add(Pair(it.documents[index].x,it.documents[index].y))
+
                             }
                         }
                     }

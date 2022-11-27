@@ -70,7 +70,6 @@ class ProfileActivity : AppCompatActivity() {
                             "${post.restaurantName},${post.oneLineComment}\n" +
                             "${postInfoList.size}")
                 }
-
                 for(post in postInfoList){
                     imageList.add(post.imageUri.toUri())
                     nameList.add(post.restaurantName)
@@ -85,6 +84,8 @@ class ProfileActivity : AppCompatActivity() {
                 startToast("프로필 게시물 정보 받아오기 실패")
                 Log.e(TAG,"게시물 정보 받아오기 실패 :",e) }
         )
+
+        //버튼 이벤트
 
 
         profile_PeedClickRange.setOnClickListener {
@@ -131,6 +132,7 @@ class ProfileActivity : AppCompatActivity() {
         profile_Bookmark_ListView.setOnItemClickListener { adapterView, view, i, l ->
             // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
         }
+
 
     }
 
