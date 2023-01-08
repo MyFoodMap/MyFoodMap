@@ -1,7 +1,9 @@
 package com.example.myfoodmap
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +36,7 @@ class GalleryAdapter(): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
             .load(imageList[position]) // 이미지 위치
             .into(holder.peedView) // 보여줄 위치
         holder.peedName.text = nameList[position]
+        Log.d(TAG, "${nameList[position]},   $position")
         holder.itemView.setOnClickListener{
             itemClickListener.OnClick(it, position)
         }

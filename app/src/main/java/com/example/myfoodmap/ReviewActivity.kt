@@ -11,27 +11,26 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_score.*
+import kotlinx.android.synthetic.main.activity_review.*
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_score.addressName1
-import kotlinx.android.synthetic.main.activity_score.addressName2
-import kotlinx.android.synthetic.main.activity_score.addressName3
-import kotlinx.android.synthetic.main.activity_score.addressName4
-import kotlinx.android.synthetic.main.activity_score.addressName5
-import kotlinx.android.synthetic.main.activity_score.placeName1
-import kotlinx.android.synthetic.main.activity_score.placeName2
-import kotlinx.android.synthetic.main.activity_score.placeName3
-import kotlinx.android.synthetic.main.activity_score.placeName4
-import kotlinx.android.synthetic.main.activity_score.placeName5
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_review.addressName1
+import kotlinx.android.synthetic.main.activity_review.addressName2
+import kotlinx.android.synthetic.main.activity_review.addressName3
+import kotlinx.android.synthetic.main.activity_review.addressName4
+import kotlinx.android.synthetic.main.activity_review.addressName5
+import kotlinx.android.synthetic.main.activity_review.placeName1
+import kotlinx.android.synthetic.main.activity_review.placeName2
+import kotlinx.android.synthetic.main.activity_review.placeName3
+import kotlinx.android.synthetic.main.activity_review.placeName4
+import kotlinx.android.synthetic.main.activity_review.placeName5
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.roundToInt
-
-class ScoreActivity : AppCompatActivity() {
+/* 기존의 ScoreAcivity 이름과 용도가 Review에 적합하다고 생각되어 수정 확인시 삭제 */
+class ReviewActivity : AppCompatActivity() {
     private companion object {
         const val TAG = "게시들작성"
         const val BASE_URL = "https://dapi.kakao.com/"
@@ -59,7 +58,7 @@ class ScoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_score)
+        setContentView(R.layout.activity_review)
 
         //사용하는 변수
         customProgress = CustomProgress(this)
@@ -67,7 +66,7 @@ class ScoreActivity : AppCompatActivity() {
         postInfo = PostInfo()
         userInfo = intent.getSerializableExtra("user") as UserInfo
 
-        score_Photo.setOnClickListener {
+        review_Photo.setOnClickListener {
             upload()
         }
 
@@ -79,271 +78,271 @@ class ScoreActivity : AppCompatActivity() {
         var egg_5=1
         var whatScore="Taste"
 
-        score_TasteRange.setOnClickListener {
-            score_ScoreBackground.visibility= View.VISIBLE
-            score_ScoreRange.visibility= View.VISIBLE
+        review_TasteRange.setOnClickListener {
+            review_ScoreBackground.visibility= View.VISIBLE
+            review_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
             egg_3=1
             egg_4=1
             egg_5=1
-            score_Score1.setImageResource(R.mipmap.score_zero)
-            score_Score2.setImageResource(R.mipmap.score_zero)
-            score_Score3.setImageResource(R.mipmap.score_zero)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
-            score_Score.text = "0.0"
+            review_Score1.setImageResource(R.mipmap.score_zero)
+            review_Score2.setImageResource(R.mipmap.score_zero)
+            review_Score3.setImageResource(R.mipmap.score_zero)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
+            review_Score.text = "0.0"
             whatScore="Taste"
         }
-        score_PriceRange.setOnClickListener {
-            score_ScoreBackground.visibility=View.VISIBLE
-            score_ScoreRange.visibility= View.VISIBLE
+        review_PriceRange.setOnClickListener {
+            review_ScoreBackground.visibility=View.VISIBLE
+            review_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
             egg_3=1
             egg_4=1
             egg_5=1
-            score_Score1.setImageResource(R.mipmap.score_zero)
-            score_Score2.setImageResource(R.mipmap.score_zero)
-            score_Score3.setImageResource(R.mipmap.score_zero)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
-            score_Score.text = "0.0"
+            review_Score1.setImageResource(R.mipmap.score_zero)
+            review_Score2.setImageResource(R.mipmap.score_zero)
+            review_Score3.setImageResource(R.mipmap.score_zero)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
+            review_Score.text = "0.0"
             whatScore="Price"
         }
-        score_CleanRange.setOnClickListener {
-            score_ScoreBackground.visibility=View.VISIBLE
-            score_ScoreRange.visibility= View.VISIBLE
+        review_CleanRange.setOnClickListener {
+            review_ScoreBackground.visibility=View.VISIBLE
+            review_ScoreRange.visibility= View.VISIBLE
             egg_1=1
             egg_2=1
             egg_3=1
             egg_4=1
             egg_5=1
-            score_Score1.setImageResource(R.mipmap.score_zero)
-            score_Score2.setImageResource(R.mipmap.score_zero)
-            score_Score3.setImageResource(R.mipmap.score_zero)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
-            score_Score.text = "0.0"
+            review_Score1.setImageResource(R.mipmap.score_zero)
+            review_Score2.setImageResource(R.mipmap.score_zero)
+            review_Score3.setImageResource(R.mipmap.score_zero)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
+            review_Score.text = "0.0"
             whatScore="Clean"
         }
-        score_Save.setOnClickListener {
+        review_Save.setOnClickListener {
             when(whatScore) {
                 "Taste" -> {
-                    score_TasteScore.text=score_Score.text
-                    score_Taste1.setImageDrawable(score_Score1.drawable)
-                    score_Taste2.setImageDrawable(score_Score2.drawable)
-                    score_Taste3.setImageDrawable(score_Score3.drawable)
-                    score_Taste4.setImageDrawable(score_Score4.drawable)
-                    score_Taste5.setImageDrawable(score_Score5.drawable)
+                    review_TasteScore.text=review_Score.text
+                    review_Taste1.setImageDrawable(review_Score1.drawable)
+                    review_Taste2.setImageDrawable(review_Score2.drawable)
+                    review_Taste3.setImageDrawable(review_Score3.drawable)
+                    review_Taste4.setImageDrawable(review_Score4.drawable)
+                    review_Taste5.setImageDrawable(review_Score5.drawable)
                 }
                 "Price" -> {
-                    score_PriceScore.text=score_Score.text
-                    score_Price1.setImageDrawable(score_Score1.drawable)
-                    score_Price2.setImageDrawable(score_Score2.drawable)
-                    score_Price3.setImageDrawable(score_Score3.drawable)
-                    score_Price4.setImageDrawable(score_Score4.drawable)
-                    score_Price5.setImageDrawable(score_Score5.drawable)
+                    review_PriceScore.text=review_Score.text
+                    review_Price1.setImageDrawable(review_Score1.drawable)
+                    review_Price2.setImageDrawable(review_Score2.drawable)
+                    review_Price3.setImageDrawable(review_Score3.drawable)
+                    review_Price4.setImageDrawable(review_Score4.drawable)
+                    review_Price5.setImageDrawable(review_Score5.drawable)
                 }
                 "Clean" -> {
-                    score_CleanScore.text=score_Score.text
-                    score_Clean1.setImageDrawable(score_Score1.drawable)
-                    score_Clean2.setImageDrawable(score_Score2.drawable)
-                    score_Clean3.setImageDrawable(score_Score3.drawable)
-                    score_Clean4.setImageDrawable(score_Score4.drawable)
-                    score_Clean5.setImageDrawable(score_Score5.drawable)
+                    review_CleanScore.text=review_Score.text
+                    review_Clean1.setImageDrawable(review_Score1.drawable)
+                    review_Clean2.setImageDrawable(review_Score2.drawable)
+                    review_Clean3.setImageDrawable(review_Score3.drawable)
+                    review_Clean4.setImageDrawable(review_Score4.drawable)
+                    review_Clean5.setImageDrawable(review_Score5.drawable)
                 }
             }
-            score_ScoreRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
+            review_ScoreRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
             averageSum()
         }
-        score_Score1.setOnClickListener {
-            score_Score2.setImageResource(R.mipmap.score_zero)
-            score_Score3.setImageResource(R.mipmap.score_zero)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
+        review_Score1.setOnClickListener {
+            review_Score2.setImageResource(R.mipmap.score_zero)
+            review_Score3.setImageResource(R.mipmap.score_zero)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
             egg_2=1
             egg_3=1
             egg_4=1
             egg_5=1
             when (egg_1) {
                 1 -> {
-                    score_Score1.setImageResource(R.mipmap.score_half)
+                    review_Score1.setImageResource(R.mipmap.score_half)
                     egg_1 = 2
-                    score_Score.text = "0.5"
+                    review_Score.text = "0.5"
                 }
                 2 -> {
-                    score_Score1.setImageResource(R.mipmap.score_full)
+                    review_Score1.setImageResource(R.mipmap.score_full)
                     egg_1 = 3
-                    score_Score.text = "1.0"
+                    review_Score.text = "1.0"
                 }
                 3 -> {
-                    score_Score1.setImageResource(R.mipmap.score_zero)
+                    review_Score1.setImageResource(R.mipmap.score_zero)
                     egg_1 = 1
-                    score_Score.text = "0.0"
+                    review_Score.text = "0.0"
                 }
             }
         }
-        score_Score2.setOnClickListener {
-            score_Score1.setImageResource(R.mipmap.score_full)
-            score_Score3.setImageResource(R.mipmap.score_zero)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
+        review_Score2.setOnClickListener {
+            review_Score1.setImageResource(R.mipmap.score_full)
+            review_Score3.setImageResource(R.mipmap.score_zero)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
             egg_1=1
             egg_3=1
             egg_4=1
             egg_5=1
             when (egg_2) {
                 1 -> {
-                    score_Score2.setImageResource(R.mipmap.score_half)
+                    review_Score2.setImageResource(R.mipmap.score_half)
                     egg_2 = 2
-                    score_Score.text = "1.5"
+                    review_Score.text = "1.5"
                 }
                 2 -> {
-                    score_Score2.setImageResource(R.mipmap.score_full)
+                    review_Score2.setImageResource(R.mipmap.score_full)
                     egg_2 = 3
-                    score_Score.text = "2.0"
+                    review_Score.text = "2.0"
                 }
                 3 -> {
-                    score_Score2.setImageResource(R.mipmap.score_zero)
+                    review_Score2.setImageResource(R.mipmap.score_zero)
                     egg_2 = 1
-                    score_Score.text = "1.0"
+                    review_Score.text = "1.0"
                 }
             }
         }
-        score_Score3.setOnClickListener {
-            score_Score1.setImageResource(R.mipmap.score_full)
-            score_Score2.setImageResource(R.mipmap.score_full)
-            score_Score4.setImageResource(R.mipmap.score_zero)
-            score_Score5.setImageResource(R.mipmap.score_zero)
+        review_Score3.setOnClickListener {
+            review_Score1.setImageResource(R.mipmap.score_full)
+            review_Score2.setImageResource(R.mipmap.score_full)
+            review_Score4.setImageResource(R.mipmap.score_zero)
+            review_Score5.setImageResource(R.mipmap.score_zero)
             egg_2=1
             egg_1=1
             egg_4=1
             egg_5=1
             when (egg_3) {
                 1 -> {
-                    score_Score3.setImageResource(R.mipmap.score_half)
+                    review_Score3.setImageResource(R.mipmap.score_half)
                     egg_3 = 2
-                    score_Score.text = "2.5"
+                    review_Score.text = "2.5"
                 }
                 2 -> {
-                    score_Score3.setImageResource(R.mipmap.score_full)
+                    review_Score3.setImageResource(R.mipmap.score_full)
                     egg_3 = 3
-                    score_Score.text = "3.0"
+                    review_Score.text = "3.0"
                 }
                 3 -> {
-                    score_Score3.setImageResource(R.mipmap.score_zero)
+                    review_Score3.setImageResource(R.mipmap.score_zero)
                     egg_3 = 1
-                    score_Score.text = "2.0"
+                    review_Score.text = "2.0"
                 }
             }
         }
-        score_Score4.setOnClickListener {
-            score_Score1.setImageResource(R.mipmap.score_full)
-            score_Score2.setImageResource(R.mipmap.score_full)
-            score_Score3.setImageResource(R.mipmap.score_full)
-            score_Score5.setImageResource(R.mipmap.score_zero)
+        review_Score4.setOnClickListener {
+            review_Score1.setImageResource(R.mipmap.score_full)
+            review_Score2.setImageResource(R.mipmap.score_full)
+            review_Score3.setImageResource(R.mipmap.score_full)
+            review_Score5.setImageResource(R.mipmap.score_zero)
             egg_2=1
             egg_3=1
             egg_1=1
             egg_5=1
             when (egg_4) {
                 1 -> {
-                    score_Score4.setImageResource(R.mipmap.score_half)
+                    review_Score4.setImageResource(R.mipmap.score_half)
                     egg_4 = 2
-                    score_Score.text = "3.5"
+                    review_Score.text = "3.5"
                 }
                 2 -> {
-                    score_Score4.setImageResource(R.mipmap.score_full)
+                    review_Score4.setImageResource(R.mipmap.score_full)
                     egg_4 = 3
-                    score_Score.text = "4.0"
+                    review_Score.text = "4.0"
                 }
                 3 -> {
-                    score_Score4.setImageResource(R.mipmap.score_zero)
+                    review_Score4.setImageResource(R.mipmap.score_zero)
                     egg_4 = 1
-                    score_Score.text = "3.0"
+                    review_Score.text = "3.0"
                 }
             }
         }
-        score_Score5.setOnClickListener {
-            score_Score1.setImageResource(R.mipmap.score_full)
-            score_Score2.setImageResource(R.mipmap.score_full)
-            score_Score3.setImageResource(R.mipmap.score_full)
-            score_Score4.setImageResource(R.mipmap.score_full)
+        review_Score5.setOnClickListener {
+            review_Score1.setImageResource(R.mipmap.score_full)
+            review_Score2.setImageResource(R.mipmap.score_full)
+            review_Score3.setImageResource(R.mipmap.score_full)
+            review_Score4.setImageResource(R.mipmap.score_full)
             egg_2=1
             egg_3=1
             egg_4=1
             egg_1=1
             when (egg_5) {
                 1 -> {
-                    score_Score5.setImageResource(R.mipmap.score_half)
+                    review_Score5.setImageResource(R.mipmap.score_half)
                     egg_5 = 2
-                    score_Score.text = "4.5"
+                    review_Score.text = "4.5"
                 }
                 2 -> {
-                    score_Score5.setImageResource(R.mipmap.score_full)
+                    review_Score5.setImageResource(R.mipmap.score_full)
                     egg_5 = 3
-                    score_Score.text = "5.0"
+                    review_Score.text = "5.0"
                 }
                 3 -> {
-                    score_Score5.setImageResource(R.mipmap.score_zero)
+                    review_Score5.setImageResource(R.mipmap.score_zero)
                     egg_5 = 1
-                    score_Score.text = "4.0"
+                    review_Score.text = "4.0"
                 }
             }
         }
-        score_StoreSearch_Button.setOnClickListener {
-            score_SearchRange.visibility= View.VISIBLE
-            score_ScoreBackground.visibility= View.VISIBLE
-            val etTextKeyword=score_StoreName_EditText.text.toString()
+        review_StoreSearch_Button.setOnClickListener {
+            review_SearchRange.visibility= View.VISIBLE
+            review_ScoreBackground.visibility= View.VISIBLE
+            val etTextKeyword=review_StoreName_EditText.text.toString()
             searchKeyword(etTextKeyword)
         }
-        score_AddressSearchResult1.setOnClickListener {
-            score_SearchRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
-            score_StoreName_EditText.setText(placeName1.text)
+        review_AddressSearchResult1.setOnClickListener {
+            review_SearchRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
+            review_StoreName_EditText.setText(placeName1.text)
             postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
                 xyList[0].first,xyList[0].second)
 
         }
-        score_AddressSearchResult2.setOnClickListener {
-            score_SearchRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
-            score_StoreName_EditText.setText(placeName2.text)
+        review_AddressSearchResult2.setOnClickListener {
+            review_SearchRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
+            review_StoreName_EditText.setText(placeName2.text)
             postInfo.placeSet(placeName2.text.toString(),addressName2.text.toString(),
                 xyList[2].first,xyList[2].second)
         }
-        score_AddressSearchResult3.setOnClickListener {
-            score_SearchRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
+        review_AddressSearchResult3.setOnClickListener {
+            review_SearchRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
             postInfo.placeSet(placeName3.text.toString(),addressName3.text.toString(),
                 xyList[3].first,xyList[3].second)
 
         }
-        score_AddressSearchResult4.setOnClickListener {
-            score_SearchRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
-            score_StoreName_EditText.setText(placeName4.text)
+        review_AddressSearchResult4.setOnClickListener {
+            review_SearchRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
+            review_StoreName_EditText.setText(placeName4.text)
             postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
                 xyList[4].first,xyList[4].second)
         }
-        score_AddressSearchResult5.setOnClickListener {
-            score_SearchRange.visibility= View.INVISIBLE
-            score_ScoreBackground.visibility= View.INVISIBLE
-            score_StoreName_EditText.setText(placeName5.text)
+        review_AddressSearchResult5.setOnClickListener {
+            review_SearchRange.visibility= View.INVISIBLE
+            review_ScoreBackground.visibility= View.INVISIBLE
+            review_StoreName_EditText.setText(placeName5.text)
 
             postInfo.placeSet(placeName5.text.toString(), addressName5.text.toString(), x5, y5)
         }
-        score_Register.setOnClickListener { savePost() }
+        review_Register.setOnClickListener { savePost() }
     }
     fun averageSum() {
-        val a=score_TasteScore.text.toString().toDouble()
-        val b=score_PriceScore.text.toString().toDouble()
-        val c=score_CleanScore.text.toString().toDouble()
+        val a=review_TasteScore.text.toString().toDouble()
+        val b=review_PriceScore.text.toString().toDouble()
+        val c=review_CleanScore.text.toString().toDouble()
         val totalScore=(a+b+c)/3
         val averageScore=(totalScore*10.0).roundToInt()/10.0
-        score_AverageScore.text="${averageScore}점"
+        review_AverageScore.text="${averageScore}점"
     }
     //사진
     private fun upload() {
@@ -356,19 +355,19 @@ class ScoreActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode== RESULT_OK && it.data!=null) {
             val uri=it.data!!.data // 사진 데이터 넣어야함
-            score_Photo.setImageURI(uri)
+            review_Photo.setImageURI(uri)
             postInfo.imageUri = uri.toString()
             Glide.with(this)
                 .load(uri)
-                .into(score_Photo)
+                .into(review_Photo)
         }
     }
 
     //포스터 등록
     private fun savePost(){
-        postInfo.set(score_Review.text.toString())
-        postInfo.evaluationSet( score_TasteScore.text.toString(),score_PriceScore.text.toString(),score_CleanScore.text.toString(),
-            score_AverageScore.text.toString())
+        postInfo.set(review_Review.text.toString())
+        postInfo.evaluationSet( review_TasteScore.text.toString(),review_PriceScore.text.toString(),review_CleanScore.text.toString(),
+            review_AverageScore.text.toString())
         if(checkEmpty(postInfo)){
             showProgressBar()
             // 사진 업로드

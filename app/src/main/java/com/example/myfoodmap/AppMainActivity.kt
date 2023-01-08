@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +17,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import android.view.View
-import com.google.firebase.database.GenericTypeIndicator
 import kotlinx.android.synthetic.main.activity_app_main.*
-
 
 class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClickListener {
     private companion object {
@@ -34,7 +30,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
     private lateinit var locationSource: FusedLocationSource // 위치를 반환하는 구현체
 
     private lateinit var userInfo: UserInfo
-    private lateinit var bookmarkList:HashMap<String,HashMap<String,String>>
+    private lateinit var bookmarkList: HashMap<String,HashMap<String,String>>
     private lateinit var postInfoList: ArrayList<PostInfo>
     private lateinit var customProgress: CustomProgress
 
@@ -48,15 +44,10 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
         //데이터 베이스 정보
         showProgressBar()
 
-
         mapView = findViewById(R.id.appMain_map)
         mapView.onCreate(savedInstanceState)
 
-
-
         userInfo = intent.getSerializableExtra("user") as UserInfo
-
-
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSTION_REQUEST_CODE)
 
@@ -72,7 +63,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
             startActivity(intent)
         }
         appMain_Plus_Button.setOnClickListener {
-            val intent = Intent(this, ScoreActivity::class.java)
+            val intent = Intent(this, ReviewActivity::class.java)
             intent.putExtra("user", userInfo)
             startActivity(intent)
         }
@@ -132,22 +123,7 @@ class AppMainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClick
                 hideProgressBar()
             })
 
-//        // 지도상에 마커 표시
-//        val marker = Marker()
-//        marker.position = LatLng(37.6203077604657, 127.057193096323)
-//        marker.map = naverMap
-//
-//        marker.width = 100
-//        marker.height = 100
-//        marker.icon = OverlayImage.fromResource(R.drawable.bookmark_marker)
-//
-//        val marker1 = Marker()
-//        marker1.position = LatLng(37.6192404638865, 127.058270608867)
-//        marker1.map = naverMap
-//
-//        marker1.width = 100
-//        marker1.height = 100
-//        marker1.icon = OverlayImage.fromResource(R.drawable.peed_marker)
+        val uiSettings = naverMap.uiSettings
 
         this.naverMap = naverMap
         naverMap.locationSource = locationSource

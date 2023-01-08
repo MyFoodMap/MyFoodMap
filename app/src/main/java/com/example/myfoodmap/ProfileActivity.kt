@@ -68,11 +68,14 @@ class ProfileActivity : AppCompatActivity() {
                     postInfoList.add(post)
                     Log.d(TAG,"document : ${document.data}\n" +
                             "${post.restaurantName},${post.oneLineComment}\n" +
-                            "${postInfoList.size}")
+                            "postinfo ${postInfoList.size}"+"post  ${postInfoList.size}")
                 }
+                imageList.add(postInfoList[0].imageUri.toUri())
+                nameList.add(postInfoList[0].restaurantName)
                 for(post in postInfoList){
                     imageList.add(post.imageUri.toUri())
                     nameList.add(post.restaurantName)
+                    Log.d(TAG, "${post.imageUri}, ${post.restaurantName}")
                 }
                 if(postInfoList.isNotEmpty()) {
                     imageList.removeAt(0)
@@ -115,22 +118,24 @@ class ProfileActivity : AppCompatActivity() {
         galleryAdapter.setItemClickListener(object : GalleryAdapter.onItemClickListener{
             override fun OnClick(v: View, position: Int) {
                 val intent = Intent(v.context,ShowActivity::class.java)
-                intent.putExtra("post",postInfoList[position+1])
+                intent.putExtra("post",postInfoList[position])
                 startActivity(intent)
             }
         })
 
-        profile_BookmarkPlus.setOnClickListener {
-            profile_BookmarkPlus.visibility=View.INVISIBLE
-            profile_BookmarkNo.visibility=View.VISIBLE
-        }
-        profile_BookmarkNo.setOnClickListener {
-            profile_BookmarkPlus.visibility=View.VISIBLE
-            profile_BookmarkNo.visibility=View.INVISIBLE
-        }
+//        profile_BookmarkPlus.setOnClickListener {
+//            profile_BookmarkPlus.visibility=View.INVISIBLE
+//            profile_BookmarkNo.visibility=View.VISIBLE
+//        }
+//        profile_BookmarkNo.setOnClickListener {
+//            profile_BookmarkPlus.visibility=View.VISIBLE
+//            profile_BookmarkNo.visibility=View.INVISIBLE
+//        }
 
         profile_Bookmark_ListView.setOnItemClickListener { adapterView, view, i, l ->
             // 눌렀을때 뭐가 나와야하나 하고 우선 칸을 만들어봤어
+            bookmarkDataList.keys
+
         }
 
 
