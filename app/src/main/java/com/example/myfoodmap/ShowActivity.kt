@@ -10,7 +10,7 @@ import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.android.synthetic.main.activity_review.*
+import kotlinx.android.synthetic.main.activity_review .*
 import kotlinx.android.synthetic.main.activity_show.*
 import kotlin.math.roundToInt
 
@@ -78,6 +78,7 @@ class ShowActivity : AppCompatActivity() {
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
     }
+
     fun eggShow(score:Double) {
         if(score==0.5) {
             score1.setImageResource(R.mipmap.score_half)

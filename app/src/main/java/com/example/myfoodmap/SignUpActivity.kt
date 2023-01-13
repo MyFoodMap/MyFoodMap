@@ -10,8 +10,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodmap.databinding.ActivitySignUpBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,6 +26,9 @@ class SignUpActivity : AppCompatActivity() {
         const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
 
+    var searchList = arrayListOf<PlaceSearchData2>()
+    lateinit var searchAdapter: PlaceSearchAdapter2
+
     private lateinit var customProgress: CustomProgress
     private var checkOverlapId = false
     private var gender = ""
@@ -35,16 +36,6 @@ class SignUpActivity : AppCompatActivity() {
     private var address = "서울특별시 노원구 월계동"
     private var x = "1.223232xxx"
     private var y = "1.223232xxx"
-    private var x1 = "1.223232xxx"
-    private var y1 = "1.223232xxx"
-    private var x2 = "1.223232xxx"
-    private var y2 = "1.223232xxx"
-    private var x3 = "1.223232xxx"
-    private var y3 = "1.223232xxx"
-    private var x4 = "1.223232xxx"
-    private var y4 = "1.223232xxx"
-    private var x5 = "1.223232xxx"
-    private var y5 = "1.223232xxx"
 
     private lateinit var binding : ActivitySignUpBinding
 
@@ -76,6 +67,8 @@ class SignUpActivity : AppCompatActivity() {
         } //화원가입
 
         binding.signUpAddressSearchButton.setOnClickListener {
+            searchAdapter = PlaceSearchAdapter2(this, searchList)
+            signUp_SearchResult_ListView.adapter = searchAdapter
             var etTextKeyword=signUp_SignUpAddress_EditText.text.toString()
             signUp_AddressSearch_EditText.setText(etTextKeyword)
             searchKeyword(etTextKeyword)
@@ -83,53 +76,19 @@ class SignUpActivity : AppCompatActivity() {
             signUp_SearchScrollBackground.visibility= View.VISIBLE
         }
         binding.signUpAddressSearchButton2.setOnClickListener {
+            searchAdapter = PlaceSearchAdapter2(this, searchList)
+            signUp_SearchResult_ListView.adapter = searchAdapter
             var etTextKeyword2=signUp_AddressSearch_EditText.text.toString()
             searchKeyword(etTextKeyword2)
         }
-        signUp_AddressSearchResult1.setOnClickListener {
+        signUp_SearchResult_ListView.setOnItemClickListener { adapterView, view, i, l ->
             signUp_SearchScroll.visibility= View.INVISIBLE
             signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName1.text)
-            place=placeName1.text.toString()
-            address=addressName1.text.toString()
-            x=x1
-            y=y1
-        }
-        signUp_AddressSearchResult2.setOnClickListener {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName2.text)
-            place=placeName2.text.toString()
-            address=addressName2.text.toString()
-            x=x2
-            y=y2
-        }
-        signUp_AddressSearchResult3.setOnClickListener {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName3.text)
-            place=placeName3.text.toString()
-            address=addressName3.text.toString()
-            x=x3
-            y=y3
-        }
-        signUp_AddressSearchResult4.setOnClickListener {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName4.text)
-            place=placeName4.text.toString()
-            address=addressName4.text.toString()
-            x=x4
-            y=y4
-        }
-        signUp_AddressSearchResult5.setOnClickListener {
-            signUp_SearchScroll.visibility= View.INVISIBLE
-            signUp_SearchScrollBackground.visibility= View.INVISIBLE
-            signUp_SignUpAddress_EditText.setText(placeName5.text)
-            place=placeName5.text.toString()
-            address=addressName5.text.toString()
-            x=x5
-            y=y5
+            signUp_SignUpAddress_EditText.setText(searchList[i].placeName)
+            place=searchList[i].placeName
+            address=searchList[i].placeAddress
+            x=searchList[i].search_x
+            y=searchList[i].search_y
         }
     }
 
@@ -216,42 +175,22 @@ class SignUpActivity : AppCompatActivity() {
             ) {
                 // 통신 성공 (검색 결과는 response.body()에 담겨있음)
                 Log.d("Test", "${response.body()}")
+                searchList.removeAll(searchList)
+
                 response.body()?.let {
                     for(index in 0 until it.documents.size) { // 키워드 검색으로 나온 데이터 출력
+
+                        if(index>9) {break} // 개수제한
+
                         Log.d("Address", "${it.documents[index].place_name}") // 장소
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
                         var token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
-                        when(index) {
-                            0 -> {
-                                placeName1.text="${it.documents[index].place_name}"
-                                addressName1.text="${it.documents[index].address_name}"
-                                x1=it.documents[index].x
-                                y1=it.documents[index].y
-                            } 1 -> {
-                                placeName2.text="${it.documents[index].place_name}"
-                                addressName2.text="${it.documents[index].address_name}"
-                                x2=it.documents[index].x
-                                y2=it.documents[index].y
-                            } 2 -> {
-                                placeName3.text="${it.documents[index].place_name}"
-                                addressName3.text="${it.documents[index].address_name}"
-                                x3=it.documents[index].x
-                                y3=it.documents[index].y
-                            } 3 -> {
-                                placeName4.text="${it.documents[index].place_name}"
-                                addressName4.text="${it.documents[index].address_name}"
-                                x4=it.documents[index].x
-                                y4=it.documents[index].y
-                            } 4 -> {
-                                placeName5.text="${it.documents[index].place_name}"
-                                addressName5.text="${it.documents[index].address_name}"
-                                x5=it.documents[index].x
-                                y5=it.documents[index].y
-                            }
-                        }
+                        searchList.add(PlaceSearchData2("${it.documents[index].place_name}",
+                            "${it.documents[index].address_name}",
+                            "${it.documents[index].x}", "${it.documents[index].y}"))
                     }
                 }
             }
@@ -260,6 +199,7 @@ class SignUpActivity : AppCompatActivity() {
                 Log.w("MainActivity", "통신 실패: ${t.message}")
             }
         })
+        searchAdapter.notifyDataSetChanged()
     }
 
     //비밀번호 일치 검사

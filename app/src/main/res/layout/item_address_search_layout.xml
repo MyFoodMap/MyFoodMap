@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x"
+            android:id="@+id/itemAddressSearch_X"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            android:textSize="1dp"/>
+        <TextView
+            android:id="@+id/itemAddressSearch_Y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="y"
+            android:textSize="1dp"
+            android:textColor="@color/black"
+            android:visibility="invisible"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp"
+            android:background="@mipmap/search_rectangle"
+            android:id="@+id/itemAddressSearch_rectangle">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="받아온 주소의 건물명"
+                android:textColor="@color/black"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textSize="12sp"
+                android:id="@+id/itemAddressSearch_placeName"
+                android:fontFamily="@font/nanum_squareround_l"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="받아온 주소의 도로주소"
+                android:textColor="@color/dark_gray"
+                android:textSize="8sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/itemAddressSearch_addressName"
+                android:fontFamily="@font/nanum_squareround_l"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

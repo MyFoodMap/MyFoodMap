@@ -13,16 +13,7 @@ import androidx.core.net.toUri
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_review.*
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_review.addressName1
-import kotlinx.android.synthetic.main.activity_review.addressName2
-import kotlinx.android.synthetic.main.activity_review.addressName3
-import kotlinx.android.synthetic.main.activity_review.addressName4
-import kotlinx.android.synthetic.main.activity_review.addressName5
-import kotlinx.android.synthetic.main.activity_review.placeName1
-import kotlinx.android.synthetic.main.activity_review.placeName2
-import kotlinx.android.synthetic.main.activity_review.placeName3
-import kotlinx.android.synthetic.main.activity_review.placeName4
-import kotlinx.android.synthetic.main.activity_review.placeName5
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +27,9 @@ class ReviewActivity : AppCompatActivity() {
         const val BASE_URL = "https://dapi.kakao.com/"
         const val API_KEY = "KakaoAK 719ec8dad17c5585c9e25ff8a79fcd96"  // REST API 키
     }
+
+    var searchList = arrayListOf<PlaceSearchData2>()
+    lateinit var searchAdapter: PlaceSearchAdapter2
 
     private lateinit var customProgress: CustomProgress
     private lateinit var postInfo: PostInfo
@@ -293,47 +287,58 @@ class ReviewActivity : AppCompatActivity() {
             }
         }
         review_StoreSearch_Button.setOnClickListener {
+            searchAdapter = PlaceSearchAdapter2(this, searchList)
+            review_SearchResult_ListView.adapter = searchAdapter
+
             review_SearchRange.visibility= View.VISIBLE
             review_ScoreBackground.visibility= View.VISIBLE
             val etTextKeyword=review_StoreName_EditText.text.toString()
             searchKeyword(etTextKeyword)
         }
-        review_AddressSearchResult1.setOnClickListener {
+        review_SearchResult_ListView.setOnItemClickListener { adapterView, view, i, l ->
             review_SearchRange.visibility= View.INVISIBLE
             review_ScoreBackground.visibility= View.INVISIBLE
-            review_StoreName_EditText.setText(placeName1.text)
-            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
-                xyList[0].first,xyList[0].second)
-
+            review_StoreName_EditText.setText(searchList[i].placeName)
+            postInfo.placeSet(searchList[i].placeName,searchList[i].placeAddress,
+                searchList[i].search_x,searchList[i].search_y)
         }
-        review_AddressSearchResult2.setOnClickListener {
-            review_SearchRange.visibility= View.INVISIBLE
-            review_ScoreBackground.visibility= View.INVISIBLE
-            review_StoreName_EditText.setText(placeName2.text)
-            postInfo.placeSet(placeName2.text.toString(),addressName2.text.toString(),
-                xyList[2].first,xyList[2].second)
-        }
-        review_AddressSearchResult3.setOnClickListener {
-            review_SearchRange.visibility= View.INVISIBLE
-            review_ScoreBackground.visibility= View.INVISIBLE
-            postInfo.placeSet(placeName3.text.toString(),addressName3.text.toString(),
-                xyList[3].first,xyList[3].second)
-
-        }
-        review_AddressSearchResult4.setOnClickListener {
-            review_SearchRange.visibility= View.INVISIBLE
-            review_ScoreBackground.visibility= View.INVISIBLE
-            review_StoreName_EditText.setText(placeName4.text)
-            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
-                xyList[4].first,xyList[4].second)
-        }
-        review_AddressSearchResult5.setOnClickListener {
-            review_SearchRange.visibility= View.INVISIBLE
-            review_ScoreBackground.visibility= View.INVISIBLE
-            review_StoreName_EditText.setText(placeName5.text)
-
-            postInfo.placeSet(placeName5.text.toString(), addressName5.text.toString(), x5, y5)
-        }
+        // 이부분 xyList index 접근오류인건지 궁금? 아니면 1을 빼야하는 이유가 있었나
+//        review_AddressSearchResult1.setOnClickListener {
+//            review_SearchRange.visibility= View.INVISIBLE
+//            review_ScoreBackground.visibility= View.INVISIBLE
+//            review_StoreName_EditText.setText(placeName1.text)
+//            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
+//                xyList[0].first,xyList[0].second)
+//
+//        }
+//        review_AddressSearchResult2.setOnClickListener {
+//            review_SearchRange.visibility= View.INVISIBLE
+//            review_ScoreBackground.visibility= View.INVISIBLE
+//            review_StoreName_EditText.setText(placeName2.text)
+//            postInfo.placeSet(placeName2.text.toString(),addressName2.text.toString(),
+//                xyList[2].first,xyList[2].second)
+//        }
+//        review_AddressSearchResult3.setOnClickListener {
+//            review_SearchRange.visibility= View.INVISIBLE
+//            review_ScoreBackground.visibility= View.INVISIBLE
+//            postInfo.placeSet(placeName3.text.toString(),addressName3.text.toString(),
+//                xyList[3].first,xyList[3].second)
+//
+//        }
+//        review_AddressSearchResult4.setOnClickListener {
+//            review_SearchRange.visibility= View.INVISIBLE
+//            review_ScoreBackground.visibility= View.INVISIBLE
+//            review_StoreName_EditText.setText(placeName4.text)
+//            postInfo.placeSet(placeName1.text.toString(),addressName1.text.toString(),
+//                xyList[4].first,xyList[4].second)
+//        }
+//        review_AddressSearchResult5.setOnClickListener {
+//            review_SearchRange.visibility= View.INVISIBLE
+//            review_ScoreBackground.visibility= View.INVISIBLE
+//            review_StoreName_EditText.setText(placeName5.text)
+//
+//            postInfo.placeSet(placeName5.text.toString(), addressName5.text.toString(), x5, y5)
+//        }
         review_Register.setOnClickListener { savePost() }
     }
     fun averageSum() {
@@ -465,7 +470,6 @@ class ReviewActivity : AppCompatActivity() {
     private fun startToast(msg:String){
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
     }
-
     // 키워드 검색 함수
     private fun searchKeyword(keyword: String) {
         val retrofit = Retrofit.Builder()   // Retrofit 구성
@@ -483,40 +487,25 @@ class ReviewActivity : AppCompatActivity() {
             ) {
                 // 통신 성공 (검색 결과는 response.body()에 담겨있음)
                 Log.d("Test", "${response.body()}")
+                searchList.removeAll(searchList)
+
                 response.body()?.let {
                     for(index in 0 until it.documents.size) { // 키워드 검색으로 나온 데이터 출력
+
+                        if(index>9) {break} // 개수제한
+
                         Log.d("Address", "${it.documents[index].place_name}") // 장소
                         Log.d("Address", "${it.documents[index].address_name}") // 주소
                         Log.d("Address", "${it.documents[index].x}") // 경도
                         Log.d("Address", "${it.documents[index].y}") // 위도
 
-
                         val token=(it.documents[index].address_name).split(' ')
                         Log.d("Address", "$token")
-                        when(index) {
-                            0 -> {
-                                placeName1.text="${it.documents[index].place_name}"
-                                addressName1.text="${it.documents[index].address_name}"
-                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
-                            } 1 -> {
-                                placeName2.text="${it.documents[index].place_name}"
-                                addressName2.text="${it.documents[index].address_name}"
-                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
-                            } 2 -> {
-                                placeName3.text="${it.documents[index].place_name}"
-                                addressName3.text="${it.documents[index].address_name}"
-                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
-                            } 3 -> {
-                                placeName4.text="${it.documents[index].place_name}"
-                                addressName4.text="${it.documents[index].address_name}"
-                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
-                            } 4 -> {
-                                placeName5.text="${it.documents[index].place_name}"
-                                addressName5.text="${it.documents[index].address_name}"
-                                xyList.add(Pair(it.documents[index].x,it.documents[index].y))
 
-                            }
-                        }
+                        searchList.add(PlaceSearchData2("${it.documents[index].place_name}",
+                            "${it.documents[index].address_name}",
+                            "${it.documents[index].x}", "${it.documents[index].y}"))
+                        xyList.add(Pair(it.documents[index].x,it.documents[index].y))
                     }
                 }
             }
@@ -525,5 +514,7 @@ class ReviewActivity : AppCompatActivity() {
                 Log.w("MainActivity", "통신 실패: ${t.message}")
             }
         })
+        searchAdapter = PlaceSearchAdapter2(this, searchList)
+        review_SearchResult_ListView.adapter = searchAdapter
     }
 }
